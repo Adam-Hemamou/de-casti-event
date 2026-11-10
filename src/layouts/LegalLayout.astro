@@ -1,0 +1,65 @@
+---
+// Mise en page des pages légales (mentions légales, confidentialité).
+import BaseLayout from './BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+
+interface Props {
+  page: {
+    seo: { title: string; description: string };
+    kicker: string;
+    title: string;
+    sections: { title: string; text: string }[];
+  };
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title={page.seo.title} description={page.seo.description} headerClass="hero-simple">
+  <PageIntro slot="hero" kicker={page.kicker} title={page.title} />
+  <section class="legal on-light">
+    <div class="w">
+      <div class="legal-inner">
+      {
+        page.sections.map((s) => (
+          <div class="block" data-reveal>
+            <h2 class="bd it">{s.title}</h2>
+            <p class="p">{s.text}</p>
+          </div>
+        ))
+      }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(.site-header.hero-simple) {
+    background: var(--wine);
+  }
+  .legal {
+    padding: 104px 0;
+  }
+  .legal-inner {
+    display: flex;
+    flex-direction: column;
+    max-width: 760px;
+  }
+  .block {
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+  }
+  .block:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  h2 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    font-weight: 400;
+  }
+  @media (max-width: 768px) {
+    .legal {
+      padding: 72px 0;
+    }
+  }
+</style>

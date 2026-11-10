@@ -1,0 +1,143 @@
+---
+// Grande carte d'activité de l'accueil (Agence / DJ) : photo en fond, voile dégradé,
+// pictogramme, titre, texte, liste à puces et bouton.
+import Photo from './Photo.astro';
+import Button from './Button.astro';
+import { rich } from '../lib/rich';
+import type { LinkT, PhotoT } from '../data';
+
+interface Props {
+  icon: 'sparkle' | 'headphones';
+  title: string;
+  text: string;
+  items: string[];
+  listColumns: 1 | 2;
+  cta: LinkT;
+  photo: PhotoT;
+}
+
+const { icon, title, text, items, listColumns, cta, photo } = Astro.props;
+---
+
+<article class="card" data-reveal>
+  <Photo photo={photo} fill parallax sizes="(max-width: 860px) 100vw, 600px" />
+  <div class="veil" aria-hidden="true"></div>
+  <div class="body">
+    <span class="icon" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24">
+        {
+          icon === 'sparkle' ? (
+            <>
+              <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" />
+              <path d="M19 16l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z" />
+            </>
+          ) : (
+            <>
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+              <path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z" />
+            </>
+          )
+        }
+      </svg>
+    </span>
+    <div class="content">
+      <h2 class="bd title" set:html={rich(title)} />
+      <p class="p on text">{text}</p>
+      <ul class:list={['dots', { 'dots--2': listColumns === 2 }]}>
+        {items.map((item) => <li>{item}</li>)}
+      </ul>
+      <div class="cta">
+        <Button href={cta.href}>{cta.label}</Button>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    min-height: 600px;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    box-shadow:
+      0 0 0 1px rgba(var(--highlight-rgb), 0.35),
+      0 30px 60px rgba(var(--shadow-rgb), 0.45);
+  }
+  .veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      200deg,
+      rgba(var(--wine-rgb), 0.15) 0%,
+      rgba(var(--wine-rgb), 0.78) 45%,
+      rgba(var(--wine-deep-rgb), 0.97) 100%
+    );
+  }
+  .body {
+    position: relative;
+    width: 100%;
+    padding: 36px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--highlight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon svg {
+    fill: none;
+    stroke: var(--wine);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .title {
+    margin: 0;
+    font-size: clamp(36px, 3.84vw, 46px);
+    line-height: 1;
+    color: var(--bg-light);
+  }
+  .title :global(.it) {
+    color: var(--highlight);
+  }
+  .text {
+    max-width: 44ch;
+  }
+  .dots {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .dots--2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 20px;
+  }
+  .cta {
+    padding-top: 6px;
+  }
+  @media (max-width: 520px) {
+    .card {
+      min-height: 560px;
+    }
+    .body {
+      padding: 28px 24px 30px;
+    }
+    .dots--2 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

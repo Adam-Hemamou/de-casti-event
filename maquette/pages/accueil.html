@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>De Casti Event — Accueil</title>
+<link rel="stylesheet" href="../theme/palettes.css">
+<script src="../theme/theme-switch.js"></script>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--wine)}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--highlight);outline-offset:3px}
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.bd{font-family:'Bodoni Moda',serif;font-weight:400}
+.it{font-style:italic}
+.kick{font-family:'Bodoni Moda',serif;font-style:italic;font-size:19px;color:var(--accent);margin:0}
+.kick.on{color:var(--highlight)}
+.h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:52px;line-height:1.04;letter-spacing:-.01em;color:var(--wine);margin:0}
+.h2.on{color:var(--bg-light)}
+.p{font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.65;color:var(--text);margin:0;max-width:62ch}
+.p.on{color:var(--text-on-dark)}
+.pill{display:inline-flex;align-items:center;min-height:50px;padding:0 30px;border-radius:999px;background:var(--highlight);color:var(--wine);font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:600}
+.pill:hover{background:var(--highlight-hover)}
+.pill.ghost{background:transparent;color:var(--highlight);box-shadow:inset 0 0 0 1px var(--highlight)}
+.pill.ghost:hover{background:rgba(var(--highlight-rgb),.12)}
+.pill.wine{background:var(--wine);color:var(--bg-light)}.pill.wine:hover{background:var(--velvet)}
+.ul{font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:600;color:var(--wine);border-bottom:1px solid currentColor;padding:12px 0 2px;display:inline-block}
+.ul.on{color:var(--highlight)}
+.nav a{font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text-on-dark);padding:12px 0}
+.nav a:hover{color:var(--highlight)}
+.nav a.cur{color:var(--highlight);font-family:'Bodoni Moda',serif;font-style:italic;font-size:17px}
+.groove{background:repeating-radial-gradient(circle at center,var(--groove-1) 0 2px,var(--groove-2) 2px 4px)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin 18s linear infinite}
+@media (prefers-reduced-motion: reduce){.spin{animation:none}}
+.li{font-family:'Instrument Sans',sans-serif;font-size:15px;margin:0;padding:11px 0;border-top:1px solid currentColor}
+.fl a{font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text-on-dark)}.fl a:hover{color:var(--highlight)}
+.fl a.pill{color:var(--wine);font-size:15px}.fl a.pill:hover{color:var(--wine)}
+.wordmark{margin:0;font-size:clamp(64px,14.6vw,187px);line-height:.8;letter-spacing:-.03em;color:var(--velvet);white-space:nowrap;margin-left:-.04em}
+</style>
+<div style="font-family: 'Instrument Sans', sans-serif; background: var(--bg-light); color: var(--wine)">
+
+<!-- EN-TÊTE + BANNIÈRE : le vinyle -->
+<header style="background: radial-gradient(120% 90% at 78% 40%, var(--velvet) 0%, var(--wine) 55%, var(--wine-deep) 100%); color: var(--bg-light); overflow: hidden">
+<div class="w" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding-top: 26px; padding-bottom: 26px">
+<a href="../pages/accueil.html" style="display: flex; align-items: baseline; gap: 10px">
+<span class="bd it" style="font-size: 30px; color: var(--bg-light)">De Casti</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: .14em; color: var(--highlight)">EVENT</span>
+</a>
+<nav class="nav" aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 34px; align-items: baseline">
+<a class="cur" href="../pages/accueil.html">Accueil</a>
+<a href="../pages/agence.html">Agence événementielle</a>
+<a href="../pages/dj.html">DJ</a>
+<a href="../pages/contact.html">Contact</a>
+</nav>
+<a class="pill ghost" href="../pages/contact.html" style="min-height: 44px; padding: 0 22px">Nous contacter</a>
+</div>
+<div class="w" style="display: flex; flex-wrap: wrap; align-items: center; gap: 48px; padding-top: 40px; padding-bottom: 96px">
+<div style="flex: 1 1 520px; display: flex; flex-direction: column; gap: 28px">
+<p class="kick on">Agence événementielle &amp; DJ</p>
+<h1 style="margin: 0">
+<span class="bd" style="display: block; font-size: 30px; letter-spacing: .32em; color: var(--highlight); margin-bottom: 14px">CRÉONS ENSEMBLE</span>
+<span class="bd it" style="display: block; font-size: 96px; line-height: .96; letter-spacing: -.02em; color: var(--bg-light)">des moments inoubliables.</span>
+</h1>
+<p class="p on" style="max-width: 46ch; font-size: 17px">De la conception de votre événement à son ambiance musicale, De Casti Event imagine et coordonne des expériences sur mesure, pensées dans les moindres détails pour vous et vos invités.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center"><a class="pill" href="#activites">Découvrir nos services</a></div>
+</div>
+<div style="flex: 0 1 460px; display: flex; justify-content: center; position: relative">
+<div class="groove spin" style="width: 440px; max-width: 86vw; aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 40px 80px rgba(0,0,0,.45)">
+<div style="width: 64%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; position: relative; box-shadow: 0 0 0 6px var(--highlight)">
+<img src="../photos/dj-rooftop-bordeaux.jpg" alt="Eva de Casti aux platines" style="width: 100%; height: 100%; object-fit: cover; object-position: center 28%; display: block">
+<span aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--wine-deep); box-shadow: 0 0 0 2px var(--highlight)"></span>
+</div>
+</div>
+<p class="bd it" style="position: absolute; right: -6px; bottom: -14px; margin: 0; font-size: 18px; color: var(--highlight)">Eva de Casti, aux platines</p>
+</div>
+</div>
+</header>
+
+<!-- NOS VALEURS -->
+<section style="padding: 112px 0 104px">
+<div class="w" style="display: flex; flex-wrap: wrap; gap: 64px">
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 20px">
+<p class="kick">Notre univers</p>
+<h2 class="h2">Passion, élégance &amp; émotion</h2>
+<p class="p">Chaque événement est une nouvelle histoire à écrire. Nous mettons notre créativité, notre savoir-faire et notre sens du détail au service de vos projets, pour imaginer des expériences uniques qui vous ressemblent.</p>
+</div>
+<div style="flex: 1.3 1 520px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); column-gap: 40px; row-gap: 8px; align-content: start">
+<div style="padding: 22px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 10px; font-size: 26px; font-weight: 400">Écoute &amp; conseil</h3><p class="p" style="font-size: 15px">Comprendre vos envies, vos besoins et vos objectifs pour construire un événement qui vous ressemble.</p></div>
+<div style="padding: 22px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 10px; font-size: 26px; font-weight: 400">Création sur mesure</h3><p class="p" style="font-size: 15px">Imaginer des concepts personnalisés, adaptés à votre univers, à vos attentes et à votre budget.</p></div>
+<div style="padding: 22px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 10px; font-size: 26px; font-weight: 400">Rigueur &amp; organisation</h3><p class="p" style="font-size: 15px">Anticiper, coordonner et veiller à chaque détail pour un déroulement fluide et maîtrisé.</p></div>
+<div style="padding: 22px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 10px; font-size: 26px; font-weight: 400">Émotion &amp; expérience</h3><p class="p" style="font-size: 15px">Créer des instants forts, des rencontres et des souvenirs qui restent.</p></div>
+</div>
+</div>
+</section>
+
+<!-- LES DEUX ACTIVITÉS -->
+<section id="activites" style="background: var(--wine); padding: 88px 0 96px">
+<div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 20px">
+<article style="position: relative; min-height: 600px; border-radius: 18px; overflow: hidden; display: flex; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.35), 0 30px 60px rgba(var(--shadow-rgb),.45)">
+<img src="../photos/evenement-marque.jpg" alt="Événement de marque dans un tunnel scénographié" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<div style="position: absolute; inset: 0; background: linear-gradient(200deg, rgba(var(--wine-rgb),.15) 0%, rgba(var(--wine-rgb),.78) 45%, rgba(var(--wine-deep-rgb),.97) 100%)"></div>
+<div style="position: relative; width: 100%; padding: 36px 40px 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px">
+<span style="width: 60px; height: 60px; border-radius: 50%; background: var(--highlight); display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: var(--wine); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 16l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h2 class="bd" style="margin: 0; font-size: 46px; line-height: 1; color: var(--bg-light); font-weight: 400">Agence <span class="it" style="color: var(--highlight)">événementielle</span></h2>
+<p class="p on" style="max-width: 44ch">De Casti Event imagine, organise et coordonne vos événements professionnels et privés, de la première idée jusqu'au jour J.</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 15px; color: var(--bg-light)">
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Événements d'entreprise &amp; corporate</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Séminaires &amp; team building</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Inaugurations &amp; lancements</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Soirées d'entreprise &amp; événements clients</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Mariages &amp; célébrations privées</li>
+</ul>
+<div style="padding-top: 6px"><a class="pill" href="../pages/agence.html">Découvrir l'agence</a></div>
+</div>
+</div>
+</article>
+<article style="position: relative; min-height: 600px; border-radius: 18px; overflow: hidden; display: flex; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.35), 0 30px 60px rgba(var(--shadow-rgb),.45)">
+<img src="../photos/hero-dj.jpg" alt="Eva de Casti aux platines dans un club" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%">
+<div style="position: absolute; inset: 0; background: linear-gradient(200deg, rgba(var(--wine-rgb),.15) 0%, rgba(var(--wine-rgb),.78) 45%, rgba(var(--wine-deep-rgb),.97) 100%)"></div>
+<div style="position: relative; width: 100%; padding: 36px 40px 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px">
+<span style="width: 60px; height: 60px; border-radius: 50%; background: var(--highlight); display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: var(--wine); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h2 class="bd" style="margin: 0; font-size: 46px; line-height: 1; color: var(--bg-light); font-weight: 400">DJ <span class="it" style="color: var(--highlight)">— Eva de Casti</span></h2>
+<p class="p on" style="max-width: 44ch">Des ambiances musicales personnalisées, une sélection adaptée à votre public et une énergie pensée pour faire vivre chaque événement.</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px 20px; font-size: 15px; color: var(--bg-light)">
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Mariages</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Événements d'entreprise</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Soirées privées</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Événements sportifs &amp; publics</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Festivals &amp; événements culturels</li>
+<li style="display: flex; gap: 12px; align-items: baseline"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--highlight); flex: none; transform: translateY(-2px)"></span>Événements de marques</li>
+</ul>
+<div style="padding-top: 6px"><a class="pill" href="../pages/dj.html">Découvrir DJ</a></div>
+</div>
+</div>
+</article>
+<span aria-hidden="true" class="bd it" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 76px; height: 76px; border-radius: 50%; background: var(--wine); box-shadow: 0 0 0 1px var(--highlight), 0 0 0 7px var(--wine), 0 0 0 8px rgba(var(--highlight-rgb),.5); color: var(--highlight); font-size: 40px; display: flex; align-items: center; justify-content: center">&amp;</span>
+</div>
+</section>
+
+<!-- CHIFFRES CLÉS -->
+<section style="background: var(--wine-deep); color: var(--bg-light); padding: 72px 0">
+<div class="w" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px 24px">
+<div><p class="bd it" style="margin: 0; font-size: 72px; line-height: 1; color: var(--highlight)">250+</p><p style="margin: 10px 0 0; font-size: 15px; color: var(--text-on-dark)">événements réalisés</p></div>
+<div><p class="bd it" style="margin: 0; font-size: 72px; line-height: 1; color: var(--highlight)">7</p><p style="margin: 10px 0 0; font-size: 15px; color: var(--text-on-dark)">années d'expérience</p></div>
+<div><p class="bd it" style="margin: 0; font-size: 72px; line-height: 1; color: var(--highlight)">15+</p><p style="margin: 10px 0 0; font-size: 15px; color: var(--text-on-dark)">régions &amp; destinations</p></div>
+<div><p class="bd it" style="margin: 0; font-size: 72px; line-height: 1; color: var(--highlight)">2</p><p style="margin: 10px 0 0; font-size: 15px; color: var(--text-on-dark)">expertises : DJ &amp; organisation événementielle</p></div>
+<div><p class="bd it" style="margin: 0; font-size: 72px; line-height: 1; color: var(--highlight)">1</p><p style="margin: 10px 0 0; font-size: 15px; color: var(--text-on-dark)">interlocutrice dédiée à votre événement</p></div>
+</div>
+</section>
+
+<!-- À PROPOS -->
+<section style="padding: 112px 0">
+<div class="w" style="display: flex; flex-wrap: wrap; gap: 72px; align-items: flex-start">
+<div style="flex: 0 1 420px; position: relative">
+<div aria-hidden="true" style="position: absolute; inset: 24px -24px -24px 24px; border: 1px solid var(--accent)"></div>
+<img src="../photos/eva-portrait.jpg" alt="Portrait d'Eva de Casti" style="position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 22%; display: block">
+</div>
+<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 20px">
+<p class="kick">À propos</p>
+<h2 class="h2">L'art de sublimer chaque instant</h2>
+<p class="bd it" style="margin: 0; font-size: 24px; line-height: 1.3; color: var(--accent)">Deux expertises, une même passion : l'événementiel.</p>
+<p class="p">De Casti Event est née de la passion d'Eva de Casti pour la musique et de son envie de créer des événements uniques, authentiques et mémorables.</p>
+<p class="p">Depuis plusieurs années, Eva évolue dans l'univers événementiel à travers son activité de DJ et développe une véritable expertise dans la création d'ambiances musicales et l'accompagnement de projets événementiels.</p>
+<p class="p">Aujourd'hui, avec De Casti Event, elle met cette expérience au service des particuliers et des entreprises, en proposant un accompagnement personnalisé dans la conception, l'organisation et la coordination de leurs événements.</p>
+<p class="p">De la recherche des prestataires à la coordination du jour J, en passant par l'animation musicale, chaque projet est imaginé avec attention, créativité et exigence.</p>
+<p class="p" style="color: var(--wine); font-weight: 600">Notre ambition : donner vie à vos idées et transformer chaque événement en une expérience qui vous ressemble.</p>
+<div><a class="ul" href="../pages/agence.html">En savoir plus</a></div>
+</div>
+</div>
+</section>
+
+<!-- RÉALISATIONS (rubrique conservée) -->
+<section style="padding: 0 0 112px">
+<div class="w" style="display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 12px"><p class="kick">Réalisations</p><h2 class="h2">Revivez nos plus beaux moments</h2></div>
+<a class="ul" href="../pages/dj.html">Voir toutes nos réalisations</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 220px; gap: 12px">
+<img src="../photos/hero-accueil.jpg" alt="Eva bras levé face à la foule en club" style="grid-column: span 2; grid-row: span 2; width: 100%; height: 100%; object-fit: cover; display: block">
+<img src="../photos/stade-societe-generale.jpg" alt="DJ set au stade" style="width: 100%; height: 100%; object-fit: cover; display: block">
+<img src="../photos/evenement-marque.jpg" alt="Événement de marque automobile" style="width: 100%; height: 100%; object-fit: cover; display: block">
+<img src="../photos/rooftop-terrasse.jpg" alt="DJ set en terrasse" style="grid-column: span 2; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block">
+</div>
+</div>
+</section>
+
+<!-- AVIS CLIENTS (rubrique conservée) -->
+<section style="background: var(--bg-light-2); padding: 104px 0">
+<div class="w" style="display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px"><p class="kick">Avis clients</p><h2 class="h2">Ils nous ont fait confiance</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 26px; line-height: 1.3">« Une organisation parfaite du début à la fin. Notre mariage était tout simplement magique ! »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Camille &amp; Thomas <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+<figure style="margin: 48px 0 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 26px; line-height: 1.3">« L'ambiance était incroyable, la musique a vraiment fait toute la différence ! »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Julie R. <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+<figure style="margin: 96px 0 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 26px; line-height: 1.3">« Professionnalisme, écoute et créativité. Je recommande les yeux fermés ! »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Marc L. <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+</div>
+<div><a class="ul" href="#">Lire tous les avis</a></div>
+</div>
+</section>
+
+<!-- PIED DE PAGE -->
+<footer class="fl" style="background: var(--wine-deep); color: var(--text-on-dark); padding: 72px 0 32px; overflow: hidden">
+<div class="w" style="display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+<nav aria-label="Navigation du pied de page" style="display: flex; flex-direction: column; gap: 10px">
+<p class="bd it" style="margin: 0 0 6px; font-size: 18px; color: var(--highlight)">Navigation</p>
+<a href="../pages/accueil.html">Accueil</a><a href="../pages/agence.html">Agence événementielle</a><a href="../pages/dj.html">DJ</a><a href="../pages/contact.html">Contact</a>
+</nav>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p class="bd it" style="margin: 0 0 6px; font-size: 18px; color: var(--highlight)">Informations</p>
+<a href="#">À propos</a><a href="#">Nos réalisations</a><a href="#">Avis clients</a><a href="../pages/contact.html">FAQ</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p class="bd it" style="margin: 0 0 6px; font-size: 18px; color: var(--highlight)">Suivre Eva</p>
+<a href="#">Instagram</a><a href="#">Facebook</a><a href="#">TikTok</a><a href="#">YouTube</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 280px">
+<p class="bd it" style="margin: 0; font-size: 26px; line-height: 1.2; color: var(--bg-light)">Un projet, une date, une envie ?</p>
+<div><a class="pill" href="../pages/contact.html">Nous contacter</a></div>
+</div>
+</div>
+<p class="bd it wordmark" aria-hidden="true">De Casti Event</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: var(--faint-on-dark)">
+<span>© 2026 De Casti Event</span>
+<span style="display: flex; gap: 24px"><a href="#" style="font-size: 13px">Mentions légales</a><a href="#" style="font-size: 13px">Politique de confidentialité</a></span>
+</div>
+</div>
+</footer>
+
+</div>
+</body>
+</html>

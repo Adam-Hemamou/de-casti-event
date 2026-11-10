@@ -1,0 +1,102 @@
+{
+  "seo": {
+    "title": "De Casti Event — Agence événementielle & DJ",
+    "description": "De la conception de votre événement à son ambiance musicale, De Casti Event imagine et coordonne des expériences sur mesure."
+  },
+  "hero": {
+    "kicker": "Agence événementielle & DJ",
+    "titleTop": "CRÉONS ENSEMBLE",
+    "title": "des moments inoubliables.",
+    "text": "De la conception de votre événement à son ambiance musicale, De Casti Event imagine et coordonne des expériences sur mesure, pensées dans les moindres détails pour vous et vos invités.",
+    "cta": { "label": "Découvrir nos services", "href": "#activites" },
+    "vinyl": {
+      "photo": { "src": "dj-rooftop-bordeaux.jpg", "alt": "Eva de Casti aux platines", "position": "center 28%" },
+      "caption": "Eva de Casti, aux platines"
+    }
+  },
+  "valeurs": {
+    "kicker": "Notre univers",
+    "title": "Passion, élégance & émotion",
+    "text": "Chaque événement est une nouvelle histoire à écrire. Nous mettons notre créativité, notre savoir-faire et notre sens du détail au service de vos projets, pour imaginer des expériences uniques qui vous ressemblent.",
+    "items": [
+      { "title": "Écoute & conseil", "text": "Comprendre vos envies, vos besoins et vos objectifs pour construire un événement qui vous ressemble." },
+      { "title": "Création sur mesure", "text": "Imaginer des concepts personnalisés, adaptés à votre univers, à vos attentes et à votre budget." },
+      { "title": "Rigueur & organisation", "text": "Anticiper, coordonner et veiller à chaque détail pour un déroulement fluide et maîtrisé." },
+      { "title": "Émotion & expérience", "text": "Créer des instants forts, des rencontres et des souvenirs qui restent." }
+    ]
+  },
+  "activites": {
+    "separator": "&",
+    "cards": [
+      {
+        "icon": "sparkle",
+        "title": "Agence *événementielle*",
+        "text": "De Casti Event imagine, organise et coordonne vos événements professionnels et privés, de la première idée jusqu'au jour J.",
+        "listColumns": 1,
+        "items": [
+          "Événements d'entreprise & corporate",
+          "Séminaires & team building",
+          "Inaugurations & lancements",
+          "Soirées d'entreprise & événements clients",
+          "Mariages & célébrations privées"
+        ],
+        "cta": { "label": "Découvrir l'agence", "href": "/agence-evenementielle" },
+        "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque dans un tunnel scénographié" }
+      },
+      {
+        "icon": "headphones",
+        "title": "DJ *— Eva de Casti*",
+        "text": "Des ambiances musicales personnalisées, une sélection adaptée à votre public et une énergie pensée pour faire vivre chaque événement.",
+        "listColumns": 2,
+        "items": [
+          "Mariages",
+          "Événements d'entreprise",
+          "Soirées privées",
+          "Événements sportifs & publics",
+          "Festivals & événements culturels",
+          "Événements de marques"
+        ],
+        "cta": { "label": "Découvrir DJ", "href": "/dj" },
+        "photo": { "src": "hero-dj.jpg", "alt": "Eva de Casti aux platines dans un club", "position": "60% 40%" }
+      }
+    ]
+  },
+  "chiffres": [
+    { "value": 250, "suffix": "+", "label": "événements réalisés" },
+    { "value": 7, "suffix": "", "label": "années d'expérience" },
+    { "value": 15, "suffix": "+", "label": "régions & destinations" },
+    { "value": 2, "suffix": "", "label": "expertises : DJ & organisation événementielle" },
+    { "value": 1, "suffix": "", "label": "interlocutrice dédiée à votre événement" }
+  ],
+  "apropos": {
+    "kicker": "À propos",
+    "title": "L'art de sublimer chaque instant",
+    "lead": "Deux expertises, une même passion : l'événementiel.",
+    "paragraphs": [
+      "De Casti Event est née de la passion d'Eva de Casti pour la musique et de son envie de créer des événements uniques, authentiques et mémorables.",
+      "Depuis plusieurs années, Eva évolue dans l'univers événementiel à travers son activité de DJ et développe une véritable expertise dans la création d'ambiances musicales et l'accompagnement de projets événementiels.",
+      "Aujourd'hui, avec De Casti Event, elle met cette expérience au service des particuliers et des entreprises, en proposant un accompagnement personnalisé dans la conception, l'organisation et la coordination de leurs événements.",
+      "De la recherche des prestataires à la coordination du jour J, en passant par l'animation musicale, chaque projet est imaginé avec attention, créativité et exigence."
+    ],
+    "emphasis": "Notre ambition : donner vie à vos idées et transformer chaque événement en une expérience qui vous ressemble.",
+    "link": { "label": "En savoir plus", "href": "/agence-evenementielle" },
+    "photo": { "src": "eva-portrait.jpg", "alt": "Portrait d'Eva de Casti", "position": "center 22%" }
+  },
+  "realisations": {
+    "kicker": "Réalisations",
+    "title": "Revivez nos plus beaux moments",
+    "link": { "label": "Voir toutes nos réalisations", "href": "/dj" },
+    "rowHeight": 220,
+    "photos": [
+      { "src": "hero-accueil.jpg", "alt": "Eva bras levé face à la foule en club", "cols": 2, "rows": 2 },
+      { "src": "stade-societe-generale.jpg", "alt": "DJ set au stade" },
+      { "src": "evenement-marque.jpg", "alt": "Événement de marque automobile" },
+      { "src": "rooftop-terrasse.jpg", "alt": "DJ set en terrasse", "cols": 2, "position": "center 30%" }
+    ]
+  },
+  "avis": {
+    "kicker": "Avis clients",
+    "title": "Ils nous ont fait confiance",
+    "link": { "label": "Lire tous les avis", "href": "#" }
+  }
+}

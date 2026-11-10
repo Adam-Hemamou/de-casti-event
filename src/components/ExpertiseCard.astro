@@ -1,0 +1,96 @@
+---
+// Carte d'expertise (pages Agence et DJ) : photo, titre, texte, bouton qui ouvre un pop-up.
+// taille 'grande' : Agence (4 cartes) ; 'compacte' : DJ (5 cartes).
+// Sans JavaScript, le bouton reste un lien vers l'ancre du pop-up.
+import Photo from './Photo.astro';
+import type { PhotoT } from '../data';
+
+interface Props {
+  title: string;
+  text: string;
+  note?: string;
+  photo: PhotoT;
+  link: string;
+  popup: string;
+  size?: 'grande' | 'compacte';
+}
+
+const { title, text, note, photo, link, popup, size = 'grande' } = Astro.props;
+---
+
+<article class:list={['card', `card--${size}`]} data-reveal>
+  <Photo
+    photo={photo}
+    class="card-photo"
+    sizes={size === 'grande' ? '(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 280px' : '(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 250px'}
+    widths={[400, 700]}
+  />
+  <div class="body">
+    <h3 class="bd it">{title}</h3>
+    <p class:list={['p on text', { grow: !note }]}>{text}</p>
+    {note && <p class="p on note">{note}</p>}
+    <div class="foot">
+      <a class="ul on" href={`#${popup}`} data-popup-open={popup} aria-haspopup="dialog">{link}</a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--card-dark);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 0 1px rgba(var(--highlight-rgb), 0.28);
+  }
+  .card :global(.card-photo) {
+    width: 100%;
+    height: 230px;
+    flex: none;
+  }
+  .card--compacte :global(.card-photo) {
+    height: 220px;
+  }
+  .body {
+    padding: 26px 26px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-grow: 1;
+  }
+  .card--compacte .body {
+    padding: 22px 22px 18px;
+  }
+  h3 {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--highlight);
+  }
+  .card--compacte h3 {
+    font-size: 26px;
+  }
+  .text {
+    font-size: 15px;
+  }
+  .card--compacte .text {
+    font-size: 14.5px;
+  }
+  .note {
+    font-size: 15px;
+    color: var(--muted-on-dark);
+    flex-grow: 1;
+  }
+  .grow {
+    flex-grow: 1;
+  }
+  .foot {
+    padding-top: 8px;
+    border-top: 1px solid rgba(var(--highlight-rgb), 0.22);
+  }
+  .card--compacte .foot {
+    padding-top: 6px;
+  }
+</style>

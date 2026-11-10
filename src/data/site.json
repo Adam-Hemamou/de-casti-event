@@ -1,0 +1,60 @@
+{
+  "name": "De Casti Event",
+  "url": "https://www.decasti-event.fr",
+  "urlNote": "[domaine à confirmer] : valeur temporaire, à remplacer par le domaine définitif (sert aux URL canoniques, au sitemap et à Open Graph)",
+  "description": "Agence événementielle & DJ : De Casti Event imagine, organise et coordonne vos événements professionnels et privés, avec l'ambiance musicale d'Eva de Casti.",
+  "defaultOgImage": "hero-accueil.jpg",
+  "logo": { "main": "De Casti", "sub": "EVENT", "label": "De Casti Event, accueil" },
+  "contact": {
+    "email": "[e-mail à confirmer]",
+    "phone": "[téléphone à confirmer]",
+    "city": "[ville à confirmer]",
+    "country": "France",
+    "hours": "[horaires à confirmer]"
+  },
+  "social": {
+    "instagram": { "label": "Instagram", "href": "#" },
+    "facebook": { "label": "Facebook", "href": "#" },
+    "tiktok": { "label": "TikTok", "href": "#" },
+    "youtube": { "label": "YouTube", "href": "#" },
+    "linkedin": { "label": "LinkedIn", "href": "#" }
+  },
+  "nav": [
+    { "label": "Accueil", "href": "/" },
+    { "label": "Agence événementielle", "href": "/agence-evenementielle" },
+    { "label": "DJ", "href": "/dj" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "skipLink": "Aller au contenu",
+  "navLabel": "Navigation principale",
+  "menuLabel": "Menu",
+  "menuCloseLabel": "Fermer le menu",
+  "headerCta": { "label": "Nous contacter", "href": "/contact" },
+  "footer": {
+    "navLabel": "Navigation du pied de page",
+    "navTitle": "Navigation",
+    "infoTitle": "Informations",
+    "infoLinks": [
+      { "label": "À propos", "href": "/#a-propos" },
+      { "label": "Nos réalisations", "href": "/#realisations" },
+      { "label": "Avis clients", "href": "/#avis" },
+      { "label": "FAQ", "href": "/contact#faq" }
+    ],
+    "socialTitle": "Suivre Eva",
+    "contactTitle": "Contact",
+    "cta": { "text": "Un projet, une date, une envie ?", "label": "Nous contacter", "href": "/contact" },
+    "tagline": "Des moments qui comptent.",
+    "wordmark": "De Casti Event",
+    "copyright": "© 2026 De Casti Event",
+    "legal": [
+      { "label": "Mentions légales", "href": "/mentions-legales" },
+      { "label": "Politique de confidentialité", "href": "/politique-de-confidentialite" }
+    ],
+    "variants": {
+      "accueil": { "third": "social", "social": ["instagram", "facebook", "tiktok", "youtube"], "end": "cta" },
+      "agence": { "third": "contact", "end": "cta" },
+      "dj": { "third": "contact", "end": "cta" },
+      "contact": { "third": "social", "social": ["instagram", "facebook", "tiktok", "linkedin"], "end": "tagline" }
+    }
+  }
+}

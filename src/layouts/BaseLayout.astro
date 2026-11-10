@@ -1,0 +1,133 @@
+---
+import '@fontsource-variable/bodoni-moda/opsz.css';
+import '@fontsource-variable/bodoni-moda/opsz-italic.css';
+import '@fontsource/instrument-sans/latin-400.css';
+import '@fontsource/instrument-sans/latin-500.css';
+import '@fontsource/instrument-sans/latin-600.css';
+import '../styles/palettes.css';
+import '../styles/global.css';
+
+import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { THEME } from '../config/theme';
+import { site, type PageKey } from '../data';
+import { photo } from '../lib/photos';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Variante du pied de page (voir site.json > footer.variants). */
+  footer?: PageKey;
+  /** Classe ajoutée à l'en-tête, pour le style de la bannière propre à chaque page. */
+  headerClass?: string;
+  /** Bouton d'action de l'en-tête, si différent de celui par défaut. */
+  headerCta?: { label: string; href: string };
+  /** Photo de partage (nom de fichier dans src/assets/photos). */
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, footer = 'agence', headerClass, headerCta, ogImage, noindex = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), site.url).href;
+const og = await getImage({ src: photo(ogImage ?? site.defaultOgImage), width: 1200, format: 'jpg' });
+const ogUrl = new URL(og.src, site.url).href;
+
+// Données structurées : les coordonnées encore « à confirmer » ne sont pas publiées.
+const known = (s: string) => (s.startsWith('[') ? undefined : s);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  image: ogUrl,
+  email: known(site.contact.email),
+  telephone: known(site.contact.phone),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: known(site.contact.city),
+    addressCountry: 'FR',
+  },
+  sameAs: Object.values(site.social)
+    .map((s) => s.href)
+    .filter((h) => h.startsWith('http')),
+};
+---
+
+<!doctype html>
+<html lang="fr" data-theme={THEME}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Marque la présence de JavaScript (les styles « sans JS » restent la base). -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      document.addEventListener('astro:after-swap', function () {
+        document.documentElement.classList.add('js');
+      });
+    </script>
+
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">{site.skipLink}</a>
+    <div class="site">
+      <header class:list={['site-header', headerClass]}>
+        <Header cta={headerCta} />
+        <slot name="hero" />
+      </header>
+      <main id="contenu">
+        <slot />
+      </main>
+      <Footer variant={footer} />
+    </div>
+    <script>
+      import '../scripts/animations';
+      import '../scripts/popups';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .site-header {
+    position: relative;
+    color: var(--bg-light);
+  }
+  html.menu-open {
+    overflow: hidden;
+  }
+
+  /* Transition entre les pages : fondu doux. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.45s;
+    animation-timing-function: ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }
+</style>

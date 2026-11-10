@@ -1,0 +1,67 @@
+/* De Casti Event — palettes du site.
+   La structure, les formes et le contenu sont ceux de la maquette 2.
+   Seules les couleurs changent selon l'attribut data-theme sur <html> :
+     data-theme="bordeaux"  -> maquette 2 (Bordeaux & champagne)   [par défaut]
+     data-theme="noir-or"   -> maquette 1 (Noir & or)
+   Chaque token a le même rôle dans les deux palettes. */
+
+:root,
+:root[data-theme="bordeaux"] {
+  --wine: #3B0D18;            /* fond sombre principal (bannières, sections sombres, boutons pleins) */
+  --wine-deep: #2A0911;       /* fond le plus sombre (pied de page, bandeaux) */
+  --backdrop: #1E060B;        /* fond assombri derrière les pop-up */
+  --velvet: #5C1A2B;          /* survol bouton sombre, grand logo du pied de page */
+  --card-dark: #4A1422;       /* cartes sur fond sombre */
+  --line-dark: #7A3646;       /* filets sur fond sombre */
+  --accent: #8C3A4E;          /* petits titres, puces, numéros sur fond clair */
+  --bg-light: #F6E7E3;        /* fond clair principal */
+  --bg-light-2: #EBD3CE;      /* fond clair secondaire (avis, encadrés) */
+  --surface: #FFF8F5;         /* cartes sur fond clair */
+  --highlight: #E9CFA3;       /* couleur d'accent : boutons clairs, titres en italique sur fond sombre */
+  --highlight-hover: #F3DFBC;
+  --text-on-dark: #EBD6D4;
+  --muted-on-dark: #D3B5B9;
+  --faint-on-dark: #C7A9AD;
+  --text: #5A2F3A;            /* texte courant sur fond clair */
+  --text-muted: #7A4A55;
+  --line: #C9A3A9;
+  --line-soft: #D9B7B4;
+  --line-strong: #B98A93;
+  --groove-1: #160509;        /* sillons du vinyle */
+  --groove-2: #21090F;
+  --highlight-rgb: 233, 207, 163;
+  --wine-rgb: 59, 13, 24;
+  --wine-deep-rgb: 42, 9, 17;
+  --shadow-rgb: 20, 4, 8;
+  --velvet-rgb: 92, 26, 43;
+}
+
+:root[data-theme="noir-or"] {
+  --wine: #0B0A09;
+  --wine-deep: #070606;
+  --backdrop: #050404;
+  --velvet: #2A241E;
+  --card-dark: #15120F;
+  --line-dark: #3A3128;
+  --accent: #8A5F31;
+  --bg-light: #F3ECE2;
+  --bg-light-2: #EAE0D2;
+  --surface: #FBF7F1;
+  --highlight: #D9A877;
+  --highlight-hover: #E8C29A;
+  --text-on-dark: #E8E0D6;
+  --muted-on-dark: #B8AEA2;
+  --faint-on-dark: #9A9086;
+  --text: #4A423A;
+  --text-muted: #6B6058;
+  --line: #CDBBA2;
+  --line-soft: #DCCBB4;
+  --line-strong: #B9A487;
+  --groove-1: #050404;
+  --groove-2: #12100D;
+  --highlight-rgb: 217, 168, 119;
+  --wine-rgb: 11, 10, 9;
+  --wine-deep-rgb: 7, 6, 6;
+  --shadow-rgb: 0, 0, 0;
+  --velvet-rgb: 42, 36, 30;
+}

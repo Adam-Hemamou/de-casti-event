@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>De Casti Event — DJ</title>
+<link rel="stylesheet" href="../theme/palettes.css">
+<script src="../theme/theme-switch.js"></script>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--wine)}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--highlight);outline-offset:3px}
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.bd{font-family:'Bodoni Moda',serif;font-weight:400}
+.it{font-style:italic}
+.kick{font-family:'Bodoni Moda',serif;font-style:italic;font-size:19px;color:var(--accent);margin:0}
+.kick.on{color:var(--highlight)}
+.h2{font-family:'Bodoni Moda',serif;font-weight:400;font-size:52px;line-height:1.04;letter-spacing:-.01em;color:var(--wine);margin:0}
+.h2.on{color:var(--bg-light)}
+.p{font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.65;color:var(--text);margin:0;max-width:62ch}
+.p.on{color:var(--text-on-dark)}
+.pill{display:inline-flex;align-items:center;min-height:50px;padding:0 30px;border-radius:999px;background:var(--highlight);color:var(--wine);font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:600}
+.pill:hover{background:var(--highlight-hover)}
+.pill.ghost{background:transparent;color:var(--highlight);box-shadow:inset 0 0 0 1px var(--highlight)}
+.pill.ghost:hover{background:rgba(var(--highlight-rgb),.12)}
+.ul{font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:600;color:var(--wine);border-bottom:1px solid currentColor;padding:12px 0 2px;display:inline-block}
+.ul.on{color:var(--highlight)}
+.nav a{font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text-on-dark);padding:12px 0}
+.nav a:hover{color:var(--highlight)}
+.nav a.cur{color:var(--highlight);font-family:'Bodoni Moda',serif;font-style:italic;font-size:17px}
+.genre{font-family:'Bodoni Moda',serif;font-size:44px;line-height:1.18;color:var(--wine)}
+.genre.i{font-style:italic;color:var(--accent)}
+.li{font-family:'Instrument Sans',sans-serif;font-size:16px;color:var(--bg-light);margin:0;padding:14px 0;border-top:1px solid var(--line-dark)}
+.fl a{font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text-on-dark)}.fl a:hover{color:var(--highlight)}
+.fl a.pill{color:var(--wine);font-size:15px}.fl a.pill:hover{color:var(--wine)}
+.wordmark{margin:0;font-size:clamp(64px,14.6vw,187px);line-height:.8;letter-spacing:-.03em;color:var(--velvet);white-space:nowrap;margin-left:-.04em}
+</style>
+<div style="font-family: 'Instrument Sans', sans-serif; background: var(--bg-light); color: var(--wine)">
+
+<!-- EN-TÊTE + BANNIÈRE -->
+<header style="position: relative; min-height: 780px; background: var(--wine-deep); color: var(--bg-light); display: flex; flex-direction: column; overflow: hidden">
+<img src="../photos/hero-dj.jpg" alt="Eva de Casti aux platines dans un club, la foule derrière elle" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%">
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(var(--wine-deep-rgb),.75) 0%, rgba(var(--wine-deep-rgb),.15) 30%, rgba(var(--wine-deep-rgb),.35) 55%, rgba(var(--wine-deep-rgb),.96) 100%)"></div>
+<div class="w" style="position: relative; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding-top: 26px; padding-bottom: 26px">
+<a href="../pages/accueil.html" style="display: flex; align-items: baseline; gap: 10px">
+<span class="bd it" style="font-size: 30px; color: var(--bg-light)">De Casti</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: .14em; color: var(--highlight)">EVENT</span>
+</a>
+<nav class="nav" aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 34px; align-items: baseline">
+<a href="../pages/accueil.html">Accueil</a>
+<a href="../pages/agence.html">Agence événementielle</a>
+<a class="cur" href="../pages/dj.html">DJ</a>
+<a href="../pages/contact.html">Contact</a>
+</nav>
+<a class="pill ghost" href="../pages/contact.html" style="min-height: 44px; padding: 0 22px">Nous contacter</a>
+</div>
+<div class="w" style="position: relative; width: 100%; margin-top: auto; padding-bottom: 72px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div style="max-width: 760px; display: flex; flex-direction: column; gap: 24px">
+<p class="kick on">DJ &amp; production événementielle</p>
+<h1 class="bd it" style="margin: 0; font-size: 92px; line-height: .96; letter-spacing: -.02em; color: var(--bg-light)">La musique au cœur de vos événements.</h1>
+</div>
+<div style="flex: 0 1 380px; display: flex; flex-direction: column; gap: 22px">
+<p class="p on">Une signature musicale, une énergie communicative et une programmation adaptée à chaque public. Je vous accompagne pour faire de votre événement un moment unique, où la musique crée l'ambiance et rassemble les invités.</p>
+<div><a class="pill" href="../pages/contact.html">Demander un devis</a></div>
+</div>
+</div>
+</header>
+
+<!-- NOTRE APPROCHE -->
+<section style="padding: 112px 0 104px">
+<div class="w" style="display: flex; flex-wrap: wrap; gap: 64px">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 20px">
+<p class="kick">Notre approche</p>
+<h2 class="h2">Une passion, une exigence, une ambiance qui vous ressemble.</h2>
+<p class="p">Chaque événement possède son identité et son public. Mon rôle est de comprendre vos attentes pour construire une programmation musicale cohérente, m'adapter à l'ambiance et faire vivre chaque moment derrière les platines.</p>
+<img src="../photos/dj-terrasse-pont.jpg" alt="DJ set en terrasse avec vue sur le pont Chaban-Delmas" style="width: 100%; max-width: 420px; aspect-ratio: 4 / 3; object-fit: cover; display: block; margin-top: 12px">
+</div>
+<div style="flex: 1.2 1 480px; display: flex; flex-direction: column">
+<div style="padding: 24px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 8px; font-size: 26px; font-weight: 400">Écoute &amp; conseil</h3><p class="p" style="font-size: 15px">Comprendre vos envies, vos goûts musicaux et l'atmosphère que vous souhaitez créer.</p></div>
+<div style="padding: 24px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 8px; font-size: 26px; font-weight: 400">Programmation sur mesure</h3><p class="p" style="font-size: 15px">Une sélection musicale adaptée à votre événement, à votre public et à chaque moment de la soirée.</p></div>
+<div style="padding: 24px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 8px; font-size: 26px; font-weight: 400">Préparation &amp; anticipation</h3><p class="p" style="font-size: 15px">Préparer chaque intervention et anticiper les besoins techniques et musicaux.</p></div>
+<div style="padding: 24px 0; border-top: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 8px; font-size: 26px; font-weight: 400">Sonorisation &amp; éclairage</h3><p class="p" style="font-size: 15px">Des solutions techniques adaptées au lieu, au nombre d'invités et au format de votre événement.</p></div>
+<div style="padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line)"><h3 class="bd it" style="margin: 0 0 8px; font-size: 26px; font-weight: 400">Énergie &amp; émotion</h3><p class="p" style="font-size: 15px">Créer une connexion avec le public et transformer chaque prestation en véritable expérience musicale.</p></div>
+</div>
+</div>
+</section>
+
+<!-- NOS EXPERTISES -->
+<section style="background: var(--wine); color: var(--bg-light); padding: 104px 0">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 32px; display: flex; flex-direction: column; gap: 52px">
+<div style="display: flex; flex-direction: column; gap: 16px; padding: 0 16px"><p class="kick on">Nos expertises</p><h2 class="h2 on">Une ambiance musicale pour chaque événement.</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+<article style="background: var(--card-dark); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.28)">
+<img src="../photos/dj-mariage-pampas.jpg" alt="Installation DJ pour un mariage devant un mur en pierre" style="width: 100%; height: 220px; object-fit: cover; object-position: center 30%; display: block">
+<div style="padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
+<h3 class="bd it" style="margin: 0; font-size: 26px; line-height: 1.05; font-weight: 400; color: var(--highlight)">Mariages</h3>
+<p class="p on" style="font-size: 14.5px; flex-grow: 1">Du vin d'honneur à la soirée dansante, j'accompagne les mariés pour créer une ambiance musicale à leur image, des premiers instants jusqu'aux dernières danses.</p>
+<div style="padding-top: 6px; border-top: 1px solid rgba(var(--highlight-rgb),.22)"><a class="ul on" href="../pages/popups/dj-mariages.html">Voir les formules</a></div>
+</div>
+</article>
+<article style="background: var(--card-dark); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.28)">
+<img src="../photos/evenement-marque.jpg" alt="Événement de marque avec animation musicale" style="width: 100%; height: 220px; object-fit: cover; display: block">
+<div style="padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
+<h3 class="bd it" style="margin: 0; font-size: 26px; line-height: 1.05; font-weight: 400; color: var(--highlight)">Événements d'entreprise</h3>
+<p class="p on" style="font-size: 14.5px; flex-grow: 1">Soirées corporate, cocktails, séminaires, inaugurations, lancements de produits et événements clients. Une prestation musicale adaptée à votre image et à votre public.</p>
+<div style="padding-top: 6px; border-top: 1px solid rgba(var(--highlight-rgb),.22)"><a class="ul on" href="../pages/popups/dj-entreprise.html">Voir les formules</a></div>
+</div>
+</article>
+<article style="background: var(--card-dark); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.28)">
+<img src="../photos/club-foule.jpg" alt="Soirée privée en club avec Eva aux platines" style="width: 100%; height: 220px; object-fit: cover; display: block">
+<div style="padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
+<h3 class="bd it" style="margin: 0; font-size: 26px; line-height: 1.05; font-weight: 400; color: var(--highlight)">Soirées privées</h3>
+<p class="p on" style="font-size: 14.5px; flex-grow: 1">Anniversaires, fêtes de famille, soirées entre amis et célébrations. Une programmation personnalisée pour partager un moment festif et mémorable.</p>
+<div style="padding-top: 6px; border-top: 1px solid rgba(var(--highlight-rgb),.22)"><a class="ul on" href="../pages/popups/dj-soirees.html">Voir les formules</a></div>
+</div>
+</article>
+<article style="background: var(--card-dark); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.28)">
+<img src="../photos/guinguette.jpg" alt="DJ set en plein air lors d'une fête locale" style="width: 100%; height: 220px; object-fit: cover; display: block">
+<div style="padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
+<h3 class="bd it" style="margin: 0; font-size: 26px; line-height: 1.05; font-weight: 400; color: var(--highlight)">Festivals &amp; événements publics</h3>
+<p class="p on" style="font-size: 14.5px; flex-grow: 1">Festivals, fêtes locales, événements culturels et manifestations publiques. Une présence musicale adaptée à l'ambiance et à l'énergie du public.</p>
+<div style="padding-top: 6px; border-top: 1px solid rgba(var(--highlight-rgb),.22)"><a class="ul on" href="../pages/popups/dj-festivals.html">Voir les formules</a></div>
+</div>
+</article>
+<article style="background: var(--card-dark); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.28)">
+<img src="../photos/stade-societe-generale.jpg" alt="Eva aux platines au bord du terrain dans un stade" style="width: 100%; height: 220px; object-fit: cover; display: block">
+<div style="padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
+<h3 class="bd it" style="margin: 0; font-size: 26px; line-height: 1.05; font-weight: 400; color: var(--highlight)">Sport, marques &amp; événements spéciaux</h3>
+<p class="p on" style="font-size: 14.5px; flex-grow: 1">Événements sportifs, compétitions, animations de marques, événements automobiles et lancements. Une animation musicale pensée pour accompagner et dynamiser chaque temps fort.</p>
+<div style="padding-top: 6px; border-top: 1px solid rgba(var(--highlight-rgb),.22)"><a class="ul on" href="../pages/popups/dj-sport.html">Voir les formules</a></div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- EN IMAGES -->
+<section style="padding: 112px 0 96px">
+<div class="w" style="display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 620px"><p class="kick">En images</p><h2 class="h2">La musique, l'énergie, l'instant.</h2><p class="p">Découvrez quelques extraits de mes prestations, entre soirées privées, mariages, événements professionnels et festivals.</p></div>
+<a class="ul" href="#">Voir plus de photos &amp; vidéos</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 230px; gap: 12px">
+<img src="../photos/club-noir-blanc.jpg" alt="Soirée en club, photo noir et blanc" style="grid-row: span 2; width: 100%; height: 100%; object-fit: cover; display: block">
+<img src="../photos/dj-coucher-soleil.jpg" alt="DJ set au coucher du soleil face à la Garonne" style="grid-column: span 2; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block">
+<img src="../photos/cave-voutee.jpg" alt="DJ set dans une cave voûtée" style="grid-row: span 2; width: 100%; height: 100%; object-fit: cover; display: block">
+<img src="../photos/soiree-privee-coeur.jpg" alt="Eva fait un cœur avec ses mains derrière les platines" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block">
+<img src="../photos/rooftop-terrasse.jpg" alt="DJ set en terrasse avec vue sur la ville" style="width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block">
+</div>
+</div>
+</section>
+
+<!-- AVIS CLIENTS — section 5 du document -->
+<section style="padding: 104px 0; background: var(--bg-light-2)">
+<div class="w" style="display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px"><p class="kick">Ils nous ont fait confiance</p><h2 class="h2">Leur expérience, leurs mots.</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 24px; line-height: 1.32">« Tout a été parfait du début à la fin. Une ambiance incroyable, une équipe professionnelle et à l'écoute. Nous recommandons les yeux fermés ! »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Camille &amp; Thomas — mariage, Bordeaux <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+<figure style="margin: 48px 0 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 24px; line-height: 1.32">« Un grand merci pour cette soirée mémorable ! La musique, la lumière, l'énergie… tout était réuni pour une expérience unique. »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Julien R. — soirée privée, Paris <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+<figure style="margin: 96px 0 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 24px; line-height: 1.32">« Une équipe sérieuse, créative et passionnée. Notre événement d'entreprise a été un véritable succès grâce à leur savoir-faire. »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Sophie L. — événement pro, Lyon <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<!-- MON UNIVERS MUSICAL -->
+<section style="background: var(--bg-light); padding: 104px 0; border-top: 1px solid var(--line-soft)">
+<div class="w" style="display: flex; flex-wrap: wrap; gap: 64px">
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 20px">
+<p class="kick">Mon univers musical</p>
+<h2 class="h2" style="font-size: 44px">Une programmation musicale adaptée à chaque événement.</h2>
+<p class="p">De la musique électronique aux grands classiques incontournables, je m'adapte à vos envies, à votre public et à l'atmosphère recherchée.</p>
+<p class="p" style="color: var(--wine); font-weight: 600">Mon univers musical est varié et évolue selon chaque prestation :</p>
+</div>
+<div style="flex: 1.3 1 520px; display: flex; flex-direction: column; gap: 32px">
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; column-gap: 26px; row-gap: 2px; align-items: baseline">
+<li class="genre">House, Deep House &amp; Tech House</li>
+<li class="genre i">Minimal &amp; Electronic</li>
+<li class="genre">Funk &amp; Disco</li>
+<li class="genre i">Pop &amp; Rock</li>
+<li class="genre">Années 80, 90 &amp; 2000</li>
+<li class="genre i">Commercial &amp; Généraliste</li>
+<li class="genre">Latino &amp; Reggaeton</li>
+<li class="genre i">Hip-Hop &amp; R&amp;B</li>
+</ul>
+<p class="p" style="padding-top: 20px; border-top: 1px solid var(--wine)">Chaque événement possède son identité musicale. Ma priorité est de trouver le bon équilibre entre vos envies et l'énergie de votre public.</p>
+</div>
+</div>
+</section>
+
+<!-- SONORISATION & MISE EN LUMIÈRE -->
+<section style="background: var(--wine); color: var(--bg-light)">
+<div style="display: flex; flex-wrap: wrap">
+<div style="flex: 1 1 440px; min-height: 600px; position: relative">
+<img src="../photos/studio-platines.jpg" alt="Platines Pioneer et enceintes de monitoring" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 65%">
+</div>
+<div style="flex: 1 1 540px; padding: 88px 56px; display: flex; flex-direction: column; gap: 20px; max-width: 720px">
+<p class="kick on">Sonorisation &amp; mise en lumière</p>
+<h2 class="h2 on" style="font-size: 44px">Le son et la lumière au service de votre événement.</h2>
+<p class="p on">Au-delà de la prestation DJ, je propose des solutions de sonorisation et de mise en lumière adaptées à votre lieu, au nombre de participants et au format de votre événement.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); column-gap: 32px">
+<p class="li">Sonorisation professionnelle</p>
+<p class="li">Enceintes et caissons de basses</p>
+<p class="li">Éclairage d'ambiance</p>
+<p class="li">Lyres et jeux de lumière</p>
+<p class="li" style="border-bottom: 1px solid var(--line-dark)">Installation et configuration technique</p>
+<p class="li" style="border-bottom: 1px solid var(--line-dark)">Solutions complémentaires selon les besoins du projet</p>
+</div>
+<p class="p on">Chaque installation est pensée pour offrir une expérience sonore et visuelle adaptée à votre événement.</p>
+<p class="bd it" style="margin: 0; font-size: 18px; color: var(--highlight)">Possibilité de compléter l'installation avec du matériel supplémentaire selon les besoins.</p>
+<div style="padding-top: 6px"><a class="pill" href="../pages/contact.html">Demander un devis</a></div>
+</div>
+</div>
+</section>
+
+<!-- AVIS CLIENTS (rubrique conservée) -->
+<section style="padding: 104px 0">
+<div class="w" style="display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 12px"><p class="kick">Ils nous ont fait confiance</p><h2 class="h2">Leur expérience, leurs mots.</h2></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 24px; line-height: 1.32">« Tout a été parfait du début à la fin. Une ambiance incroyable, une équipe professionnelle et à l'écoute. Nous recommandons les yeux fermés ! »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Camille &amp; Thomas — mariage, Bordeaux <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+<figure style="margin: 48px 0 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 24px; line-height: 1.32">« Un grand merci pour cette soirée mémorable ! La musique, la lumière, l'énergie… tout était réuni pour une expérience unique. »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Julien R. — soirée privée, Paris <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+<figure style="margin: 96px 0 0; display: flex; flex-direction: column; gap: 18px">
+<blockquote class="bd it" style="margin: 0; font-size: 24px; line-height: 1.32">« Une équipe sérieuse, créative et passionnée. Notre événement d'entreprise a été un véritable succès grâce à leur savoir-faire. »</blockquote>
+<figcaption style="font-size: 15px; color: var(--text)">Sophie L. — événement pro, Lyon <span aria-label="5 étoiles sur 5" style="color: var(--accent); letter-spacing: .12em; margin-left: 8px">★★★★★</span></figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<!-- PIED DE PAGE -->
+<footer class="fl" style="background: var(--wine-deep); color: var(--text-on-dark); padding: 72px 0 32px; overflow: hidden">
+<div class="w" style="display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between">
+<nav aria-label="Navigation du pied de page" style="display: flex; flex-direction: column; gap: 10px">
+<p class="bd it" style="margin: 0 0 6px; font-size: 18px; color: var(--highlight)">Navigation</p>
+<a href="../pages/accueil.html">Accueil</a><a href="../pages/agence.html">Agence événementielle</a><a href="../pages/dj.html">DJ</a><a href="../pages/contact.html">Contact</a>
+</nav>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p class="bd it" style="margin: 0 0 6px; font-size: 18px; color: var(--highlight)">Informations</p>
+<a href="#">À propos</a><a href="#">Nos réalisations</a><a href="#">Avis clients</a><a href="../pages/contact.html">FAQ</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p class="bd it" style="margin: 0 0 6px; font-size: 18px; color: var(--highlight)">Contact</p>
+<a href="#">[e-mail à confirmer]</a><a href="#">[téléphone à confirmer]</a><span style="font-size: 15px">[ville à confirmer], France</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 280px">
+<p class="bd it" style="margin: 0; font-size: 26px; line-height: 1.2; color: var(--bg-light)">Un projet, une date, une envie ?</p>
+<div><a class="pill" href="../pages/contact.html">Nous contacter</a></div>
+</div>
+</div>
+<p class="bd it wordmark" aria-hidden="true">De Casti Event</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: var(--faint-on-dark)">
+<span>© 2026 De Casti Event</span>
+<span style="display: flex; gap: 24px"><a href="#" style="font-size: 13px">Mentions légales</a><a href="#" style="font-size: 13px">Politique de confidentialité</a></span>
+</div>
+</div>
+</footer>
+
+</div>
+</body>
+</html>

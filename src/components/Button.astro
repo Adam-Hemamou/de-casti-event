@@ -1,0 +1,31 @@
+---
+// Bouton / lien d'action.
+// variant : 'plein' (doré, par défaut) | 'sombre' (fond bordeaux) | 'contour' | 'lien' (souligné)
+// on : true sur fond sombre (pour le lien souligné)
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'> & {
+  variant?: 'plein' | 'sombre' | 'contour' | 'lien';
+  on?: boolean;
+  type?: 'button' | 'submit';
+};
+
+const { variant = 'plein', on = false, href, type, class: extra, ...rest } = Astro.props;
+const classes = [
+  variant === 'lien' ? 'ul' : 'pill',
+  { wine: variant === 'sombre', ghost: variant === 'contour', on: on && variant === 'lien' },
+  extra,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type ?? 'button'} class:list={classes} {...(rest as HTMLAttributes<'button'>)}>
+      <slot />
+    </button>
+  )
+}

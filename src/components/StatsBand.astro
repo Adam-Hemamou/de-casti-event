@@ -1,0 +1,54 @@
+---
+// Bandeau des chiffres clés. La valeur finale est écrite dans le HTML
+// (visible sans JavaScript) ; l'animation la fait défiler depuis 0.
+interface Props {
+  items: { value: number; suffix: string; label: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="stats">
+  <div class="w grid">
+    {
+      items.map((s) => (
+        <div class="stat" data-reveal>
+          <p class="bd it value"><span data-count={s.value}>{s.value}</span>{s.suffix}</p>
+          <p class="label">{s.label}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .stats {
+    background: var(--wine-deep);
+    color: var(--bg-light);
+    padding: 72px 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px 24px;
+  }
+  .value {
+    margin: 0;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--highlight);
+  }
+  .label {
+    margin: 10px 0 0;
+    font-size: 15px;
+    color: var(--text-on-dark);
+  }
+  @media (max-width: 520px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .value {
+      font-size: 60px;
+    }
+  }
+</style>

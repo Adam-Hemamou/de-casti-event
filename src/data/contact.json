@@ -1,0 +1,60 @@
+{
+  "seo": {
+    "title": "Contact — De Casti Event",
+    "description": "Une question, une envie, un projet en tête ? Contactez De Casti Event pour organiser votre événement ou réserver Eva de Casti, DJ."
+  },
+  "headerCta": { "label": "Demander un devis", "href": "#formulaire" },
+  "hero": {
+    "kicker": "Contactez-nous",
+    "title": "Parlons de *votre projet.*",
+    "text": "Une question, une envie, un projet en tête ? Nous sommes à votre écoute pour créer ensemble des moments uniques et inoubliables.",
+    "labels": { "email": "E-mail", "phone": "Téléphone", "address": "Adresse", "hours": "Disponibilités" }
+  },
+  "form": {
+    "name": "contact",
+    "title": "Envoyez-nous *un message.*",
+    "fields": {
+      "nom": { "label": "Nom *", "error": "Veuillez indiquer votre nom." },
+      "prenom": { "label": "Prénom *", "error": "Veuillez indiquer votre prénom." },
+      "email": { "label": "E-mail *", "error": "Veuillez indiquer votre adresse e-mail.", "errorFormat": "Cette adresse e-mail ne semble pas valide (exemple : nom@domaine.fr)." },
+      "telephone": { "label": "Téléphone" },
+      "type": { "label": "Type d'événement *", "error": "Veuillez choisir un type d'événement." },
+      "date": { "label": "Date de l'événement" },
+      "message": { "label": "Votre message *", "error": "Veuillez écrire votre message." }
+    },
+    "typePlaceholder": "Choisir…",
+    "types": [
+      { "value": "mariage", "label": "Mariage" },
+      { "value": "entreprise", "label": "Événement d'entreprise & corporate" },
+      { "value": "soiree-privee", "label": "Soirée privée & anniversaire" },
+      { "value": "festival", "label": "Festival & événement public" },
+      { "value": "sport", "label": "Sport, marque & événement spécial" }
+    ],
+    "honeypotLabel": "Ne pas remplir ce champ :",
+    "submit": "Envoyer ma demande",
+    "privacy": "Vos données sont confidentielles et ne seront jamais partagées.",
+    "errorSummary": "Merci de compléter les champs signalés."
+  },
+  "social": {
+    "title": "Suivez-nous",
+    "networks": ["instagram", "facebook", "tiktok", "linkedin"]
+  },
+  "video": {
+    "title": "Chaque projet est unique. *Chaque détail compte.*",
+    "text": "Notre équipe met tout en œuvre pour comprendre vos envies et vous proposer une expérience sur mesure, à votre image.",
+    "link": { "label": "Voir la vidéo", "href": "#" },
+    "photo": { "src": "hero-accueil.jpg", "alt": "Eva bras levé face à la foule en club", "position": "center 40%" }
+  },
+  "faq": {
+    "kicker": "Questions fréquentes",
+    "title": "Vous avez des questions ?",
+    "textBefore": "Vous ne trouvez pas votre réponse ?",
+    "link": { "label": "Contactez-nous", "href": "#formulaire" },
+    "textAfter": ", nous serons ravis de vous aider.",
+    "items": [
+      { "question": "Quels types d'événements organisez-vous ?", "answer": "[Réponse à rédiger avec le client]" },
+      { "question": "Intervenez-vous dans toute la France ?", "answer": "[Réponse à rédiger avec le client]" },
+      { "question": "Comment se déroule la réservation d'un DJ ou d'un événement ?", "answer": "[Réponse à rédiger avec le client]" }
+    ]
+  }
+}

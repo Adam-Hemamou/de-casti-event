@@ -1,0 +1,169 @@
+---
+// Pied de page. Les colonnes varient selon la page, comme dans la maquette
+// (voir footer.variants dans src/data/site.json).
+import { site, type PageKey } from '../data';
+import Button from './Button.astro';
+
+interface Props {
+  variant: PageKey;
+}
+
+const f = site.footer;
+const v = f.variants[Astro.props.variant];
+const socials = (v.social ?? []).map((key) => site.social[key]).filter(Boolean);
+const c = site.contact;
+const isPlaceholder = (s: string) => s.startsWith('[');
+---
+
+<footer class="footer" transition:name="site-footer" transition:animate="none">
+  <div class="w inner">
+    <div class="cols">
+      <nav class="col" aria-label={f.navLabel}>
+        <p class="bd it col-title">{f.navTitle}</p>
+        {site.nav.map((l) => <a href={l.href}>{l.label}</a>)}
+      </nav>
+      <div class="col">
+        <p class="bd it col-title">{f.infoTitle}</p>
+        {f.infoLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+      </div>
+      {
+        v.third === 'social' ? (
+          <div class="col">
+            <p class="bd it col-title">{f.socialTitle}</p>
+            {socials.map((l) => <a href={l.href}>{l.label}</a>)}
+          </div>
+        ) : (
+          <div class="col">
+            <p class="bd it col-title">{f.contactTitle}</p>
+            <a href={isPlaceholder(c.email) ? '#' : `mailto:${c.email}`}>{c.email}</a>
+            <a href={isPlaceholder(c.phone) ? '#' : `tel:${c.phone.replace(/\s/g, '')}`}>{c.phone}</a>
+            <span class="city">{c.city}, {c.country}</span>
+          </div>
+        )
+      }
+      {
+        v.end === 'cta' ? (
+          <div class="col cta">
+            <p class="bd it cta-text">{f.cta.text}</p>
+            <div>
+              <Button href={f.cta.href}>{f.cta.label}</Button>
+            </div>
+          </div>
+        ) : (
+          <p class="bd it tagline">{f.tagline}</p>
+        )
+      }
+    </div>
+
+    <p class="bd it wordmark" aria-hidden="true"><span>{f.wordmark}</span></p>
+
+    <div class="bottom">
+      <span>{f.copyright}</span>
+      <span class="legal">{f.legal.map((l) => <a href={l.href}>{l.label}</a>)}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--wine-deep);
+    color: var(--text-on-dark);
+    padding: 72px 0 32px;
+    overflow: hidden;
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: space-between;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .col-title {
+    margin: 0 0 6px;
+    font-size: 18px;
+    color: var(--highlight);
+  }
+  .col a:not(.pill),
+  .city,
+  .legal a {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--text-on-dark);
+    transition: color 0.2s ease;
+  }
+  .col a:not(.pill):hover,
+  .legal a:hover {
+    color: var(--highlight);
+  }
+  .cta {
+    gap: 14px;
+    max-width: 280px;
+  }
+  .cta-text {
+    margin: 0;
+    font-size: 26px;
+    line-height: 1.2;
+    color: var(--bg-light);
+  }
+  .tagline {
+    margin: 0;
+    max-width: 280px;
+    font-size: 30px;
+    line-height: 1.2;
+    color: var(--bg-light);
+  }
+
+  /* Le grand « De Casti Event » occupe la largeur disponible, quelle que soit la taille d'écran.
+     Taille de la maquette (187 px) atteinte dans un conteneur de 1104 px. */
+  .wordmark {
+    container-type: inline-size;
+    margin: 0;
+    color: var(--velvet);
+    white-space: nowrap;
+  }
+  .wordmark span {
+    display: block;
+    font-size: clamp(40px, 16.94cqi, 187px);
+    line-height: 0.8;
+    letter-spacing: -0.03em;
+    margin-left: -0.04em;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--faint-on-dark);
+  }
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .legal a {
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px 24px;
+    }
+    .cta,
+    .tagline {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

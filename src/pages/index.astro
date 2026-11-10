@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ValueList from '../components/ValueList.astro';
+import ActivityCard from '../components/ActivityCard.astro';
+import StatsBand from '../components/StatsBand.astro';
+import Vinyl from '../components/Vinyl.astro';
+import Photo from '../components/Photo.astro';
+import Gallery from '../components/Gallery.astro';
+import Reviews from '../components/Reviews.astro';
+import { accueil as d, avis } from '../data';
+---
+
+<BaseLayout title={d.seo.title} description={d.seo.description} footer="accueil" headerClass="hero-accueil">
+  <div class="w hero" slot="hero">
+    <div class="hero-text">
+      <p class="kick on" data-reveal>{d.hero.kicker}</p>
+      <h1 class="hero-title">
+        <span class="bd hero-top" data-reveal>{d.hero.titleTop}</span>
+        <span class="bd it hero-main" data-reveal-title>{d.hero.title}</span>
+      </h1>
+      <p class="p on hero-lead" data-reveal>{d.hero.text}</p>
+      <div class="hero-cta" data-reveal><Button href={d.hero.cta.href}>{d.hero.cta.label}</Button></div>
+    </div>
+    <Vinyl photo={d.hero.vinyl.photo} caption={d.hero.vinyl.caption} />
+  </div>
+
+  <!-- Nos valeurs -->
+  <section class="valeurs">
+    <div class="w valeurs-inner">
+      <SectionHeading kicker={d.valeurs.kicker} title={d.valeurs.title} gap={20} class="valeurs-intro">
+        <p class="p" data-reveal>{d.valeurs.text}</p>
+      </SectionHeading>
+      <ValueList items={d.valeurs.items} class="valeurs-list" />
+    </div>
+  </section>
+
+  <!-- Les deux activités -->
+  <section id="activites" class="activites">
+    <div class="activites-grid">
+      {d.activites.cards.map((card) => <ActivityCard {...card} />)}
+      <span aria-hidden="true" class="bd it amp">{d.activites.separator}</span>
+    </div>
+  </section>
+
+  <StatsBand items={d.chiffres} />
+
+  <!-- À propos -->
+  <section id="a-propos" class="apropos">
+    <div class="w apropos-inner">
+      <div class="portrait">
+        <div class="portrait-frame" aria-hidden="true"></div>
+        <Photo photo={d.apropos.photo} parallax class="portrait-photo" sizes="(max-width: 560px) 100vw, 420px" widths={[420, 840]} />
+      </div>
+      <SectionHeading kicker={d.apropos.kicker} title={d.apropos.title} gap={20} class="apropos-text">
+        <p class="bd it lead" data-reveal>{d.apropos.lead}</p>
+        {d.apropos.paragraphs.map((p) => <p class="p" data-reveal>{p}</p>)}
+        <p class="p emphasis" data-reveal>{d.apropos.emphasis}</p>
+        <div data-reveal><Button variant="lien" href={d.apropos.link.href}>{d.apropos.link.label}</Button></div>
+      </SectionHeading>
+    </div>
+  </section>
+
+  <Gallery data={d.realisations} id="realisations" class="realisations" />
+
+  <Reviews id="avis" kicker={d.avis.kicker} title={d.avis.title} items={avis.accueil} link={d.avis.link} size="grande" />
+</BaseLayout>
+
+<style>
+  /* Bannière */
+  :global(.site-header.hero-accueil) {
+    background: radial-gradient(120% 90% at 78% 40%, var(--velvet) 0%, var(--wine) 55%, var(--wine-deep) 100%);
+    overflow: hidden;
+  }
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 48px;
+    padding-top: 40px;
+    padding-bottom: 96px;
+  }
+  .hero-text {
+    flex: 1 1 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .hero-title {
+    margin: 0;
+    font-weight: 400;
+  }
+  .hero-top {
+    display: block;
+    font-size: clamp(20px, 2.5vw, 30px);
+    letter-spacing: 0.32em;
+    color: var(--highlight);
+    margin-bottom: 14px;
+  }
+  .hero-main {
+    display: block;
+    font-size: clamp(54px, 8vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: var(--bg-light);
+  }
+  .hero-lead {
+    max-width: 46ch;
+    font-size: 17px;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+  }
+
+  /* Valeurs */
+  .valeurs {
+    padding: 112px 0 104px;
+  }
+  .valeurs-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+  }
+  .valeurs-inner :global(.valeurs-intro) {
+    flex: 1 1 360px;
+  }
+  .valeurs-inner :global(.valeurs-list) {
+    flex: 1.3 1 520px;
+  }
+
+  /* Activités */
+  .activites {
+    background: var(--wine);
+    padding: 88px 0 96px;
+  }
+  .activites-grid {
+    position: relative;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+    gap: 20px;
+  }
+  .amp {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--wine);
+    box-shadow:
+      0 0 0 1px var(--highlight),
+      0 0 0 7px var(--wine),
+      0 0 0 8px rgba(var(--highlight-rgb), 0.5);
+    color: var(--highlight);
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  /* À propos */
+  .apropos {
+    padding: 112px 0;
+  }
+  .apropos-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 72px;
+    align-items: flex-start;
+  }
+  .portrait {
+    flex: 0 1 420px;
+    position: relative;
+  }
+  .portrait-frame {
+    position: absolute;
+    inset: 24px -24px -24px 24px;
+    border: 1px solid var(--accent);
+  }
+  .portrait :global(.portrait-photo) {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+  }
+  .apropos-inner :global(.apropos-text) {
+    flex: 1 1 480px;
+  }
+  .lead {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.3;
+    color: var(--accent);
+  }
+  .emphasis {
+    color: var(--wine);
+    font-weight: 600;
+  }
+
+  /* Réalisations */
+  :global(.gallery.realisations) {
+    padding: 0 0 112px;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: 24px;
+      padding-bottom: 80px;
+    }
+    .valeurs {
+      padding: 80px 0 72px;
+    }
+    .valeurs-inner,
+    .apropos-inner {
+      gap: 48px;
+    }
+    .activites {
+      padding: 64px 0 72px;
+    }
+    .activites-grid {
+      padding: 0 16px;
+    }
+    .apropos {
+      padding: 80px 0;
+    }
+    .portrait {
+      margin-right: 24px;
+    }
+    :global(.gallery.realisations) {
+      padding-bottom: 80px;
+    }
+  }
+</style>

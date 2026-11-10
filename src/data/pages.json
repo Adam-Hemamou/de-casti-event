@@ -1,0 +1,28 @@
+{
+  "merci": {
+    "seo": { "title": "Merci — De Casti Event", "description": "Votre demande a bien été envoyée à De Casti Event." },
+    "kicker": "Merci",
+    "title": "Votre message est bien *envoyé.*",
+    "text": "[Texte de confirmation à confirmer] Nous avons bien reçu votre demande et revenons vers vous très vite.",
+    "cta": { "label": "Retour à l'accueil", "href": "/" }
+  },
+  "erreur404": {
+    "seo": { "title": "Page introuvable — De Casti Event", "description": "Cette page n'existe pas ou a été déplacée." },
+    "kicker": "Erreur 404",
+    "title": "Cette page est *introuvable.*",
+    "text": "[Texte à confirmer] La page que vous cherchez n'existe pas ou a été déplacée.",
+    "cta": { "label": "Retour à l'accueil", "href": "/" }
+  },
+  "mentions": {
+    "seo": { "title": "Mentions légales — De Casti Event", "description": "Mentions légales du site De Casti Event." },
+    "kicker": "Informations légales",
+    "title": "Mentions légales",
+    "sections": [{ "title": "[à rédiger]", "text": "[à rédiger]" }]
+  },
+  "confidentialite": {
+    "seo": { "title": "Politique de confidentialité — De Casti Event", "description": "Politique de confidentialité et traitement des données personnelles du site De Casti Event." },
+    "kicker": "Informations légales",
+    "title": "Politique de confidentialité",
+    "sections": [{ "title": "[à rédiger]", "text": "[à rédiger]" }]
+  }
+}

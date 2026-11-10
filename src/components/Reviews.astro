@@ -1,0 +1,112 @@
+---
+// Section d'avis clients : trois citations décalées (figure / blockquote).
+import SectionHeading from './SectionHeading.astro';
+import Button from './Button.astro';
+import { avis, type LinkT, type ReviewT } from '../data';
+
+interface Props {
+  kicker: string;
+  title: string;
+  items: ReviewT[];
+  link?: LinkT;
+  /** Taille des citations : 'grande' (accueil, 26 px) ou 'normale' (24 px). */
+  size?: 'grande' | 'normale';
+  background?: 'light' | 'light-2';
+  id?: string;
+}
+
+const { kicker, title, items, link, size = 'normale', background = 'light-2', id } = Astro.props;
+---
+
+<section class:list={['reviews', `bg-${background}`]} id={id}>
+  <div class="w inner">
+    <SectionHeading kicker={kicker} title={title} />
+    <div class="grid">
+      {
+        items.map((r) => (
+          <figure class="review" data-reveal>
+            <blockquote class:list={['bd it quote', `quote--${size}`]}>« {r.text} »</blockquote>
+            <figcaption>
+              {r.author}
+              <span class="stars" role="img" aria-label={avis.starsLabel.replace('{n}', String(r.stars))}>
+                {'★'.repeat(r.stars)}
+              </span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+    {
+      link && (
+        <div>
+          <Button variant="lien" href={link.href}>{link.label}</Button>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .reviews {
+    padding: 104px 0;
+  }
+  .bg-light-2 {
+    background: var(--bg-light-2);
+  }
+  .bg-light {
+    background: var(--bg-light);
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 48px;
+  }
+  .review {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .quote {
+    margin: 0;
+  }
+  .quote--grande {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+  .quote--normale {
+    font-size: 24px;
+    line-height: 1.32;
+  }
+  figcaption {
+    font-size: 15px;
+    color: var(--text);
+  }
+  .stars {
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-left: 8px;
+  }
+  /* Décalage en escalier quand les trois avis tiennent sur une ligne. */
+  @media (min-width: 1032px) {
+    .review:nth-child(3n + 2) {
+      margin-top: 48px;
+    }
+    .review:nth-child(3n + 3) {
+      margin-top: 96px;
+    }
+  }
+  @media (max-width: 768px) {
+    .reviews {
+      padding: 80px 0;
+    }
+    .grid {
+      gap: 40px;
+    }
+  }
+</style>

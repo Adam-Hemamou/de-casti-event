@@ -1,0 +1,18 @@
+{
+  "starsLabel": "{n} étoiles sur 5",
+  "accueil": [
+    { "text": "Une organisation parfaite du début à la fin. Notre mariage était tout simplement magique !", "author": "Camille & Thomas", "stars": 5 },
+    { "text": "L'ambiance était incroyable, la musique a vraiment fait toute la différence !", "author": "Julie R.", "stars": 5 },
+    { "text": "Professionnalisme, écoute et créativité. Je recommande les yeux fermés !", "author": "Marc L.", "stars": 5 }
+  ],
+  "agence": [
+    { "text": "De Casti Event a fait de notre mariage un rêve devenu réalité. Chaque détail était pensé avec goût, professionnalisme et passion.", "author": "Camille & Thomas", "stars": 5 },
+    { "text": "Notre soirée d'entreprise a été un véritable succès. L'équipe a su comprendre nos besoins et créer une ambiance incroyable.", "author": "Claire L.", "stars": 5 },
+    { "text": "Une soirée d'anniversaire inoubliable ! Tout était parfait du début à la fin. Je recommande les yeux fermés.", "author": "Marc D.", "stars": 5 }
+  ],
+  "dj": [
+    { "text": "Tout a été parfait du début à la fin. Une ambiance incroyable, une équipe professionnelle et à l'écoute. Nous recommandons les yeux fermés !", "author": "Camille & Thomas — mariage, Bordeaux", "stars": 5 },
+    { "text": "Un grand merci pour cette soirée mémorable ! La musique, la lumière, l'énergie… tout était réuni pour une expérience unique.", "author": "Julien R. — soirée privée, Paris", "stars": 5 },
+    { "text": "Une équipe sérieuse, créative et passionnée. Notre événement d'entreprise a été un véritable succès grâce à leur savoir-faire.", "author": "Sophie L. — événement pro, Lyon", "stars": 5 }
+  ]
+}

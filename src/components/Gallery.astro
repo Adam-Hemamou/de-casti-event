@@ -1,0 +1,79 @@
+---
+// Galerie photo en grille (4 colonnes, 2 sur mobile). Les étendues (cols / rows)
+// de chaque photo sont définies dans les fichiers de données.
+import SectionHeading from './SectionHeading.astro';
+import Button from './Button.astro';
+import Photo from './Photo.astro';
+import type { GalleryT } from '../data';
+
+interface Props {
+  data: GalleryT;
+  id?: string;
+  /** Espacement et largeur de l'en-tête (différents sur la page DJ). */
+  headingGap?: number;
+  headingMax?: string;
+  headerGap?: number;
+  class?: string;
+}
+
+const { data, id, headingGap = 12, headingMax, headerGap = 20, class: extra } = Astro.props;
+---
+
+<section class:list={['gallery', extra]} id={id}>
+  <div class="w inner">
+    <div class="head" style={`gap: ${headerGap}px`}>
+      <SectionHeading kicker={data.kicker} title={data.title} gap={headingGap} maxWidth={headingMax}>
+        {data.text && <p class="p" data-reveal>{data.text}</p>}
+      </SectionHeading>
+      <Button variant="lien" href={data.link.href}>{data.link.label}</Button>
+    </div>
+    <div class="grid" style={`--row: ${data.rowHeight}px`}>
+      {
+        data.photos.map((p) => (
+          <Photo
+            photo={p}
+            class="cell"
+            style={`--c: ${p.cols ?? 1}; --r: ${p.rows ?? 1}`}
+            sizes={`(max-width: 768px) ${(p.cols ?? 1) > 1 ? '100vw' : '50vw'}, ${(p.cols ?? 1) * 280}px`}
+            widths={[400, 700, 1100]}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: var(--row);
+    gap: 12px;
+  }
+  .grid :global(.cell) {
+    grid-column: span var(--c);
+    grid-row: span var(--r);
+  }
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: calc(var(--row) * 0.72);
+      grid-auto-flow: dense;
+      gap: 8px;
+    }
+    .grid :global(.cell) {
+      grid-column: span min(var(--c), 2);
+    }
+  }
+</style>

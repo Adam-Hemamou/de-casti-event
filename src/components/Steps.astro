@@ -1,0 +1,179 @@
+---
+// Liste d'étapes numérotées.
+// 'page'  : approche de la page Agence (filet, point, grand numéro, titre, texte)
+// 'popup' : accompagnement dans les pop-up (pastilles numérotées reliées par un filet)
+interface Props {
+  variant?: 'page' | 'popup';
+  items: { title?: string; text: string; note?: string }[];
+}
+
+const { variant = 'page', items } = Astro.props;
+---
+
+{
+  variant === 'page' ? (
+    <ol class="steps-page">
+      {items.map((s, i) => (
+        <li class="step" data-reveal>
+          <p class="num">{i + 1}</p>
+          {s.title && <h3 class="bd">{s.title}</h3>}
+          <p class="p">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <ol class="steps-popup">
+      {items.map((s, i) => (
+        <li>
+          <b>{i + 1}</b>
+          {s.text}
+          {s.note && <small>{s.note}</small>}
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+<style>
+  /* Variante page */
+  .steps-page {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--wine);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 32px;
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 28px;
+    position: relative;
+  }
+  .step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--wine);
+    transform: translateY(-5px);
+  }
+  .num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 46px;
+    line-height: 1;
+    color: var(--accent);
+    margin: 0;
+  }
+  h3 {
+    margin: 0;
+    font-size: 23px;
+    font-weight: 400;
+  }
+  .step .p {
+    font-size: 15px;
+  }
+
+  /* Variante pop-up */
+  .steps-popup {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    position: relative;
+  }
+  .steps-popup::before {
+    content: '';
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 22px;
+    height: 1px;
+    background: var(--line-strong);
+  }
+  .steps-popup li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--wine);
+  }
+  .steps-popup b {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--wine);
+    color: var(--highlight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+  }
+  .steps-popup small {
+    display: block;
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  /* Mobile : l'étape « page » passe en une colonne ; dans les pop-up,
+     les pastilles s'empilent avec un filet vertical. */
+  @media (max-width: 640px) {
+    .steps-page {
+      grid-template-columns: 1fr;
+      border-top: 0;
+      border-left: 1px solid var(--wine);
+      padding-left: 28px;
+      gap: 36px;
+    }
+    .step {
+      padding-top: 0;
+    }
+    .step::before {
+      left: -34px;
+      top: 18px;
+      transform: none;
+    }
+    .steps-popup {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .steps-popup::before {
+      left: 22px;
+      right: auto;
+      top: 22px;
+      bottom: 22px;
+      width: 1px;
+      height: auto;
+    }
+    .steps-popup li {
+      flex-direction: row;
+      text-align: left;
+      flex-wrap: wrap;
+      column-gap: 14px;
+    }
+    .steps-popup b {
+      flex: none;
+    }
+    .steps-popup small {
+      flex-basis: 100%;
+      padding-left: 58px;
+      margin-top: -10px;
+    }
+  }
+</style>

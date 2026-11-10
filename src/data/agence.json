@@ -1,0 +1,81 @@
+{
+  "seo": {
+    "title": "Agence événementielle — De Casti Event",
+    "description": "De la première idée à la coordination du jour J, De Casti Event organise vos événements professionnels et privés, selon vos envies."
+  },
+  "hero": {
+    "kicker": "Agence événementielle",
+    "title": "L'art d'organiser des événements *inoubliables.*",
+    "text": "De la première idée à la coordination du jour J, De Casti Event vous accompagne dans la conception et l'organisation d'événements professionnels et privés, entièrement pensés selon vos envies et vos objectifs.",
+    "cta": { "label": "Parlons de votre projet", "href": "/contact" },
+    "photo": { "src": "hero-agence.jpg", "alt": "Réception en bord de mer organisée par De Casti Event", "position": "center 60%" }
+  },
+  "approche": {
+    "kicker": "Notre approche",
+    "title": "Une méthode, des valeurs, des émotions au cœur de chaque projet.",
+    "steps": [
+      { "title": "Écoute & conseil", "text": "Nous prenons le temps de comprendre vos envies, vos besoins, vos contraintes et vos objectifs pour construire un projet qui vous ressemble." },
+      { "title": "Conception sur mesure", "text": "Nous imaginons un concept adapté à votre événement, à votre univers, à votre public et à votre budget." },
+      { "title": "Organisation & planification", "text": "Nous préparons chaque étape, recherchons les prestataires adaptés et sollicitons les devis nécessaires à la réalisation de votre projet." },
+      { "title": "Coordination le jour J", "text": "Nous assurons le suivi des intervenants et la coordination du déroulement de votre événement pour vous permettre de profiter pleinement de l'instant." },
+      { "title": "Émotions & souvenirs", "text": "Notre ambition : créer des expériences authentiques, des moments forts et des souvenirs qui restent." }
+    ]
+  },
+  "expertises": {
+    "kicker": "Nos expertises",
+    "title": "Un événement à votre image, une organisation adaptée à vos besoins.",
+    "cards": [
+      {
+        "title": "Événements professionnels",
+        "text": "Soirées d'entreprise, séminaires, team building, inaugurations, lancements de produits, cocktails et événements clients.",
+        "note": "Nous imaginons des événements qui valorisent votre image, fédèrent vos équipes et marquent les esprits.",
+        "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque dans un lieu scénographié" },
+        "link": "En savoir plus",
+        "popup": "prestations-entreprise"
+      },
+      {
+        "title": "Mariages",
+        "text": "De la préparation à la coordination du jour J, nous accompagnons les futurs mariés dans l'organisation de leur journée.",
+        "note": "Un accompagnement personnalisé pour profiter pleinement de chaque instant.",
+        "photo": { "src": "hero-contact.jpg", "alt": "Jardins d'un château, cadre de réception", "position": "center 70%" },
+        "link": "En savoir plus",
+        "popup": "prestations-mariages"
+      },
+      {
+        "title": "Événements privés",
+        "text": "Anniversaires, fiançailles, célébrations et soirées privées.",
+        "note": "Nous donnons vie à vos envies pour imaginer des moments uniques à partager avec vos proches.",
+        "photo": { "src": "guinguette.jpg", "alt": "Fête privée en plein air avec DJ" },
+        "link": "En savoir plus",
+        "popup": "prestations-prives"
+      },
+      {
+        "title": "Événements sur mesure",
+        "text": "Événements publics, festivals, événements sportifs, projets de marques et manifestations culturelles.",
+        "note": "Nous étudions chaque projet pour proposer un accompagnement adapté à ses enjeux et à son format.",
+        "photo": { "src": "stade-public.jpg", "alt": "Animation musicale dans un stade" },
+        "link": "En savoir plus",
+        "popup": "prestations-sur-mesure"
+      }
+    ]
+  },
+  "realisations": {
+    "kicker": "Nos réalisations",
+    "title": "Revivez nos plus beaux moments.",
+    "link": { "label": "Voir plus de photos & vidéos", "href": "/dj" },
+    "rowHeight": 220,
+    "photos": [
+      { "src": "hero-agence.jpg", "alt": "Réception en bord de mer", "cols": 2 },
+      { "src": "club-foule.jpg", "alt": "Soirée en club", "rows": 2 },
+      { "src": "guinguette.jpg", "alt": "Soirée en guinguette" },
+      { "src": "evenement-marque.jpg", "alt": "Événement de marque" },
+      { "src": "stade-societe-generale.jpg", "alt": "Animation au stade" },
+      { "src": "hero-accueil.jpg", "alt": "Soirée en club, bras levés" }
+    ]
+  },
+  "avis": {
+    "kicker": "Ils nous font confiance",
+    "title": "Leur expérience, leurs mots.",
+    "link": { "label": "Lire tous les avis", "href": "#" }
+  }
+}

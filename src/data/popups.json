@@ -1,0 +1,299 @@
+{
+  "prestationsKicker": "Nos prestations",
+  "formulesKicker": "Nos formules DJ",
+  "closeLabel": "Fermer",
+  "popups": [
+    {
+      "id": "prestations-entreprise",
+      "variant": "prestations",
+      "page": "agence",
+      "eventType": "entreprise",
+      "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque dans un lieu scénographié" },
+      "quote": "Des événements professionnels qui marquent les esprits.",
+      "title": "Événements d'entreprise *& corporate*",
+      "text": "De Casti Event accompagne les entreprises dans la conception, l'organisation et la coordination de leurs événements professionnels.",
+      "services": [
+        "Soirées d'entreprise",
+        "Séminaires & team building",
+        "Lancements de produits",
+        "Inaugurations & ouvertures",
+        "Événements clients & partenaires"
+      ],
+      "stepsTitle": "Notre accompagnement",
+      "steps": [
+        { "text": "Échange & définition de vos besoins" },
+        { "text": "Conception du projet" },
+        { "text": "Recherche des prestataires & devis" },
+        { "text": "Organisation & coordination" },
+        { "text": "Présence le jour J", "note": "(selon votre projet)" }
+      ],
+      "closing": "Nous nous occupons de l'ensemble de l'organisation, en vous proposant des solutions sur-mesure et un réseau de prestataires de confiance, adaptés à vos objectifs.",
+      "cta": "Parlons de votre projet"
+    },
+    {
+      "id": "prestations-mariages",
+      "variant": "prestations",
+      "page": "agence",
+      "eventType": "mariage",
+      "photo": { "src": "hero-contact.jpg", "alt": "Eva de Casti dans les jardins d'un château", "position": "60% 60%" },
+      "quote": "Des mariages uniques, à votre image.",
+      "title": "Mariages",
+      "text": "Un accompagnement sur mesure pour imaginer, organiser et coordonner le plus beau jour de votre vie.",
+      "services": [
+        "Cérémonie laïque",
+        "Réception & dîner",
+        "Ambiance & animations",
+        "Décoration & scénographie",
+        "Coordination jour J"
+      ],
+      "stepsTitle": "Notre accompagnement",
+      "steps": [
+        { "text": "Échange & définition de vos envies" },
+        { "text": "Conception de votre projet" },
+        { "text": "Recherche & coordination des prestataires" },
+        { "text": "Organisation & suivi" },
+        { "text": "Coordination le jour J" }
+      ],
+      "closing": "Nous vous accompagnons à chaque étape, avec un réseau de prestataires de confiance, pour un mariage fluide, serein et à votre image.",
+      "cta": "Parlons de votre projet"
+    },
+    {
+      "id": "prestations-prives",
+      "variant": "prestations",
+      "page": "agence",
+      "eventType": "soiree-privee",
+      "photo": { "src": "guinguette.jpg", "alt": "Fête privée en plein air avec DJ" },
+      "quote": "Des instants uniques pour vos événements privés.",
+      "title": "Événements privés",
+      "text": "Anniversaires, soirées entre amis, fêtes de famille ou célébrations spéciales : nous organisons des événements sur mesure, à votre image.",
+      "services": [
+        "Anniversaires & célébrations",
+        "Soirées privées",
+        "Fêtes de famille",
+        "Événements entre amis",
+        "Soirées à thème"
+      ],
+      "stepsTitle": "Notre accompagnement",
+      "steps": [
+        { "text": "Échange & définition de votre projet" },
+        { "text": "Conception & idées" },
+        { "text": "Sélection & coordination des prestataires" },
+        { "text": "Organisation & suivi" },
+        { "text": "Coordination le jour J", "note": "(selon votre projet)" }
+      ],
+      "closing": "Un accompagnement personnalisé pour créer un moment convivial, festif et sans contrainte.",
+      "cta": "Parlons de votre projet"
+    },
+    {
+      "id": "prestations-sur-mesure",
+      "variant": "prestations",
+      "page": "agence",
+      "photo": { "src": "stade-public.jpg", "alt": "Animation musicale dans un stade", "position": "40% center" },
+      "quote": "Des événements sur mesure, de grande ampleur comme plus intimistes.",
+      "title": "Événements sur mesure",
+      "text": "Des projets uniques, créatifs et adaptés à vos objectifs. Nous concevons et organisons des événements d'envergure comme des formats plus confidentiels, pour les collectivités, les marques, les associations ou les organisateurs privés.",
+      "services": [
+        "Festivals & événements culturels",
+        "Événements sportifs",
+        "Événements publics & collectivités",
+        "Événements de marque & lancements",
+        "Projets sur mesure"
+      ],
+      "stepsTitle": "Notre accompagnement",
+      "steps": [
+        { "text": "Échange & analyse de vos besoins" },
+        { "text": "Conception & recommandations" },
+        { "text": "Sélection & coordination des prestataires" },
+        { "text": "Organisation & suivi" },
+        { "text": "Coordination le jour J" }
+      ],
+      "closing": "Une organisation clé en main, un réseau de partenaires fiables et une coordination rigoureuse, pour faire de votre événement une réussite.",
+      "cta": "Parlons de votre projet",
+      "layout": { "quoteSize": 36, "veilStart": 35, "textWidth": 64 }
+    },
+    {
+      "id": "formules-mariages",
+      "variant": "formules",
+      "page": "dj",
+      "eventType": "mariage",
+      "photo": { "src": "dj-mariage-pampas.jpg", "alt": "Installation DJ pour un mariage devant un mur en pierre", "position": "center 30%" },
+      "quote": "Une ambiance unique pour le plus beau jour de votre vie.",
+      "title": "Mariages",
+      "text": "Une prestation musicale à votre image, de vos premiers instants jusqu'à la dernière danse.",
+      "featuredLabel": "La plus choisie",
+      "plans": [
+        {
+          "name": "Premium",
+          "subtitle": "L'essentiel pour votre soirée dansante.",
+          "items": ["DJ professionnel", "Sonorisation complète", "2 micros HF", "GigBar + barre LED", "Ambiance dîner", "Gestion discours & animations", "Jusqu'à ~4h de DJ set"],
+          "price": "1 500 €",
+          "priceUnit": "TTC"
+        },
+        {
+          "name": "Signature",
+          "subtitle": "Du vin d'honneur à la soirée.",
+          "items": ["Tout le contenu de la formule Premium", "Musique du vin d'honneur", "Sonorisation du cocktail", "Dîner & soirée dansante", "Accompagnement du déroulé"],
+          "price": "1 700 €",
+          "priceUnit": "TTC",
+          "featured": true
+        },
+        {
+          "name": "Expérience",
+          "subtitle": "De la cérémonie à la dernière danse.",
+          "items": ["Sonorisation de la cérémonie (civile, religieuse ou laïque)", "2 enceintes sur batterie", "Jusqu'à 4 micros HF", "Vin d'honneur", "Dîner & soirée dansante", "Accompagnement complet de votre journée"],
+          "price": "1 900 €",
+          "priceUnit": "TTC"
+        }
+      ],
+      "optionsTitle": "Options & compléments",
+      "optionGroups": [
+        { "title": "Lumière", "items": ["6 PAR LED sur batterie", "Éclairage architectural"] },
+        { "title": "Effets", "items": ["Étincelles froides x2", "Brouillard", "Fumée lourde"] },
+        { "title": "Vidéo", "items": ["Vidéoprojecteur", "Écran", "Pack projection"] },
+        { "title": "Son", "items": ["Enceinte colonne supp.", "Pack 2 enceintes colonne", "Retour 400 W", "Micro supplémentaire"] },
+        { "title": "Animations", "items": ["Photobooth", "Livre d'or audio"] },
+        { "title": "Artistique", "items": ["Saxophoniste, chanteur, musicien"] },
+        { "title": "Technique", "items": ["Régie DJ premium"] }
+      ],
+      "cta": "Parlons de votre mariage",
+      "ctaNote": "Les configurations et horaires sont définis selon le déroulement de votre mariage.\nRenfort technique éventuel si plusieurs lieux."
+    },
+    {
+      "id": "formules-entreprise",
+      "variant": "formules",
+      "page": "dj",
+      "eventType": "entreprise",
+      "photo": { "src": "stade-societe-generale.jpg", "alt": "Eva aux platines au bord du terrain lors d'un événement de marque au stade", "position": "65% center" },
+      "quote": "Des événements d'entreprise à votre image.",
+      "title": "Événements d'entreprise *& corporate*",
+      "text": "Soirées d'entreprise, séminaires, lancements, afterworks, conventions… Une prestation DJ professionnelle et un accompagnement adapté à vos objectifs.",
+      "featuredLabel": "La plus choisie",
+      "plans": [
+        {
+          "name": "Essentiel",
+          "subtitle": "Une solution efficace et professionnelle pour vos événements d'entreprise.",
+          "items": ["DJ professionnel", "Sonorisation complète", "Éclairage de base (piste)", "2 micros HF", "Préparation & briefing", "Installation / démontage"],
+          "price": "790 €",
+          "priceUnit": "TTC"
+        },
+        {
+          "name": "Signature",
+          "subtitle": "Une expérience renforcée pour un événement impactant.",
+          "items": ["Tout le contenu de la formule Essentiel", "Mise en lumière de la salle", "Éclairage PAR LED", "Accompagnement renforcé du déroulé"],
+          "price": "990 €",
+          "priceUnit": "TTC",
+          "featured": true
+        },
+        {
+          "name": "Expérience",
+          "subtitle": "Un dispositif sur mesure pour vos projets d'envergure.",
+          "items": ["Événement technique et personnalisé", "Plusieurs espaces / configurations", "Vidéo, projection, écrans", "Artistes / performances live", "Renfort son & lumière", "Convention, gala, lancement, etc."],
+          "price": "Sur devis"
+        }
+      ],
+      "optionsTitle": "Options & compléments",
+      "optionList": ["Mise en lumière", "Vidéo & projection", "Renfort sonorisation", "Micro supplémentaire", "Artistes live", "Photobooth"],
+      "cta": "Parlons de votre projet"
+    },
+    {
+      "id": "formules-soirees",
+      "variant": "formules",
+      "page": "dj",
+      "eventType": "soiree-privee",
+      "photo": { "src": "club-foule.jpg", "alt": "Soirée privée en club avec Eva aux platines", "position": "65% center" },
+      "quote": "Anniversaires, soirées privées, vos plus beaux moments en musique.",
+      "title": "Soirées privées *& anniversaires*",
+      "text": "Une ambiance sur mesure pour vos anniversaires, fêtes de famille, soirées entre amis et toutes vos célébrations.",
+      "featuredLabel": "La plus choisie",
+      "plans": [
+        {
+          "name": "Essentielle",
+          "label": "Soirée dansante",
+          "subtitle": "L'animation musicale de votre soirée festive.",
+          "items": ["DJ professionnel", "Sonorisation", "Éclairage de piste", "Micro", "Installation / démontage"],
+          "price": "650 €",
+          "priceUnit": "TTC"
+        },
+        {
+          "name": "Essentielle",
+          "label": "Soirée complète",
+          "subtitle": "Une présence dès l'arrivée de vos invités.",
+          "items": ["Accueil & ambiance", "Ambiance repas", "Soirée dansante", "Sonorisation complète", "Micro"],
+          "price": "850 €",
+          "priceUnit": "TTC"
+        },
+        {
+          "name": "Signature",
+          "label": "Soirée dansante",
+          "subtitle": "Une soirée festive avec une mise en lumière renforcée.",
+          "items": ["DJ professionnel", "Sonorisation", "Mise en lumière (PAR LED)", "Micro", "Installation / démontage"],
+          "price": "910 €",
+          "priceUnit": "TTC",
+          "featured": true
+        },
+        {
+          "name": "Signature",
+          "label": "Soirée complète",
+          "subtitle": "Une ambiance musicale et lumineuse du début à la fin.",
+          "items": ["Accueil & ambiance", "Ambiance repas", "Soirée dansante", "Mise en lumière (PAR LED)", "Sonorisation complète"],
+          "price": "1 090 €",
+          "priceUnit": "TTC"
+        },
+        {
+          "name": "Expérience",
+          "label": "Sur mesure",
+          "subtitle": "Une prestation entièrement personnalisée.",
+          "items": ["Vidéo / projection", "Effets spéciaux", "Artistes (saxophoniste, chanteur, etc.)", "Configuration spécifique"],
+          "price": "Sur devis"
+        }
+      ],
+      "notes": [
+        { "title": "À vous de choisir le moment de ma présence", "text": "Uniquement la soirée dansante ou l'événement complet dès l'accueil." },
+        { "title": "Différence Essentiel / Signature", "text": "La formule Signature inclut une mise en lumière renforcée (PAR LED) pour sublimer votre lieu." },
+        { "title": "Expérience", "text": "Une prestation sur mesure avec des options comme la vidéo, les effets ou des artistes live." }
+      ],
+      "cta": "Parlons de votre événement",
+      "layout": { "quoteSize": 34 }
+    },
+    {
+      "id": "formules-festivals",
+      "variant": "formules",
+      "page": "dj",
+      "eventType": "festival",
+      "photo": { "src": "guinguette.jpg", "alt": "DJ set en plein air lors d'une fête locale" },
+      "quote": "Une présence musicale adaptée à l'ambiance et à l'énergie du public.",
+      "title": "Festivals *& événements publics*",
+      "text": "Festivals, fêtes locales, événements culturels et manifestations publiques. Une présence musicale adaptée à l'ambiance et à l'énergie du public.",
+      "featuredLabel": "La plus choisie",
+      "plans": [
+        { "name": "[Formule 1]", "description": "[Contenu de la formule à fournir par le client]", "price": "[Tarif]" },
+        { "name": "[Formule 2]", "description": "[Contenu de la formule à fournir par le client]", "price": "[Tarif]", "featured": true },
+        { "name": "[Formule 3]", "description": "[Contenu de la formule à fournir par le client]", "price": "[Tarif ou sur devis]" }
+      ],
+      "optionsTitle": "Options & compléments",
+      "optionText": "[Options à fournir par le client]",
+      "cta": "Parlons de votre événement",
+      "layout": { "quoteSize": 34 }
+    },
+    {
+      "id": "formules-sport",
+      "variant": "formules",
+      "page": "dj",
+      "eventType": "sport",
+      "photo": { "src": "stade-public.jpg", "alt": "Eva aux platines dans un stade, devant les tribunes", "position": "60% center" },
+      "quote": "Une animation musicale pensée pour dynamiser chaque temps fort.",
+      "title": "Sport, marques *& événements spéciaux*",
+      "text": "Événements sportifs, compétitions, animations de marques, événements automobiles et lancements. Une animation musicale pensée pour accompagner et dynamiser chaque temps fort.",
+      "featuredLabel": "La plus choisie",
+      "plans": [
+        { "name": "[Formule 1]", "description": "[Contenu de la formule à fournir par le client]", "price": "[Tarif]" },
+        { "name": "[Formule 2]", "description": "[Contenu de la formule à fournir par le client]", "price": "[Tarif]", "featured": true },
+        { "name": "[Formule 3]", "description": "[Contenu de la formule à fournir par le client]", "price": "[Tarif ou sur devis]" }
+      ],
+      "optionsTitle": "Options & compléments",
+      "optionText": "[Options à fournir par le client]",
+      "cta": "Parlons de votre événement",
+      "layout": { "quoteSize": 34 }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Pop-up DJ — Formules entreprise</title>
+<link rel="stylesheet" href="../../theme/palettes.css">
+<script src="../../theme/theme-switch.js"></script>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--backdrop)}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.bd{font-family:'Bodoni Moda',serif;font-weight:400}
+.it{font-style:italic}
+.p{font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.6;color:var(--text);margin:0}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.plan{position:relative;background:var(--surface);border:1px solid var(--line-soft);border-radius:16px;padding:26px 22px 20px;display:flex;flex-direction:column;gap:12px}
+.plan h3{margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:30px;line-height:1;color:var(--wine)}
+.plan .sub{margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:17px;line-height:1.3;color:var(--accent)}
+.plan ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:7px;flex-grow:1}
+.plan li{font-family:'Instrument Sans',sans-serif;font-size:14.5px;line-height:1.35;color:var(--wine);padding-left:18px;position:relative}
+.plan li::before{content:'';position:absolute;left:0;top:.5em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.price{margin:6px 0 0;padding:12px 0 0;border-top:1px solid var(--line-soft);font-family:'Bodoni Moda',serif;font-size:34px;line-height:1;color:var(--wine)}
+.price small{font-family:'Instrument Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;margin-left:6px}
+.plan.feat{background:var(--wine);border-color:var(--wine);box-shadow:0 20px 40px rgba(var(--wine-rgb),.3)}
+.plan.feat h3,.plan.feat li,.plan.feat .price{color:var(--bg-light)}
+.plan.feat .sub{color:var(--highlight)}
+.plan.feat li::before{background:var(--highlight)}
+.plan.feat .price{border-top-color:var(--line-dark);color:var(--highlight)}
+.tag{position:absolute;top:-13px;left:22px;padding:5px 14px;border-radius:999px;background:var(--highlight);color:var(--wine);font-family:'Instrument Sans',sans-serif;font-size:12.5px;font-weight:600}
+.opts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+.opts li{padding:4px 10px;border-left:1px solid var(--line-soft);text-align:center;font-family:'Bodoni Moda',serif;font-style:italic;font-size:18px;line-height:1.25;color:var(--wine)}
+.opts li:first-child{border-left:0}
+.close{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--wine);font-size:20px;line-height:1;cursor:pointer}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 40px;border-radius:999px;background:var(--wine);color:var(--bg-light);font-family:'Instrument Sans',sans-serif;font-size:16px;font-weight:600}
+.pill:hover{background:var(--velvet)}
+</style>
+<div style="width: 1360px; padding: 40px; background: radial-gradient(90% 80% at 50% 40%, var(--wine) 0%, var(--backdrop) 100%); font-family: 'Instrument Sans', sans-serif">
+<div role="dialog" aria-modal="true" aria-labelledby="t" style="display: grid; grid-template-columns: 360px minmax(0, 1fr); border-radius: 22px; overflow: hidden; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.35), 0 50px 100px rgba(0,0,0,.55)">
+<div style="position: relative; min-height: 100%">
+<img src="../../photos/stade-societe-generale.jpg" alt="Eva aux platines au bord du terrain lors d'un événement de marque au stade" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% center">
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(var(--wine-rgb),0) 40%, rgba(var(--wine-deep-rgb),.92) 100%)"></div>
+<div style="position: absolute; left: 32px; right: 32px; bottom: 40px; display: flex; flex-direction: column; gap: 18px">
+<p class="bd it" style="margin: 0; font-size: 36px; line-height: 1.12; color: var(--bg-light)">Des événements d'entreprise à votre image.</p>
+<span aria-hidden="true" style="display: block; width: 80px; height: 1px; background: var(--highlight)"></span>
+</div>
+</div>
+<div style="position: relative; background: var(--bg-light); padding: 44px 48px 36px; display: flex; flex-direction: column; gap: 26px">
+<button type="button" class="close" aria-label="Fermer">×</button>
+<div style="display: flex; flex-direction: column; gap: 10px; padding-right: 56px">
+<p class="bd it" style="margin: 0; font-size: 19px; color: var(--accent)">Nos formules DJ</p>
+<h2 id="t" class="bd" style="margin: 0; font-size: 52px; line-height: 1; color: var(--wine)">Événements d'entreprise <span class="it" style="color: var(--accent)">&amp; corporate</span></h2>
+<p class="p">Soirées d'entreprise, séminaires, lancements, afterworks, conventions… Une prestation DJ professionnelle et un accompagnement adapté à vos objectifs.</p>
+</div>
+<div class="plans" style="padding-top: 8px">
+<div class="plan">
+<h3>Essentiel</h3>
+<p class="sub">Une solution efficace et professionnelle pour vos événements d'entreprise.</p>
+<ul><li>DJ professionnel</li><li>Sonorisation complète</li><li>Éclairage de base (piste)</li><li>2 micros HF</li><li>Préparation &amp; briefing</li><li>Installation / démontage</li></ul>
+<p class="price">790 €<small>TTC</small></p>
+</div>
+<div class="plan feat">
+<span class="tag">La plus choisie</span>
+<h3>Signature</h3>
+<p class="sub">Une expérience renforcée pour un événement impactant.</p>
+<ul><li>Tout le contenu de la formule Essentiel</li><li>Mise en lumière de la salle</li><li>Éclairage PAR LED</li><li>Accompagnement renforcé du déroulé</li></ul>
+<p class="price">990 €<small>TTC</small></p>
+</div>
+<div class="plan">
+<h3>Expérience</h3>
+<p class="sub">Un dispositif sur mesure pour vos projets d'envergure.</p>
+<ul><li>Événement technique et personnalisé</li><li>Plusieurs espaces / configurations</li><li>Vidéo, projection, écrans</li><li>Artistes / performances live</li><li>Renfort son &amp; lumière</li><li>Convention, gala, lancement, etc.</li></ul>
+<p class="price">Sur devis</p>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px; padding-top: 18px; border-top: 1px solid var(--line-soft)">
+<p class="bd it" style="margin: 0; font-size: 22px; color: var(--wine)">Options &amp; compléments</p>
+<ul class="opts">
+<li>Mise en lumière</li>
+<li>Vidéo &amp; projection</li>
+<li>Renfort sonorisation</li>
+<li>Micro supplémentaire</li>
+<li>Artistes live</li>
+<li>Photobooth</li>
+</ul>
+</div>
+<div style="display: flex; justify-content: center"><a class="pill" href="../../pages/contact.html">Parlons de votre projet</a></div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Steps from '../components/Steps.astro';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import Photo from '../components/Photo.astro';
+import Gallery from '../components/Gallery.astro';
+import Reviews from '../components/Reviews.astro';
+import Popup from '../components/Popup.astro';
+import { agence as d, avis, popups } from '../data';
+import { rich } from '../lib/rich';
+
+const pagePopups = popups.popups.filter((p) => p.page === 'agence');
+---
+
+<BaseLayout title={d.seo.title} description={d.seo.description} footer="agence" headerClass="hero-agence" ogImage={d.hero.photo.src}>
+  <div class="hero" slot="hero">
+    <div class="hero-text">
+      <p class="kick on" data-reveal>{d.hero.kicker}</p>
+      <h1 class="bd hero-title" data-reveal-title set:html={rich(d.hero.title)} />
+      <p class="p on hero-lead" data-reveal>{d.hero.text}</p>
+      <div data-reveal><Button href={d.hero.cta.href}>{d.hero.cta.label}</Button></div>
+    </div>
+    <div class="hero-photo">
+      <Photo photo={d.hero.photo} fill parallax priority sizes="(max-width: 1000px) 100vw, 50vw" />
+    </div>
+  </div>
+
+  <!-- Notre approche -->
+  <section class="approche">
+    <div class="w approche-inner">
+      <SectionHeading kicker={d.approche.kicker} title={d.approche.title} gap={16} maxWidth="760px" />
+      <Steps items={d.approche.steps} />
+    </div>
+  </section>
+
+  <!-- Nos expertises -->
+  <section class="expertises" id="expertises">
+    <div class="w expertises-inner">
+      <SectionHeading kicker={d.expertises.kicker} title={d.expertises.title} on gap={16} maxWidth="760px" />
+      <div class="expertises-grid">
+        {d.expertises.cards.map((card) => <ExpertiseCard {...card} />)}
+      </div>
+    </div>
+  </section>
+
+  <Gallery data={d.realisations} id="realisations" class="realisations" />
+
+  <Reviews kicker={d.avis.kicker} title={d.avis.title} items={avis.agence} link={d.avis.link} />
+
+  {pagePopups.map((p) => <Popup popup={p} returnTo="expertises" />)}
+</BaseLayout>
+
+<style>
+  :global(.site-header.hero-agence) {
+    background: var(--wine);
+  }
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  .hero-text {
+    flex: 1 1 560px;
+    padding: 56px 56px 96px max(48px, calc((100vw - 1200px) / 2 + 48px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+  .hero-title {
+    margin: 0;
+    font-size: clamp(48px, 6.5vw, 78px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--bg-light);
+  }
+  .hero-title :global(.it) {
+    color: var(--highlight);
+  }
+  .hero-lead {
+    max-width: 48ch;
+    font-size: 17px;
+  }
+  .hero-photo {
+    flex: 1 1 440px;
+    min-height: 560px;
+    position: relative;
+  }
+
+  .approche {
+    padding: 112px 0 104px;
+  }
+  .approche-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .expertises {
+    background: var(--wine);
+    color: var(--bg-light);
+    padding: 104px 0;
+  }
+  .expertises-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+  .expertises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    gap: 20px;
+  }
+
+  :global(.gallery.realisations) {
+    padding: 112px 0;
+  }
+
+  @media (max-width: 768px) {
+    .hero-text {
+      padding: 32px 24px 64px;
+    }
+    .hero-photo {
+      min-height: 360px;
+    }
+    .approche {
+      padding: 80px 0 72px;
+    }
+    .approche-inner {
+      gap: 48px;
+    }
+    .expertises {
+      padding: 80px 0;
+    }
+    :global(.gallery.realisations) {
+      padding: 80px 0;
+    }
+  }
+</style>

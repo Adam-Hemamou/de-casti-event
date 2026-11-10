@@ -1,0 +1,92 @@
+---
+// Disque vinyle de l'accueil : photo d'Eva au centre, sillons, rotation lente continue.
+// La rotation est en CSS (fonctionne sans JavaScript) et s'arrête si l'utilisateur
+// préfère réduire les animations.
+import Photo from './Photo.astro';
+import type { PhotoT } from '../data';
+
+interface Props {
+  photo: PhotoT;
+  caption: string;
+}
+
+const { photo, caption } = Astro.props;
+---
+
+<div class="vinyl-wrap">
+  <div class="vinyl">
+    <div class="label">
+      <Photo photo={photo} sizes="(max-width: 520px) 56vw, 282px" widths={[320, 600]} priority class="label-photo" />
+      <span class="hole" aria-hidden="true"></span>
+    </div>
+  </div>
+  <p class="bd it caption">{caption}</p>
+</div>
+
+<style>
+  .vinyl-wrap {
+    flex: 0 1 460px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .vinyl {
+    width: 440px;
+    max-width: 86vw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-radial-gradient(circle at center, var(--groove-1) 0 2px, var(--groove-2) 2px 4px);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+    animation: spin 18s linear infinite;
+  }
+  .label {
+    width: 64%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 6px var(--highlight);
+  }
+  .label :global(.label-photo) {
+    width: 100%;
+    height: 100%;
+  }
+  .hole {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: var(--wine-deep);
+    box-shadow: 0 0 0 2px var(--highlight);
+  }
+  .caption {
+    position: absolute;
+    right: -6px;
+    bottom: -14px;
+    margin: 0;
+    font-size: 18px;
+    color: var(--highlight);
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl {
+      animation: none;
+    }
+  }
+  @media (max-width: 520px) {
+    .caption {
+      right: 0;
+      font-size: 16px;
+    }
+  }
+</style>

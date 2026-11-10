@@ -1,0 +1,35 @@
+---
+// Photo optimisée (astro:assets) dans un cadre qui recadre l'image (object-fit: cover).
+// parallax : la photo se déplace légèrement au défilement (voir scripts/animations.ts).
+// priority : photo de bannière, chargée immédiatement.
+import { Image } from 'astro:assets';
+import type { PhotoT } from '../data';
+import { photo } from '../lib/photos';
+
+interface Props {
+  photo: PhotoT;
+  sizes: string;
+  widths?: number[];
+  priority?: boolean;
+  parallax?: boolean;
+  fill?: boolean;
+  class?: string;
+  style?: string;
+}
+
+const { photo: p, sizes, widths = [480, 800, 1200, 1600, 2000], priority = false, parallax = false, fill = false, class: extra, style } = Astro.props;
+const img = photo(p.src);
+const usable = widths.filter((w) => w <= img.width);
+---
+
+<div class:list={['media', { 'media--fill': fill }, extra]} data-parallax={parallax ? '' : undefined} style={style}>
+  <Image
+    src={img}
+    alt={p.alt}
+    widths={usable.length ? usable : [img.width]}
+    sizes={sizes}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    style={p.position ? `object-position: ${p.position}` : undefined}
+  />
+</div>

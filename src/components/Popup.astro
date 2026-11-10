@@ -1,0 +1,608 @@
+---
+// Pop-up (élément <dialog>) des pages Agence et DJ.
+// Variante 'prestations' : prestations, étapes d'accompagnement, texte de conclusion.
+// Variante 'formules' : cartes tarifaires, options & compléments.
+// Ouverture / fermeture : src/scripts/popups.ts. Sans JavaScript, le pop-up s'affiche
+// quand son ancre est ciblée (/agence-evenementielle#prestations-mariages).
+import Photo from './Photo.astro';
+import Steps from './Steps.astro';
+import PricingCard from './PricingCard.astro';
+import { popups, type PopupT } from '../data';
+import { rich } from '../lib/rich';
+
+interface Props {
+  popup: PopupT;
+  /** Ancre de la section d'où s'ouvre le pop-up (lien de fermeture sans JavaScript). */
+  returnTo: string;
+}
+
+const { popup: p, returnTo } = Astro.props;
+const titleId = `${p.id}-titre`;
+const kicker = p.variant === 'prestations' ? popups.prestationsKicker : popups.formulesKicker;
+const ctaHref = `/contact${p.eventType ? `?type=${p.eventType}` : ''}#formulaire`;
+const compact = p.variant === 'formules' && p.plans.length > 3;
+const titleSize = p.layout?.titleSize ?? (p.title.includes('*') ? 52 : 56);
+const vars = [
+  `--title-size: ${titleSize}px`,
+  p.layout?.quoteSize && `--quote-size: ${p.layout.quoteSize}px`,
+  p.layout?.veilStart && `--veil-start: ${p.layout.veilStart}%`,
+  p.layout?.textWidth && `--text-width: ${p.layout.textWidth}ch`,
+]
+  .filter(Boolean)
+  .join('; ');
+---
+
+<dialog id={p.id} class:list={['popup', `popup--${p.variant}`, { 'popup--compact': compact }]} aria-labelledby={titleId} data-popup data-lenis-prevent style={vars}>
+  <div class="frame">
+    <div class="aside">
+      <Photo photo={p.photo} fill sizes="(max-width: 900px) 100vw, 400px" widths={[400, 800]} />
+      <div class="veil" aria-hidden="true"></div>
+      <div class="aside-text">
+        <p class="bd it quote">{p.quote}</p>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="main on-light">
+      <button type="button" class="close close--js" data-popup-close aria-label={popups.closeLabel}>×</button>
+      <a class="close close--nojs" href={`#${returnTo}`} aria-label={popups.closeLabel}>×</a>
+
+      <div class="head">
+        <p class="bd it kicker">{kicker}</p>
+        <h2 id={titleId} class="bd title" set:html={rich(p.title)} />
+        <p class="p intro">{p.text}</p>
+      </div>
+
+      {
+        p.variant === 'prestations' && (
+          <>
+            <ul class="svc">
+              {p.services.map((s) => (
+                <li>{s}</li>
+              ))}
+            </ul>
+            <div class="steps-box">
+              <p class="bd it box-title">{p.stepsTitle}</p>
+              <Steps variant="popup" items={p.steps} />
+            </div>
+            <p class="bd it closing">{p.closing}</p>
+            <div class="cta">
+              <a class="pill wine popup-pill" href={ctaHref}>{p.cta}</a>
+            </div>
+          </>
+        )
+      }
+
+      {
+        p.variant === 'formules' && (
+          <>
+            <div class:list={['plans', { 'plans--compact': compact }]}>
+              {p.plans.map((plan) => (
+                <PricingCard {...plan} featuredLabel={p.featuredLabel} compact={compact} />
+              ))}
+            </div>
+            {p.optionsTitle && (
+              <div class:list={['options', { 'options--text': !!p.optionText }]}>
+                <p class="bd it box-title">{p.optionsTitle}</p>
+                {p.optionGroups && (
+                  <div class="opts opts--groups" style={`--n: ${p.optionGroups.length}`}>
+                    {p.optionGroups.map((g) => (
+                      <div>
+                        <b>{g.title}</b>
+                        <span set:html={g.items.map((i) => rich(i)).join('<br>')} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {p.optionList && (
+                  <ul class="opts opts--list" style={`--n: ${p.optionList.length}`}>
+                    {p.optionList.map((o) => (
+                      <li>{o}</li>
+                    ))}
+                  </ul>
+                )}
+                {p.optionText && <p class="p option-text">{p.optionText}</p>}
+              </div>
+            )}
+            {p.notes && (
+              <div class="notes">
+                {p.notes.map((n) => (
+                  <div>
+                    <b>{n.title}</b>
+                    <p>{n.text}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div class:list={['cta', { 'cta--note': !!p.ctaNote }]}>
+              <a class="pill wine popup-pill" href={ctaHref}>{p.cta}</a>
+              {p.ctaNote && <p class="bd it cta-note" set:html={rich(p.ctaNote)} />}
+            </div>
+          </>
+        )
+      }
+    </div>
+  </div>
+</dialog>
+
+<style>
+  /* Boîte de dialogue */
+  .popup {
+    --title-size: 56px;
+    --quote-size: 38px;
+    --veil-start: 40%;
+    --text-width: 60ch;
+    width: min(1200px, 100vw - 48px);
+    max-width: none;
+    max-height: calc(100dvh - 48px);
+    margin: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 22px;
+    background: var(--bg-light);
+    color: var(--wine);
+    overflow: auto;
+    overscroll-behavior: contain;
+    box-shadow:
+      0 0 0 1px rgba(var(--highlight-rgb), 0.35),
+      0 50px 100px rgba(0, 0, 0, 0.55);
+    font-family: var(--font-sans);
+  }
+  .popup::backdrop {
+    background: radial-gradient(90% 80% at 50% 40%, var(--wine) 0%, var(--backdrop) 100%);
+    opacity: 0.94;
+  }
+  .popup[open] {
+    animation: popup-in 0.4s ease both;
+  }
+  .popup[open]::backdrop {
+    animation: backdrop-in 0.4s ease both;
+  }
+  @keyframes popup-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .popup[open],
+    .popup[open]::backdrop {
+      animation: none;
+    }
+  }
+
+  .frame {
+    display: grid;
+    grid-template-columns: 400px minmax(0, 1fr);
+    min-height: 100%;
+  }
+
+  /* Colonne photo */
+  .aside {
+    position: relative;
+    min-height: 100%;
+  }
+  .veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(var(--wine-rgb), 0) var(--veil-start), rgba(var(--wine-deep-rgb), 0.92) 100%);
+  }
+  .aside-text {
+    position: absolute;
+    left: 36px;
+    right: 36px;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .quote {
+    margin: 0;
+    font-size: var(--quote-size);
+    line-height: 1.12;
+    color: var(--bg-light);
+  }
+  .rule {
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--highlight);
+  }
+
+  /* Colonne contenu */
+  .main {
+    position: relative;
+    background: var(--bg-light);
+    padding: 48px 56px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .main :focus-visible {
+    outline-color: var(--accent);
+  }
+  .close {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--wine);
+    font-family: var(--font-sans);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  .close--nojs {
+    display: none;
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 56px;
+  }
+  .kicker {
+    margin: 0;
+    font-size: 19px;
+    color: var(--accent);
+  }
+  .title {
+    margin: 0;
+    font-size: var(--title-size);
+    line-height: 1;
+    color: var(--wine);
+  }
+  .title :global(.it) {
+    color: var(--accent);
+  }
+  .p {
+    line-height: 1.6;
+  }
+  .intro {
+    max-width: var(--text-width);
+  }
+
+  /* Prestations */
+  .svc {
+    margin: 0;
+    padding: 18px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .svc li {
+    list-style: none;
+    padding: 4px 14px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--wine);
+    border-left: 1px solid var(--line-soft);
+  }
+  .svc li:first-child {
+    border-left: 0;
+  }
+  .steps-box {
+    background: var(--bg-light-2);
+    border-radius: 16px;
+    padding: 24px 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .box-title {
+    margin: 0;
+    font-size: 22px;
+    color: var(--wine);
+  }
+  .closing {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--text);
+    text-align: center;
+  }
+  .cta {
+    display: flex;
+    justify-content: center;
+  }
+  .popup-pill {
+    min-height: 54px;
+    padding: 0 40px;
+    font-size: 16px;
+  }
+
+  /* Formules (DJ) */
+  .popup--formules {
+    --quote-size: 36px;
+    --text-width: none;
+    width: min(1280px, 100vw - 48px);
+  }
+  .popup--formules .frame {
+    grid-template-columns: 360px minmax(0, 1fr);
+  }
+  .popup--formules .aside-text {
+    left: 32px;
+    right: 32px;
+  }
+  .popup--formules .main {
+    padding: 44px 48px 36px;
+    gap: 26px;
+  }
+  .popup--formules .head {
+    gap: 10px;
+  }
+  .popup--compact {
+    width: min(1440px, 100vw - 48px);
+  }
+  .popup--compact .frame {
+    grid-template-columns: 340px minmax(0, 1fr);
+  }
+  .popup--compact .main {
+    padding: 44px 44px 36px;
+  }
+  .plans {
+    padding-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+  .plans--compact {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .options--text {
+    gap: 10px;
+  }
+  .option-text {
+    color: var(--text-muted);
+  }
+  .opts {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  }
+  .opts--groups > div {
+    padding: 2px 10px;
+    border-left: 1px solid var(--line-soft);
+    text-align: center;
+  }
+  .opts--groups > div:first-child {
+    border-left: 0;
+  }
+  .opts b {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+  .opts span {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+  .opts--list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .opts--list li {
+    padding: 4px 10px;
+    border-left: 1px solid var(--line-soft);
+    text-align: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.25;
+    color: var(--wine);
+  }
+  .opts--list li:first-child {
+    border-left: 0;
+  }
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .notes > div {
+    padding: 2px 22px;
+    border-left: 1px solid var(--line-soft);
+  }
+  .notes > div:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .notes b {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--wine);
+    margin-bottom: 6px;
+  }
+  .notes p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .cta--note {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .cta-note {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text);
+    text-align: center;
+  }
+
+  /* Sans JavaScript : le pop-up ciblé par l'ancre s'affiche en plein écran. */
+  :global(html:not(.js)) .popup:target {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+  }
+  :global(html:not(.js)) .close--js {
+    display: none;
+  }
+  :global(html:not(.js)) .close--nojs {
+    display: flex;
+  }
+
+  /* Tablette */
+  @media (max-width: 1100px) {
+    .frame {
+      grid-template-columns: 320px minmax(0, 1fr);
+    }
+    .main {
+      padding: 44px 40px 40px;
+    }
+    .svc {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      row-gap: 12px;
+    }
+    .svc li:nth-child(3n + 1) {
+      border-left: 0;
+    }
+    .popup--formules .frame {
+      grid-template-columns: 300px minmax(0, 1fr);
+    }
+    .popup--formules .main {
+      padding: 44px 36px 36px;
+    }
+    .plans--compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      row-gap: 28px;
+    }
+    .opts {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      row-gap: 18px;
+    }
+    .opts > :nth-child(4n + 1) {
+      border-left: 0;
+    }
+  }
+
+  /* Mobile : plein écran, une colonne, défilement interne. */
+  @media (max-width: 860px) {
+    .popup {
+      --title-size: 40px !important;
+      --quote-size: 28px !important;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      border-radius: 0;
+    }
+    .frame {
+      grid-template-columns: 1fr;
+    }
+    .aside {
+      min-height: 280px;
+    }
+    .aside-text {
+      left: 24px;
+      right: 24px;
+      bottom: 28px;
+    }
+    .main {
+      padding: 36px 24px 40px;
+      gap: 24px;
+    }
+    .close {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+    }
+    .head {
+      padding-right: 0;
+    }
+    .svc {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .svc li,
+    .svc li:nth-child(3n + 1) {
+      border-left: 1px solid var(--line-soft);
+    }
+    .svc li:nth-child(2n + 1) {
+      border-left: 0;
+    }
+    .steps-box {
+      padding: 22px 20px;
+    }
+    .closing {
+      font-size: 18px;
+    }
+    .popup--formules .frame,
+    .popup--compact .frame {
+      grid-template-columns: 1fr;
+    }
+    .popup--formules .main,
+    .popup--compact .main {
+      padding: 36px 24px 40px;
+    }
+    .plans,
+    .plans--compact {
+      grid-template-columns: 1fr;
+      row-gap: 28px;
+    }
+    .opts,
+    .notes {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 18px;
+    }
+    .opts > *,
+    .opts > :nth-child(4n + 1),
+    .notes > div {
+      border-left: 1px solid var(--line-soft);
+      padding: 2px 12px;
+    }
+    .opts > :nth-child(2n + 1),
+    .notes > div:nth-child(2n + 1) {
+      border-left: 0;
+    }
+    .notes {
+      grid-template-columns: 1fr;
+    }
+    .notes > div,
+    .notes > div:nth-child(2n + 1),
+    .notes > div:first-child {
+      border-left: 0;
+      padding: 0;
+    }
+  }
+</style>

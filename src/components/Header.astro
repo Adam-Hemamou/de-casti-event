@@ -1,0 +1,255 @@
+---
+// Barre d'en-tête : logo, navigation principale, bouton d'action, menu burger (mobile).
+// Sans JavaScript, la navigation reste affichée (sur plusieurs lignes si besoin).
+import { site } from '../data';
+
+interface Props {
+  /** Remplace le bouton d'action par défaut (ex. « Demander un devis » sur la page contact). */
+  cta?: { label: string; href: string };
+}
+
+const cta = Astro.props.cta ?? site.headerCta;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => (href === '/' ? path === '/' || path === '/index' : path === href);
+---
+
+<div class="bar w" transition:name="site-bar" transition:animate="none">
+  <a class="logo" href="/" aria-label={site.logo.label}>
+    <span class="bd it logo-main">{site.logo.main}</span>
+    <span class="logo-sub">{site.logo.sub}</span>
+  </a>
+
+  <button
+    class="burger"
+    type="button"
+    aria-expanded="false"
+    aria-controls="site-menu"
+    data-label-open={site.menuLabel}
+    data-label-close={site.menuCloseLabel}
+  >
+    <span class="sr-only">{site.menuLabel}</span>
+    <span class="burger-lines" aria-hidden="true"><span></span><span></span></span>
+  </button>
+
+  <nav class="nav" id="site-menu" aria-label={site.navLabel}>
+    {
+      site.nav.map((item) => (
+        <a class:list={{ cur: isCurrent(item.href) }} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a class="pill nav-cta" href={cta.href}>{cta.label}</a>
+  </nav>
+
+  <a class="pill ghost bar-cta" href={cta.href}>{cta.label}</a>
+</div>
+
+<script>
+  // Écouteurs globaux de la page en cours, retirés avant de changer de page.
+  let pageListeners: AbortController | null = null;
+
+  function setupMenu() {
+    const button = document.querySelector<HTMLButtonElement>('.burger');
+    const menu = document.getElementById('site-menu');
+    if (!button || !menu) return;
+    const label = button.querySelector('.sr-only')!;
+    pageListeners = new AbortController();
+    const { signal } = pageListeners;
+
+    // Menu ouvert : tout ce qui est hors de la barre (lien d'évitement, reste de l'en-tête,
+    // contenu, pied de page) devient inactif, pour que le focus clavier reste dans le menu.
+    const outside = () => document.querySelectorAll<HTMLElement>('.skip-link, .site-header > :not(.bar, script), main, footer');
+
+    const setOpen = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open));
+      label.textContent = open ? button.dataset.labelClose! : button.dataset.labelOpen!;
+      document.documentElement.classList.toggle('menu-open', open);
+      outside().forEach((el) => (el.inert = open));
+      document.dispatchEvent(new CustomEvent(open ? 'decasti:lock' : 'decasti:unlock'));
+    };
+
+    button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          button.focus();
+        }
+      },
+      { signal },
+    );
+    // Repasse en affichage normal si l'écran s'élargit menu ouvert.
+    matchMedia('(min-width: 961px)').addEventListener(
+      'change',
+      (e) => {
+        if (e.matches) setOpen(false);
+      },
+      { signal },
+    );
+  }
+  document.addEventListener('astro:page-load', setupMenu);
+  document.addEventListener('astro:before-swap', () => {
+    pageListeners?.abort();
+    pageListeners = null;
+    document.documentElement.classList.remove('menu-open');
+  });
+</script>
+
+<style>
+  .bar {
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .logo-main {
+    font-size: 30px;
+    color: var(--bg-light);
+  }
+  .logo-sub {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--highlight);
+  }
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 34px;
+    align-items: baseline;
+  }
+  .nav a:not(.pill) {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--text-on-dark);
+    padding: 12px 0;
+    transition: color 0.2s ease;
+  }
+  .nav a:not(.pill):hover {
+    color: var(--highlight);
+  }
+  .nav a.cur {
+    color: var(--highlight);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+  }
+  .bar-cta {
+    min-height: 44px;
+    padding: 0 22px;
+  }
+  .nav-cta,
+  .burger {
+    display: none;
+  }
+
+  /* Mobile et tablette portrait : menu burger (seulement si JavaScript est actif). */
+  @media (max-width: 960px) {
+    .nav {
+      column-gap: 24px;
+      row-gap: 0;
+    }
+    :global(.js) .burger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-right: -10px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--highlight);
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+    .burger-lines {
+      position: relative;
+      display: block;
+      width: 26px;
+      height: 10px;
+    }
+    .burger-lines span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: currentColor;
+      transition: transform 0.3s ease, top 0.3s ease;
+    }
+    .burger-lines span:first-child {
+      top: 0;
+    }
+    .burger-lines span:last-child {
+      top: 8.5px;
+    }
+    .burger[aria-expanded='true'] .burger-lines span:first-child {
+      top: 4.25px;
+      transform: rotate(45deg);
+    }
+    .burger[aria-expanded='true'] .burger-lines span:last-child {
+      top: 4.25px;
+      transform: rotate(-45deg);
+    }
+
+    :global(.js) .bar-cta {
+      display: none;
+    }
+    :global(.js) .nav {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 6px;
+      padding: 96px 24px 48px;
+      background: var(--wine-deep);
+      overflow-y: auto;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    }
+    :global(.js.menu-open) .nav {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    :global(.js) .nav a:not(.pill) {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      line-height: 1.15;
+      padding: 8px 0;
+    }
+    :global(.js) .nav a.cur {
+      font-size: 34px;
+    }
+    :global(.js) .nav-cta {
+      display: inline-flex;
+      margin-top: 28px;
+    }
+    :global(.js.menu-open) .logo {
+      position: relative;
+      z-index: 2;
+    }
+  }
+</style>

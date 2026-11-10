@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Pop-up agence — Mariages</title>
+<link rel="stylesheet" href="../../theme/palettes.css">
+<script src="../../theme/theme-switch.js"></script>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--backdrop)}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.bd{font-family:'Bodoni Moda',serif;font-weight:400}
+.it{font-style:italic}
+.p{font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.6;color:var(--text);margin:0}
+.svc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.svc li{list-style:none;padding:4px 14px;text-align:center;font-family:'Instrument Sans',sans-serif;font-size:15px;line-height:1.4;color:var(--wine);border-left:1px solid var(--line-soft)}
+.svc li:first-child{border-left:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;position:relative}
+.steps::before{content:'';position:absolute;left:10%;right:10%;top:22px;height:1px;background:var(--line-strong)}
+.steps li{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;font-family:'Instrument Sans',sans-serif;font-size:14px;line-height:1.4;color:var(--wine)}
+.steps b{width:44px;height:44px;border-radius:50%;background:var(--wine);color:var(--highlight);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:20px}
+.close{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--wine);font-size:20px;line-height:1;cursor:pointer}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 40px;border-radius:999px;background:var(--wine);color:var(--bg-light);font-family:'Instrument Sans',sans-serif;font-size:16px;font-weight:600}
+.pill:hover{background:var(--velvet)}
+</style>
+<div style="width: 1280px; padding: 40px; background: radial-gradient(90% 80% at 50% 40%, var(--wine) 0%, var(--backdrop) 100%); font-family: 'Instrument Sans', sans-serif">
+<div role="dialog" aria-modal="true" aria-labelledby="t" style="display: grid; grid-template-columns: 400px minmax(0, 1fr); border-radius: 22px; overflow: hidden; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.35), 0 50px 100px rgba(0,0,0,.55)">
+<div style="position: relative; min-height: 100%">
+<img src="../../photos/hero-contact.jpg" alt="Eva de Casti dans les jardins d'un château" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 60%">
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(var(--wine-rgb),0) 40%, rgba(var(--wine-deep-rgb),.92) 100%)"></div>
+<div style="position: absolute; left: 36px; right: 36px; bottom: 40px; display: flex; flex-direction: column; gap: 18px">
+<p class="bd it" style="margin: 0; font-size: 38px; line-height: 1.12; color: var(--bg-light)">Des mariages uniques, à votre image.</p>
+<span aria-hidden="true" style="display: block; width: 80px; height: 1px; background: var(--highlight)"></span>
+</div>
+</div>
+<div style="position: relative; background: var(--bg-light); padding: 48px 56px 44px; display: flex; flex-direction: column; gap: 28px">
+<button type="button" class="close" aria-label="Fermer">×</button>
+<div style="display: flex; flex-direction: column; gap: 12px; padding-right: 56px">
+<p class="bd it" style="margin: 0; font-size: 19px; color: var(--accent)">Nos prestations</p>
+<h2 id="t" class="bd" style="margin: 0; font-size: 56px; line-height: 1; color: var(--wine)">Mariages</h2>
+<p class="p" style="max-width: 60ch">Un accompagnement sur mesure pour imaginer, organiser et coordonner le plus beau jour de votre vie.</p>
+</div>
+<ul class="svc" style="margin: 0; padding: 18px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft)">
+<li>Cérémonie laïque</li>
+<li>Réception &amp; dîner</li>
+<li>Ambiance &amp; animations</li>
+<li>Décoration &amp; scénographie</li>
+<li>Coordination jour J</li>
+</ul>
+<div style="background: var(--bg-light-2); border-radius: 16px; padding: 24px 28px 26px; display: flex; flex-direction: column; gap: 20px">
+<p class="bd it" style="margin: 0; font-size: 22px; color: var(--wine)">Notre accompagnement</p>
+<ol class="steps">
+<li><b>1</b>Échange &amp; définition de vos envies</li>
+<li><b>2</b>Conception de votre projet</li>
+<li><b>3</b>Recherche &amp; coordination des prestataires</li>
+<li><b>4</b>Organisation &amp; suivi</li>
+<li><b>5</b>Coordination le jour J</li>
+</ol>
+</div>
+<p class="bd it" style="margin: 0; font-size: 20px; line-height: 1.45; color: var(--text); text-align: center">Nous vous accompagnons à chaque étape, avec un réseau de prestataires de confiance, pour un mariage fluide, serein et à votre image.</p>
+<div style="display: flex; justify-content: center"><a class="pill" href="../../pages/contact.html">Parlons de votre projet</a></div>
+</div>
+</div>
+</div>
+</body>
+</html>

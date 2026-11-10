@@ -1,0 +1,31 @@
+---
+// En-tête de section : surtitre en italique + titre h2 (ou h1).
+// on : section sur fond sombre. Le texte du titre accepte *italique*.
+import { rich } from '../lib/rich';
+
+interface Props {
+  kicker: string;
+  title: string;
+  on?: boolean;
+  as?: 'h1' | 'h2';
+  gap?: number;
+  maxWidth?: string;
+  class?: string;
+  titleClass?: string;
+}
+
+const { kicker, title, on = false, as: Tag = 'h2', gap = 12, maxWidth, class: extra, titleClass } = Astro.props;
+---
+
+<div class:list={['heading', extra]} style={`gap: ${gap}px;${maxWidth ? ` max-width: ${maxWidth};` : ''}`}>
+  <p class:list={['kick', { on }]} data-reveal>{kicker}</p>
+  <Tag class:list={['h2', { on }, titleClass]} data-reveal-title set:html={rich(title)} />
+  <slot />
+</div>
+
+<style>
+  .heading {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

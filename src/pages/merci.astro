@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { pages } from '../data';
+
+const d = pages.merci;
+---
+
+<BaseLayout title={d.seo.title} description={d.seo.description} headerClass="hero-simple" noindex>
+  <PageIntro slot="hero" kicker={d.kicker} title={d.title} text={d.text} cta={d.cta} />
+</BaseLayout>
+
+<style>
+  :global(.site-header.hero-simple) {
+    background: var(--wine);
+  }
+</style>

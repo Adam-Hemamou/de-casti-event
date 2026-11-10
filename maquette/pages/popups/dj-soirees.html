@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Pop-up DJ — Formules soirées privées</title>
+<link rel="stylesheet" href="../../theme/palettes.css">
+<script src="../../theme/theme-switch.js"></script>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--backdrop)}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.bd{font-family:'Bodoni Moda',serif;font-weight:400}
+.it{font-style:italic}
+.p{font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.6;color:var(--text);margin:0}
+.plans{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}
+.plan{position:relative;background:var(--surface);border:1px solid var(--line-soft);border-radius:16px;padding:24px 18px 18px;display:flex;flex-direction:column;gap:10px}
+.plan h3{margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:25px;line-height:1.05;color:var(--wine)}
+.plan h3 span{display:block;font-style:italic;font-size:16px;color:var(--accent);margin-top:4px}
+.plan .sub{margin:0;font-family:'Instrument Sans',sans-serif;font-size:13.5px;line-height:1.4;color:var(--text)}
+.plan ul{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;flex-grow:1}
+.plan li{font-family:'Instrument Sans',sans-serif;font-size:13.5px;line-height:1.35;color:var(--wine);padding-left:16px;position:relative}
+.plan li::before{content:'';position:absolute;left:0;top:.48em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.price{margin:6px 0 0;padding:12px 0 0;border-top:1px solid var(--line-soft);font-family:'Bodoni Moda',serif;font-size:30px;line-height:1;color:var(--wine)}
+.price small{font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;margin-left:5px}
+.plan.feat{background:var(--wine);border-color:var(--wine);box-shadow:0 20px 40px rgba(var(--wine-rgb),.3)}
+.plan.feat h3,.plan.feat li,.plan.feat .price{color:var(--bg-light)}
+.plan.feat h3 span{color:var(--highlight)}
+.plan.feat .sub{color:var(--text-on-dark)}
+.plan.feat li::before{background:var(--highlight)}
+.plan.feat .price{border-top-color:var(--line-dark);color:var(--highlight)}
+.tag{position:absolute;top:-13px;left:18px;padding:5px 12px;border-radius:999px;background:var(--highlight);color:var(--wine);font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:600}
+.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.notes div{padding:2px 22px;border-left:1px solid var(--line-soft)}
+.notes div:first-child{border-left:0;padding-left:0}
+.notes b{display:block;font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:19px;color:var(--wine);margin-bottom:6px}
+.notes p{margin:0;font-family:'Instrument Sans',sans-serif;font-size:14px;line-height:1.5;color:var(--text)}
+.close{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--wine);font-size:20px;line-height:1;cursor:pointer}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 40px;border-radius:999px;background:var(--wine);color:var(--bg-light);font-family:'Instrument Sans',sans-serif;font-size:16px;font-weight:600}
+.pill:hover{background:var(--velvet)}
+</style>
+<div style="width: 1520px; padding: 40px; background: radial-gradient(90% 80% at 50% 40%, var(--wine) 0%, var(--backdrop) 100%); font-family: 'Instrument Sans', sans-serif">
+<div role="dialog" aria-modal="true" aria-labelledby="t" style="display: grid; grid-template-columns: 340px minmax(0, 1fr); border-radius: 22px; overflow: hidden; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.35), 0 50px 100px rgba(0,0,0,.55)">
+<div style="position: relative; min-height: 100%">
+<img src="../../photos/club-foule.jpg" alt="Soirée privée en club avec Eva aux platines" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% center">
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(var(--wine-rgb),0) 40%, rgba(var(--wine-deep-rgb),.92) 100%)"></div>
+<div style="position: absolute; left: 32px; right: 32px; bottom: 40px; display: flex; flex-direction: column; gap: 18px">
+<p class="bd it" style="margin: 0; font-size: 34px; line-height: 1.12; color: var(--bg-light)">Anniversaires, soirées privées, vos plus beaux moments en musique.</p>
+<span aria-hidden="true" style="display: block; width: 80px; height: 1px; background: var(--highlight)"></span>
+</div>
+</div>
+<div style="position: relative; background: var(--bg-light); padding: 44px 44px 36px; display: flex; flex-direction: column; gap: 26px">
+<button type="button" class="close" aria-label="Fermer">×</button>
+<div style="display: flex; flex-direction: column; gap: 10px; padding-right: 56px">
+<p class="bd it" style="margin: 0; font-size: 19px; color: var(--accent)">Nos formules DJ</p>
+<h2 id="t" class="bd" style="margin: 0; font-size: 52px; line-height: 1; color: var(--wine)">Soirées privées <span class="it" style="color: var(--accent)">&amp; anniversaires</span></h2>
+<p class="p">Une ambiance sur mesure pour vos anniversaires, fêtes de famille, soirées entre amis et toutes vos célébrations.</p>
+</div>
+<div class="plans" style="padding-top: 8px">
+<div class="plan">
+<h3>Essentielle<span>Soirée dansante</span></h3>
+<p class="sub">L'animation musicale de votre soirée festive.</p>
+<ul><li>DJ professionnel</li><li>Sonorisation</li><li>Éclairage de piste</li><li>Micro</li><li>Installation / démontage</li></ul>
+<p class="price">650 €<small>TTC</small></p>
+</div>
+<div class="plan">
+<h3>Essentielle<span>Soirée complète</span></h3>
+<p class="sub">Une présence dès l'arrivée de vos invités.</p>
+<ul><li>Accueil &amp; ambiance</li><li>Ambiance repas</li><li>Soirée dansante</li><li>Sonorisation complète</li><li>Micro</li></ul>
+<p class="price">850 €<small>TTC</small></p>
+</div>
+<div class="plan feat">
+<span class="tag">La plus choisie</span>
+<h3>Signature<span>Soirée dansante</span></h3>
+<p class="sub">Une soirée festive avec une mise en lumière renforcée.</p>
+<ul><li>DJ professionnel</li><li>Sonorisation</li><li>Mise en lumière (PAR LED)</li><li>Micro</li><li>Installation / démontage</li></ul>
+<p class="price">910 €<small>TTC</small></p>
+</div>
+<div class="plan">
+<h3>Signature<span>Soirée complète</span></h3>
+<p class="sub">Une ambiance musicale et lumineuse du début à la fin.</p>
+<ul><li>Accueil &amp; ambiance</li><li>Ambiance repas</li><li>Soirée dansante</li><li>Mise en lumière (PAR LED)</li><li>Sonorisation complète</li></ul>
+<p class="price">1 090 €<small>TTC</small></p>
+</div>
+<div class="plan">
+<h3>Expérience<span>Sur mesure</span></h3>
+<p class="sub">Une prestation entièrement personnalisée.</p>
+<ul><li>Vidéo / projection</li><li>Effets spéciaux</li><li>Artistes (saxophoniste, chanteur, etc.)</li><li>Configuration spécifique</li></ul>
+<p class="price">Sur devis</p>
+</div>
+</div>
+<div class="notes" style="padding-top: 18px; border-top: 1px solid var(--line-soft)">
+<div><b>À vous de choisir le moment de ma présence</b><p>Uniquement la soirée dansante ou l'événement complet dès l'accueil.</p></div>
+<div><b>Différence Essentiel / Signature</b><p>La formule Signature inclut une mise en lumière renforcée (PAR LED) pour sublimer votre lieu.</p></div>
+<div><b>Expérience</b><p>Une prestation sur mesure avec des options comme la vidéo, les effets ou des artistes live.</p></div>
+</div>
+<div style="display: flex; justify-content: center"><a class="pill" href="../../pages/contact.html">Parlons de votre événement</a></div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Pop-up DJ — Festivals &amp; événements publics</title>
+<link rel="stylesheet" href="../../theme/palettes.css">
+<script src="../../theme/theme-switch.js"></script>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--backdrop)}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.bd{font-family:'Bodoni Moda',serif;font-weight:400}
+.it{font-style:italic}
+.p{font-family:'Instrument Sans',sans-serif;font-size:16px;line-height:1.6;color:var(--text);margin:0}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.plan{position:relative;background:var(--surface);border:1px dashed var(--line);border-radius:16px;padding:26px 22px 20px;display:flex;flex-direction:column;gap:12px;min-height:250px}
+.plan h3{margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:28px;line-height:1;color:var(--wine)}
+.plan p{margin:0;font-family:'Instrument Sans',sans-serif;font-size:14.5px;line-height:1.45;color:var(--text-muted);flex-grow:1}
+.price{margin:6px 0 0;padding:12px 0 0;border-top:1px solid var(--line-soft);font-family:'Bodoni Moda',serif;font-size:24px;line-height:1;color:var(--wine)}
+.plan.feat{background:var(--wine);border:1px solid var(--wine)}
+.plan.feat h3{color:var(--bg-light)}.plan.feat p{color:var(--muted-on-dark)}.plan.feat .price{color:var(--highlight);border-top-color:var(--line-dark)}
+.tag{position:absolute;top:-13px;left:22px;padding:5px 14px;border-radius:999px;background:var(--highlight);color:var(--wine);font-family:'Instrument Sans',sans-serif;font-size:12.5px;font-weight:600}
+.close{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--wine);font-size:20px;line-height:1;cursor:pointer}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 40px;border-radius:999px;background:var(--wine);color:var(--bg-light);font-family:'Instrument Sans',sans-serif;font-size:16px;font-weight:600}
+.pill:hover{background:var(--velvet)}
+</style>
+<div style="width: 1360px; padding: 40px; background: radial-gradient(90% 80% at 50% 40%, var(--wine) 0%, var(--backdrop) 100%); font-family: 'Instrument Sans', sans-serif">
+<div role="dialog" aria-modal="true" aria-labelledby="t" style="display: grid; grid-template-columns: 360px minmax(0, 1fr); border-radius: 22px; overflow: hidden; box-shadow: 0 0 0 1px rgba(var(--highlight-rgb),.35), 0 50px 100px rgba(0,0,0,.55)">
+<div style="position: relative; min-height: 100%">
+<img src="../../photos/guinguette.jpg" alt="DJ set en plein air lors d'une fête locale" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(var(--wine-rgb),0) 40%, rgba(var(--wine-deep-rgb),.92) 100%)"></div>
+<div style="position: absolute; left: 32px; right: 32px; bottom: 40px; display: flex; flex-direction: column; gap: 18px">
+<p class="bd it" style="margin: 0; font-size: 34px; line-height: 1.12; color: var(--bg-light)">Une présence musicale adaptée à l'ambiance et à l'énergie du public.</p>
+<span aria-hidden="true" style="display: block; width: 80px; height: 1px; background: var(--highlight)"></span>
+</div>
+</div>
+<div style="position: relative; background: var(--bg-light); padding: 44px 48px 36px; display: flex; flex-direction: column; gap: 26px">
+<button type="button" class="close" aria-label="Fermer">×</button>
+<div style="display: flex; flex-direction: column; gap: 10px; padding-right: 56px">
+<p class="bd it" style="margin: 0; font-size: 19px; color: var(--accent)">Nos formules DJ</p>
+<h2 id="t" class="bd" style="margin: 0; font-size: 52px; line-height: 1; color: var(--wine)">Festivals <span class="it" style="color: var(--accent)">&amp; événements publics</span></h2>
+<p class="p">Festivals, fêtes locales, événements culturels et manifestations publiques. Une présence musicale adaptée à l'ambiance et à l'énergie du public.</p>
+</div>
+<div class="plans" style="padding-top: 8px">
+<div class="plan"><h3>[Formule 1]</h3><p>[Contenu de la formule à fournir par le client]</p><p class="price">[Tarif]</p></div>
+<div class="plan feat"><span class="tag">La plus choisie</span><h3>[Formule 2]</h3><p>[Contenu de la formule à fournir par le client]</p><p class="price">[Tarif]</p></div>
+<div class="plan"><h3>[Formule 3]</h3><p>[Contenu de la formule à fournir par le client]</p><p class="price">[Tarif ou sur devis]</p></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line-soft)">
+<p class="bd it" style="margin: 0; font-size: 22px; color: var(--wine)">Options &amp; compléments</p>
+<p class="p" style="color: var(--text-muted)">[Options à fournir par le client]</p>
+</div>
+<div style="display: flex; justify-content: center"><a class="pill" href="../../pages/contact.html">Parlons de votre événement</a></div>
+</div>
+</div>
+</div>
+</body>
+</html>

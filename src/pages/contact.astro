@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Faq from '../components/Faq.astro';
+import Photo from '../components/Photo.astro';
+import { contact as d, site } from '../data';
+import { rich } from '../lib/rich';
+
+const c = site.contact;
+const coords = [
+  { label: d.hero.labels.email, value: c.email },
+  { label: d.hero.labels.phone, value: c.phone },
+  { label: d.hero.labels.address, value: `${c.city}, ${c.country}` },
+  { label: d.hero.labels.hours, value: c.hours },
+];
+const socials = d.social.networks.map((k) => site.social[k]);
+---
+
+<BaseLayout title={d.seo.title} description={d.seo.description} footer="contact" headerClass="hero-contact" headerCta={d.headerCta}>
+  <Fragment slot="hero">
+    <div class="w hero">
+      <div class="hero-text">
+        <p class="kick on" data-reveal>{d.hero.kicker}</p>
+        <h1 class="bd hero-title" data-reveal-title set:html={rich(d.hero.title)} />
+        <p class="p on hero-lead" data-reveal>{d.hero.text}</p>
+        <dl class="coords" data-reveal>
+          {
+            coords.map((item) => (
+              <div>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+      <ContactForm />
+    </div>
+    <div class="w social on-light">
+      <p class="bd it social-title">{d.social.title}</p>
+      {socials.map((s) => <a href={s.href}>{s.label}</a>)}
+    </div>
+  </Fragment>
+
+  <!-- Bandeau vidéo -->
+  <section class="video">
+    <Photo photo={d.video.photo} fill parallax sizes="100vw" />
+    <div class="video-veil" aria-hidden="true"></div>
+    <div class="w video-inner">
+      <div class="video-text">
+        <h2 class="bd video-title" data-reveal-title set:html={rich(d.video.title)} />
+        <p class="p on" data-reveal>{d.video.text}</p>
+      </div>
+      <a class="play" href={d.video.link.href} data-reveal>
+        <span class="play-icon" aria-hidden="true">▶</span>{d.video.link.label}
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section on-light" id="faq">
+    <div class="w faq-inner">
+      <SectionHeading kicker={d.faq.kicker} title={d.faq.title} gap={16} class="faq-intro" titleClass="h2-contact">
+        <p class="p" data-reveal>
+          {d.faq.textBefore} <a class="faq-link" href={d.faq.link.href}>{d.faq.link.label}</a>{d.faq.textAfter}
+        </p>
+      </SectionHeading>
+      <div class="faq-list">
+        <Faq items={d.faq.items} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(.site-header.hero-contact) {
+    background: linear-gradient(180deg, var(--wine) 0%, var(--wine) 72%, var(--bg-light) 72%, var(--bg-light) 100%);
+  }
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+    padding-top: 48px;
+    padding-bottom: 32px;
+    align-items: flex-start;
+  }
+  .hero-text {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding-top: 24px;
+  }
+  .hero-title {
+    margin: 0;
+    font-size: clamp(52px, 7vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .hero-title :global(.it) {
+    color: var(--highlight);
+  }
+  .hero-lead {
+    max-width: 40ch;
+    font-size: 17px;
+  }
+  .coords {
+    margin: 16px 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 28px;
+  }
+  dt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--highlight);
+  }
+  dd {
+    margin: 2px 0 18px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--bg-light);
+  }
+
+  .social {
+    padding-bottom: 72px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+  .social-title {
+    margin: 0;
+    font-size: 18px;
+    color: var(--wine);
+  }
+  .social a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--wine);
+    border-bottom: 1px solid currentColor;
+    padding: 10px 0 2px;
+  }
+
+  /* Bandeau vidéo */
+  .video {
+    position: relative;
+    min-height: 520px;
+    background: var(--wine-deep);
+    color: var(--bg-light);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .video-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(var(--wine-deep-rgb), 0.2) 0%, rgba(var(--wine-deep-rgb), 0.9) 100%);
+  }
+  .video-inner {
+    position: relative;
+    width: 100%;
+    padding-bottom: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .video-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+  }
+  .video-title {
+    margin: 0;
+    font-size: clamp(36px, 4.34vw, 52px);
+    line-height: 1.05;
+    color: var(--bg-light);
+  }
+  .video-title :global(.it) {
+    color: var(--highlight);
+  }
+  .play {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bg-light);
+  }
+  .play-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--highlight);
+    color: var(--wine);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+  }
+  .play:hover .play-icon {
+    background: var(--highlight-hover);
+  }
+
+  /* FAQ */
+  .faq-section {
+    padding: 104px 0;
+  }
+  .faq-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+  }
+  .faq-inner :global(.faq-intro) {
+    flex: 1 1 320px;
+  }
+  :global(.h2.h2-contact) {
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+  .faq-link {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .faq-list {
+    flex: 1.5 1 520px;
+  }
+
+  @media (max-width: 960px) {
+    /* Le formulaire passe sous le texte : le fond clair ne commence qu'en bas du formulaire. */
+    :global(.site-header.hero-contact) {
+      background: linear-gradient(180deg, var(--wine) 0%, var(--wine) calc(100% - 220px), var(--bg-light) calc(100% - 220px));
+    }
+  }
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: 24px;
+      gap: 40px;
+    }
+    .hero-text {
+      padding-top: 0;
+    }
+    .social {
+      padding-top: 8px;
+      padding-bottom: 56px;
+    }
+    .video {
+      min-height: 460px;
+    }
+    .video-inner {
+      padding-bottom: 48px;
+    }
+    .faq-section {
+      padding: 80px 0;
+    }
+    .faq-inner {
+      gap: 40px;
+    }
+  }
+  @media (max-width: 420px) {
+    .coords {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

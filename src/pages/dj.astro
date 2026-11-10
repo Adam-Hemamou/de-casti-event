@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ValueList from '../components/ValueList.astro';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import Photo from '../components/Photo.astro';
+import Gallery from '../components/Gallery.astro';
+import Reviews from '../components/Reviews.astro';
+import Popup from '../components/Popup.astro';
+import { dj as d, avis, popups } from '../data';
+
+const pagePopups = popups.popups.filter((p) => p.page === 'dj');
+---
+
+<BaseLayout title={d.seo.title} description={d.seo.description} footer="dj" headerClass="hero-dj" ogImage={d.hero.photo.src}>
+  <Fragment slot="hero">
+    <Photo photo={d.hero.photo} fill parallax priority sizes="100vw" class="hero-bg" />
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="w hero">
+      <div class="hero-title-wrap">
+        <p class="kick on" data-reveal>{d.hero.kicker}</p>
+        <h1 class="bd it hero-title" data-reveal-title>{d.hero.title}</h1>
+      </div>
+      <div class="hero-side">
+        <p class="p on" data-reveal>{d.hero.text}</p>
+        <div data-reveal><Button href={d.hero.cta.href}>{d.hero.cta.label}</Button></div>
+      </div>
+    </div>
+  </Fragment>
+
+  <!-- Notre approche -->
+  <section class="approche">
+    <div class="w approche-inner">
+      <SectionHeading kicker={d.approche.kicker} title={d.approche.title} gap={20} class="approche-intro">
+        <p class="p" data-reveal>{d.approche.text}</p>
+        <Photo photo={d.approche.photo} parallax class="approche-photo" sizes="(max-width: 520px) 100vw, 420px" widths={[420, 840]} />
+      </SectionHeading>
+      <ValueList items={d.approche.items} layout="liste" class="approche-list" />
+    </div>
+  </section>
+
+  <!-- Nos expertises -->
+  <section class="expertises" id="expertises">
+    <div class="expertises-inner">
+      <SectionHeading kicker={d.expertises.kicker} title={d.expertises.title} on gap={16} class="expertises-head" />
+      <div class="expertises-grid">
+        {d.expertises.cards.map((card) => <ExpertiseCard {...card} size="compacte" />)}
+      </div>
+    </div>
+  </section>
+
+  <Gallery data={d.galerie} id="galerie" class="galerie" headingGap={14} headingMax="620px" headerGap={24} />
+
+  <Reviews kicker={d.avis.kicker} title={d.avis.title} items={avis.dj} />
+
+  <!-- Mon univers musical -->
+  <section class="univers">
+    <div class="w univers-inner">
+      <SectionHeading kicker={d.univers.kicker} title={d.univers.title} gap={20} class="univers-intro" titleClass="h2-44">
+        <p class="p" data-reveal>{d.univers.text}</p>
+        <p class="p emphasis" data-reveal>{d.univers.emphasis}</p>
+      </SectionHeading>
+      <div class="univers-list">
+        <ul class="genres">
+          {d.univers.genres.map((g, i) => <li class:list={['genre', { i: i % 2 === 1 }]} data-reveal>{g}</li>)}
+        </ul>
+        <p class="p univers-closing" data-reveal>{d.univers.closing}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sonorisation & mise en lumière -->
+  <section class="sono">
+    <div class="sono-inner">
+      <div class="sono-photo">
+        <Photo photo={d.sono.photo} fill parallax sizes="(max-width: 1000px) 100vw, 50vw" />
+      </div>
+      <SectionHeading kicker={d.sono.kicker} title={d.sono.title} on gap={20} class="sono-text" titleClass="h2-44">
+        <p class="p on" data-reveal>{d.sono.text}</p>
+        <div class="sono-items">
+          {d.sono.items.map((item) => <p class="sono-item">{item}</p>)}
+        </div>
+        <p class="p on" data-reveal>{d.sono.closing}</p>
+        <p class="bd it sono-note" data-reveal>{d.sono.note}</p>
+        <div class="sono-cta" data-reveal><Button href={d.sono.cta.href}>{d.sono.cta.label}</Button></div>
+      </SectionHeading>
+    </div>
+  </section>
+
+  {d.avisBis.afficher && <Reviews kicker={d.avisBis.kicker} title={d.avisBis.title} items={avis.dj} background="light" />}
+
+  {pagePopups.map((p) => <Popup popup={p} returnTo="expertises" />)}
+</BaseLayout>
+
+<style>
+  /* Bannière photo plein cadre */
+  :global(.site-header.hero-dj) {
+    min-height: 780px;
+    background: var(--wine-deep);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .hero-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(var(--wine-deep-rgb), 0.75) 0%,
+      rgba(var(--wine-deep-rgb), 0.15) 30%,
+      rgba(var(--wine-deep-rgb), 0.35) 55%,
+      rgba(var(--wine-deep-rgb), 0.96) 100%
+    );
+  }
+  .hero {
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+    padding-bottom: 72px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  /* Largeur fixe : le titre garde la même mise en page qu'il soit découpé en lignes
+     par l'animation ou non (le texte d'accompagnement passe dessous, comme la maquette). */
+  .hero-title-wrap {
+    width: 760px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .hero-title {
+    margin: 0;
+    font-size: clamp(52px, 7.67vw, 92px);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: var(--bg-light);
+  }
+  .hero-side {
+    flex: 0 1 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* Approche */
+  .approche {
+    padding: 112px 0 104px;
+  }
+  .approche-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+  }
+  .approche-inner :global(.approche-intro) {
+    flex: 1 1 380px;
+  }
+  .approche-inner :global(.approche-photo) {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 3;
+    margin-top: 12px;
+  }
+  .approche-inner :global(.approche-list) {
+    flex: 1.2 1 480px;
+  }
+
+  /* Expertises */
+  .expertises {
+    background: var(--wine);
+    color: var(--bg-light);
+    padding: 104px 0;
+  }
+  .expertises-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+  .expertises-inner :global(.expertises-head) {
+    padding: 0 16px;
+  }
+  .expertises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 16px;
+  }
+
+  :global(.gallery.galerie) {
+    padding: 112px 0 96px;
+  }
+
+  /* Univers musical */
+  .univers {
+    background: var(--bg-light);
+    padding: 104px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .univers-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+  }
+  .univers-inner :global(.univers-intro) {
+    flex: 1 1 360px;
+  }
+  :global(.h2.h2-44) {
+    font-size: clamp(34px, 3.67vw, 44px);
+  }
+  .emphasis {
+    color: var(--wine);
+    font-weight: 600;
+  }
+  .univers-list {
+    flex: 1.3 1 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .genres {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 26px;
+    row-gap: 2px;
+    align-items: baseline;
+  }
+  .genre {
+    font-family: var(--font-serif);
+    font-size: clamp(30px, 3.67vw, 44px);
+    line-height: 1.18;
+    color: var(--wine);
+  }
+  .genre.i {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .univers-closing {
+    padding-top: 20px;
+    border-top: 1px solid var(--wine);
+  }
+
+  /* Sonorisation */
+  .sono {
+    background: var(--wine);
+    color: var(--bg-light);
+  }
+  .sono-inner {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .sono-photo {
+    flex: 1 1 440px;
+    min-height: 600px;
+    position: relative;
+  }
+  .sono-inner :global(.sono-text) {
+    flex: 1 1 540px;
+    padding: 88px 56px;
+    max-width: 720px;
+  }
+  .sono-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+    column-gap: 32px;
+  }
+  .sono-item {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--bg-light);
+    margin: 0;
+    padding: 14px 0;
+    border-top: 1px solid var(--line-dark);
+  }
+  /* Les deux derniers éléments ferment la liste par un filet (comme dans la maquette). */
+  .sono-item:nth-last-child(-n + 2) {
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .sono-note {
+    margin: 0;
+    font-size: 18px;
+    color: var(--highlight);
+  }
+  .sono-cta {
+    padding-top: 6px;
+  }
+
+  @media (max-width: 768px) {
+    :global(.site-header.hero-dj) {
+      min-height: 680px;
+    }
+    .hero {
+      padding-bottom: 56px;
+    }
+    .approche,
+    .univers {
+      padding: 80px 0;
+    }
+    .approche-inner,
+    .univers-inner {
+      gap: 48px;
+    }
+    .expertises {
+      padding: 80px 0;
+    }
+    .expertises-inner {
+      padding: 0 24px;
+    }
+    .expertises-inner :global(.expertises-head) {
+      padding: 0;
+    }
+    :global(.gallery.galerie) {
+      padding: 80px 0;
+    }
+    .sono-photo {
+      min-height: 360px;
+    }
+    .sono-inner :global(.sono-text) {
+      padding: 64px 24px 72px;
+    }
+    .sono-item:nth-last-child(2) {
+      border-bottom: 0;
+    }
+  }
+</style>

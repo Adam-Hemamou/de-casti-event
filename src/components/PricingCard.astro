@@ -1,0 +1,227 @@
+---
+// Carte de formule tarifaire (pop-up DJ).
+// featured : formule mise en avant (fond bordeaux + étiquette « La plus choisie »).
+// compact : version resserrée quand le pop-up compte plus de 3 formules.
+// Une formule avec « description » (sans liste) est une formule encore à compléter.
+interface Props {
+  name: string;
+  label?: string;
+  subtitle?: string;
+  items?: string[];
+  description?: string;
+  price: string;
+  priceUnit?: string;
+  featured?: boolean;
+  featuredLabel: string;
+  compact?: boolean;
+}
+
+const { name, label, subtitle, items, description, price, priceUnit, featured = false, featuredLabel, compact = false } = Astro.props;
+const draft = !items?.length && !!description;
+---
+
+<div class:list={['plan', { feat: featured, compact, draft }]}>
+  {featured && <span class="tag">{featuredLabel}</span>}
+  <h3>
+    {name}
+    {label && <span>{label}</span>}
+  </h3>
+  {subtitle && <p class="sub">{subtitle}</p>}
+  {
+    items?.length ? (
+      <ul>
+        {items.map((i) => (
+          <li>{i}</li>
+        ))}
+      </ul>
+    ) : null
+  }
+  {description && <p class="desc">{description}</p>}
+  <p class="price">{price}{priceUnit && <small>{priceUnit}</small>}</p>
+</div>
+
+<style>
+  .plan {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    padding: 26px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  h3 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--wine);
+  }
+  h3 span {
+    display: block;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+  .sub {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.3;
+    color: var(--accent);
+  }
+  ul {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex-grow: 1;
+  }
+  li {
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.35;
+    color: var(--wine);
+    padding-left: 18px;
+    position: relative;
+  }
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .price {
+    margin: 6px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--line-soft);
+    font-family: var(--font-serif);
+    font-size: 34px;
+    line-height: 1;
+    color: var(--wine);
+  }
+  .price small {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-left: 6px;
+  }
+  .tag {
+    position: absolute;
+    top: -13px;
+    left: 22px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: var(--highlight);
+    color: var(--wine);
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+
+  /* Formule mise en avant */
+  .feat {
+    background: var(--wine);
+    border-color: var(--wine);
+    box-shadow: 0 20px 40px rgba(var(--wine-rgb), 0.3);
+  }
+  .feat h3,
+  .feat li,
+  .feat .price {
+    color: var(--bg-light);
+  }
+  .feat h3 span,
+  .feat .sub {
+    color: var(--highlight);
+  }
+  .feat li::before {
+    background: var(--highlight);
+  }
+  .feat .price {
+    border-top-color: var(--line-dark);
+    color: var(--highlight);
+  }
+
+  /* Version resserrée (5 formules) */
+  .compact {
+    padding: 24px 18px 18px;
+    gap: 10px;
+  }
+  .compact h3 {
+    font-size: 25px;
+    line-height: 1.05;
+  }
+  .compact .sub {
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .compact.feat .sub {
+    color: var(--text-on-dark);
+  }
+  .compact ul {
+    margin-top: 2px;
+    gap: 6px;
+  }
+  .compact li {
+    font-size: 13.5px;
+    padding-left: 16px;
+  }
+  .compact li::before {
+    top: 0.48em;
+    width: 6px;
+    height: 6px;
+  }
+  .compact .price {
+    font-size: 30px;
+  }
+  .compact .price small {
+    font-size: 12px;
+    margin-left: 5px;
+  }
+  .compact .tag {
+    left: 18px;
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+
+  /* Formule à compléter */
+  .draft {
+    border: 1px dashed var(--line);
+    min-height: 250px;
+    box-shadow: none;
+  }
+  .draft h3 {
+    font-size: 28px;
+  }
+  .desc {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--text-muted);
+    flex-grow: 1;
+  }
+  .draft .price {
+    font-size: 24px;
+  }
+  .draft.feat {
+    border: 1px solid var(--wine);
+  }
+  .draft.feat .desc {
+    color: var(--muted-on-dark);
+  }
+</style>

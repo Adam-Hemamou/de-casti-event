@@ -1,0 +1,125 @@
+{
+  "seo": {
+    "title": "DJ Eva de Casti — De Casti Event",
+    "description": "Eva de Casti, DJ : une programmation adaptée à chaque public pour vos mariages, événements d'entreprise, soirées privées et festivals."
+  },
+  "hero": {
+    "kicker": "DJ & production événementielle",
+    "title": "La musique au cœur de vos événements.",
+    "text": "Une signature musicale, une énergie communicative et une programmation adaptée à chaque public. Je vous accompagne pour faire de votre événement un moment unique, où la musique crée l'ambiance et rassemble les invités.",
+    "cta": { "label": "Demander un devis", "href": "/contact" },
+    "photo": { "src": "hero-dj.jpg", "alt": "Eva de Casti aux platines dans un club, la foule derrière elle", "position": "60% 40%" }
+  },
+  "approche": {
+    "kicker": "Notre approche",
+    "title": "Une passion, une exigence, une ambiance qui vous ressemble.",
+    "text": "Chaque événement possède son identité et son public. Mon rôle est de comprendre vos attentes pour construire une programmation musicale cohérente, m'adapter à l'ambiance et faire vivre chaque moment derrière les platines.",
+    "photo": { "src": "dj-terrasse-pont.jpg", "alt": "DJ set en terrasse avec vue sur le pont Chaban-Delmas" },
+    "items": [
+      { "title": "Écoute & conseil", "text": "Comprendre vos envies, vos goûts musicaux et l'atmosphère que vous souhaitez créer." },
+      { "title": "Programmation sur mesure", "text": "Une sélection musicale adaptée à votre événement, à votre public et à chaque moment de la soirée." },
+      { "title": "Préparation & anticipation", "text": "Préparer chaque intervention et anticiper les besoins techniques et musicaux." },
+      { "title": "Sonorisation & éclairage", "text": "Des solutions techniques adaptées au lieu, au nombre d'invités et au format de votre événement." },
+      { "title": "Énergie & émotion", "text": "Créer une connexion avec le public et transformer chaque prestation en véritable expérience musicale." }
+    ]
+  },
+  "expertises": {
+    "kicker": "Nos expertises",
+    "title": "Une ambiance musicale pour chaque événement.",
+    "cards": [
+      {
+        "title": "Mariages",
+        "text": "Du vin d'honneur à la soirée dansante, j'accompagne les mariés pour créer une ambiance musicale à leur image, des premiers instants jusqu'aux dernières danses.",
+        "photo": { "src": "dj-mariage-pampas.jpg", "alt": "Installation DJ pour un mariage devant un mur en pierre", "position": "center 30%" },
+        "link": "Voir les formules",
+        "popup": "formules-mariages"
+      },
+      {
+        "title": "Événements d'entreprise",
+        "text": "Soirées corporate, cocktails, séminaires, inaugurations, lancements de produits et événements clients. Une prestation musicale adaptée à votre image et à votre public.",
+        "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque avec animation musicale" },
+        "link": "Voir les formules",
+        "popup": "formules-entreprise"
+      },
+      {
+        "title": "Soirées privées",
+        "text": "Anniversaires, fêtes de famille, soirées entre amis et célébrations. Une programmation personnalisée pour partager un moment festif et mémorable.",
+        "photo": { "src": "club-foule.jpg", "alt": "Soirée privée en club avec Eva aux platines" },
+        "link": "Voir les formules",
+        "popup": "formules-soirees"
+      },
+      {
+        "title": "Festivals & événements publics",
+        "text": "Festivals, fêtes locales, événements culturels et manifestations publiques. Une présence musicale adaptée à l'ambiance et à l'énergie du public.",
+        "photo": { "src": "guinguette.jpg", "alt": "DJ set en plein air lors d'une fête locale" },
+        "link": "Voir les formules",
+        "popup": "formules-festivals"
+      },
+      {
+        "title": "Sport, marques & événements spéciaux",
+        "text": "Événements sportifs, compétitions, animations de marques, événements automobiles et lancements. Une animation musicale pensée pour accompagner et dynamiser chaque temps fort.",
+        "photo": { "src": "stade-societe-generale.jpg", "alt": "Eva aux platines au bord du terrain dans un stade" },
+        "link": "Voir les formules",
+        "popup": "formules-sport"
+      }
+    ]
+  },
+  "galerie": {
+    "kicker": "En images",
+    "title": "La musique, l'énergie, l'instant.",
+    "text": "Découvrez quelques extraits de mes prestations, entre soirées privées, mariages, événements professionnels et festivals.",
+    "link": { "label": "Voir plus de photos & vidéos", "href": "#" },
+    "rowHeight": 230,
+    "photos": [
+      { "src": "club-noir-blanc.jpg", "alt": "Soirée en club, photo noir et blanc", "rows": 2 },
+      { "src": "dj-coucher-soleil.jpg", "alt": "DJ set au coucher du soleil face à la Garonne", "cols": 2, "position": "center 30%" },
+      { "src": "cave-voutee.jpg", "alt": "DJ set dans une cave voûtée", "rows": 2 },
+      { "src": "soiree-privee-coeur.jpg", "alt": "Eva fait un cœur avec ses mains derrière les platines", "position": "center 30%" },
+      { "src": "rooftop-terrasse.jpg", "alt": "DJ set en terrasse avec vue sur la ville", "position": "center 25%" }
+    ]
+  },
+  "avis": {
+    "kicker": "Ils nous ont fait confiance",
+    "title": "Leur expérience, leurs mots."
+  },
+  "univers": {
+    "kicker": "Mon univers musical",
+    "title": "Une programmation musicale adaptée à chaque événement.",
+    "text": "De la musique électronique aux grands classiques incontournables, je m'adapte à vos envies, à votre public et à l'atmosphère recherchée.",
+    "emphasis": "Mon univers musical est varié et évolue selon chaque prestation :",
+    "genres": [
+      "House, Deep House & Tech House",
+      "Minimal & Electronic",
+      "Funk & Disco",
+      "Pop & Rock",
+      "Années 80, 90 & 2000",
+      "Commercial & Généraliste",
+      "Latino & Reggaeton",
+      "Hip-Hop & R&B"
+    ],
+    "closing": "Chaque événement possède son identité musicale. Ma priorité est de trouver le bon équilibre entre vos envies et l'énergie de votre public."
+  },
+  "sono": {
+    "kicker": "Sonorisation & mise en lumière",
+    "title": "Le son et la lumière au service de votre événement.",
+    "text": "Au-delà de la prestation DJ, je propose des solutions de sonorisation et de mise en lumière adaptées à votre lieu, au nombre de participants et au format de votre événement.",
+    "items": [
+      "Sonorisation professionnelle",
+      "Enceintes et caissons de basses",
+      "Éclairage d'ambiance",
+      "Lyres et jeux de lumière",
+      "Installation et configuration technique",
+      "Solutions complémentaires selon les besoins du projet"
+    ],
+    "closing": "Chaque installation est pensée pour offrir une expérience sonore et visuelle adaptée à votre événement.",
+    "note": "Possibilité de compléter l'installation avec du matériel supplémentaire selon les besoins.",
+    "cta": { "label": "Demander un devis", "href": "/contact" },
+    "photo": { "src": "studio-platines.jpg", "alt": "Platines Pioneer et enceintes de monitoring", "position": "center 65%" }
+  },
+  "avisBis": {
+    "note": "Deuxième section d'avis présente dans la maquette (doublon à vérifier avec la cliente) : passer \"afficher\" à false pour la masquer.",
+    "afficher": true,
+    "kicker": "Ils nous ont fait confiance",
+    "title": "Leur expérience, leurs mots."
+  }
+}

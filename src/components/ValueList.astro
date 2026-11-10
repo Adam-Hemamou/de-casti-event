@@ -1,0 +1,57 @@
+---
+// Liste titre en italique + texte, séparés par des filets.
+// layout 'grille' : valeurs de l'accueil (2 colonnes) ; 'liste' : approche de la page DJ.
+interface Props {
+  items: { title: string; text: string }[];
+  layout?: 'grille' | 'liste';
+  class?: string;
+}
+
+const { items, layout = 'grille', class: extra } = Astro.props;
+---
+
+<div class:list={['values', `values--${layout}`, extra]}>
+  {
+    items.map((item) => (
+      <div class="value" data-reveal>
+        <h3 class="bd it">{item.title}</h3>
+        <p class="p">{item.text}</p>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .values--grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+    column-gap: 40px;
+    row-gap: 8px;
+    align-content: start;
+  }
+  .values--liste {
+    display: flex;
+    flex-direction: column;
+  }
+  .value {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .values--liste .value {
+    padding: 24px 0;
+  }
+  .values--liste .value:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    font-weight: 400;
+  }
+  .values--liste h3 {
+    margin-bottom: 8px;
+  }
+  .p {
+    font-size: 15px;
+  }
+</style>

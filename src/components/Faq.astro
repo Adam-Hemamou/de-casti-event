@@ -1,0 +1,69 @@
+---
+// Questions fréquentes (<details> natif : fonctionne sans JavaScript).
+interface Props {
+  items: { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item) => (
+      <details>
+        <summary>
+          {item.question}
+          <span class="sign" aria-hidden="true">+</span>
+        </summary>
+        <p class="p answer">{item.answer}</p>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  details {
+    border-top: 1px solid var(--line);
+  }
+  details:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    min-height: 64px;
+    padding: 16px 0;
+    font-family: var(--font-serif);
+    font-size: clamp(20px, 2vw, 24px);
+    color: var(--wine);
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .sign {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    color: var(--accent);
+    flex: none;
+    transition: transform 0.3s ease;
+  }
+  details[open] .sign {
+    transform: rotate(45deg);
+  }
+  .answer {
+    padding-bottom: 20px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sign {
+      transition: none;
+    }
+  }
+</style>

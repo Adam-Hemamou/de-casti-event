@@ -1,0 +1,238 @@
+---
+// Formulaire de contact (Netlify Forms).
+// - Netlify détecte le formulaire au déploiement grâce à data-netlify="true" et au champ form-name ;
+// - champ anti-spam caché (bot-field) ;
+// - après envoi, redirection vers /merci (attribut action) ;
+// - validation : messages sous chaque champ (script ci-dessous) ; sans JavaScript,
+//   la validation native du navigateur s'applique (required, type="email") ;
+// - type d'événement présélectionné via l'adresse : /contact?type=mariage
+import { contact } from '../data';
+import { rich } from '../lib/rich';
+
+const f = contact.form;
+const fl = f.fields;
+---
+
+<form
+  id="formulaire"
+  class="form on-light"
+  name={f.name}
+  method="POST"
+  action="/merci"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  data-astro-reload
+  data-contact-form
+>
+  <input type="hidden" name="form-name" value={f.name} />
+  <p class="honeypot" hidden>
+    <label>{f.honeypotLabel} <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <h2 class="bd form-title" set:html={rich(f.title)} />
+
+  <p class="summary" role="alert" hidden>{f.errorSummary}</p>
+
+  <div class="row">
+    <div class="field">
+      <label for="nom">{fl.nom.label}</label>
+      <input id="nom" name="nom" type="text" autocomplete="family-name" required aria-describedby="nom-erreur" data-error={fl.nom.error} />
+      <p class="error" id="nom-erreur"></p>
+    </div>
+    <div class="field">
+      <label for="prenom">{fl.prenom.label}</label>
+      <input id="prenom" name="prenom" type="text" autocomplete="given-name" required aria-describedby="prenom-erreur" data-error={fl.prenom.error} />
+      <p class="error" id="prenom-erreur"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+      <label for="email">{fl.email.label}</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        aria-describedby="email-erreur"
+        data-error={fl.email.error}
+        data-error-format={fl.email.errorFormat}
+      />
+      <p class="error" id="email-erreur"></p>
+    </div>
+    <div class="field">
+      <label for="tel">{fl.telephone.label}</label>
+      <input id="tel" name="telephone" type="tel" autocomplete="tel" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+      <label for="type">{fl.type.label}</label>
+      <select id="type" name="type" required aria-describedby="type-erreur" data-error={fl.type.error}>
+        <option value="">{f.typePlaceholder}</option>
+        {f.types.map((t) => <option value={t.label} data-type={t.value}>{t.label}</option>)}
+      </select>
+      <p class="error" id="type-erreur"></p>
+    </div>
+    <div class="field">
+      <label for="date">{fl.date.label}</label>
+      <input id="date" name="date" type="date" />
+    </div>
+  </div>
+  <div class="field">
+    <label for="msg">{fl.message.label}</label>
+    <textarea id="msg" name="message" rows="4" required aria-describedby="msg-erreur" data-error={fl.message.error}></textarea>
+    <p class="error" id="msg-erreur"></p>
+  </div>
+  <button type="submit" class="pill wine submit">{f.submit}</button>
+  <p class="privacy">{f.privacy}</p>
+</form>
+
+<script>
+  function setupForm() {
+    const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+    if (!form) return;
+
+    // Présélection du type d'événement : /contact?type=mariage
+    const type = new URLSearchParams(location.search).get('type');
+    const select = form.querySelector<HTMLSelectElement>('select[name="type"]');
+    if (type && select) {
+      const option = select.querySelector<HTMLOptionElement>(`option[data-type="${CSS.escape(type)}"]`);
+      if (option) option.selected = true;
+    }
+
+    // Validation avec messages sous les champs (remplace les bulles du navigateur).
+    form.noValidate = true;
+    const fields = [...form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[required]')];
+    const summary = form.querySelector<HTMLElement>('.summary')!;
+
+    const check = (el: (typeof fields)[number]) => {
+      const error = document.getElementById(el.getAttribute('aria-describedby')!)!;
+      let message = '';
+      if (el.validity.valueMissing || !el.value.trim()) message = el.dataset.error ?? '';
+      else if (el.validity.typeMismatch) message = el.dataset.errorFormat ?? el.dataset.error ?? '';
+      error.textContent = message;
+      if (message) el.setAttribute('aria-invalid', 'true');
+      else el.removeAttribute('aria-invalid');
+      return !message;
+    };
+
+    fields.forEach((el) => {
+      // Une fois signalé, le champ se revérifie au fil de la saisie.
+      const recheck = () => el.hasAttribute('aria-invalid') && check(el);
+      el.addEventListener('input', recheck);
+      el.addEventListener('change', recheck);
+      el.addEventListener('blur', () => el.value && check(el));
+    });
+
+    form.addEventListener('submit', (e) => {
+      const invalid = fields.filter((el) => !check(el));
+      summary.hidden = invalid.length === 0;
+      if (invalid.length) {
+        e.preventDefault();
+        invalid[0].focus();
+      }
+    });
+  }
+  document.addEventListener('astro:page-load', setupForm);
+</script>
+
+<style>
+  .form {
+    flex: 1 1 480px;
+    background: var(--bg-light);
+    color: var(--wine);
+    padding: 44px 44px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 40px 80px rgba(var(--wine-deep-rgb), 0.35);
+    scroll-margin-top: 24px;
+  }
+  .form :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .form-title {
+    margin: 0 0 4px;
+    font-size: 34px;
+    font-weight: 400;
+  }
+  .form-title :global(.it) {
+    color: var(--accent);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+    gap: 20px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  label {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wine);
+  }
+  input,
+  select,
+  textarea {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--wine);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--accent);
+    padding: 10px 0;
+    min-height: 44px;
+    width: 100%;
+    border-radius: 0;
+  }
+  textarea {
+    resize: vertical;
+  }
+  [aria-invalid='true'] {
+    border-bottom-width: 2px;
+  }
+  .error {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .error:empty {
+    display: none;
+  }
+  .summary {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .honeypot {
+    display: none;
+  }
+  .submit {
+    width: 100%;
+    margin-top: 8px;
+    min-height: 52px;
+  }
+  .privacy {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text);
+    text-align: center;
+  }
+  @media (max-width: 520px) {
+    .form {
+      padding: 32px 22px 28px;
+    }
+    .form-title {
+      font-size: 30px;
+    }
+  }
+</style>
