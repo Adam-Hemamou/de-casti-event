@@ -11,9 +11,18 @@ import { ClientRouter } from 'astro:transitions';
 import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import MobileCta from '../components/MobileCta.astro';
 import { THEME } from '../config/theme';
 import { site, type PageKey } from '../data';
 import { photo } from '../lib/photos';
+import { siteNodes, pageNodes, clean } from '../lib/structured-data';
+
+// Polices affichées dès la bannière (logo, grands titres, navigation) : préchargées pour
+// limiter le changement de police visible au chargement. Ce sont les mêmes fichiers que
+// ceux des feuilles @fontsource importées ci-dessus (une seule URL, un seul téléchargement).
+import bodoniNormal from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-normal.woff2?url';
+import bodoniItalic from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-italic.woff2?url';
+import instrument400 from '@fontsource/instrument-sans/files/instrument-sans-latin-400-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -24,37 +33,46 @@ interface Props {
   headerClass?: string;
   /** Bouton d'action de l'en-tête, si différent de celui par défaut. */
   headerCta?: { label: string; href: string };
-  /** Photo de partage (nom de fichier dans src/assets/photos). */
-  ogImage?: string;
+  /** Photo de partage (nom de fichier dans src/assets/photos) et son texte alternatif. */
+  ogImage?: { src: string; alt: string };
+  /** Nom de la page dans le fil d'Ariane des données structurées (absent sur l'accueil). */
+  breadcrumb?: string;
+  /** Données structurées propres à la page (Service, FAQPage…), ajoutées au graphe commun. */
+  schema?: Record<string, unknown>[];
+  /** Destination du bouton flottant « Demander un devis » (mobile) ; absent = pas de bouton. */
+  mobileCta?: string;
   noindex?: boolean;
 }
 
-const { title, description, footer = 'agence', headerClass, headerCta, ogImage, noindex = false } = Astro.props;
+const { title, description, footer = 'agence', headerClass, headerCta, ogImage, breadcrumb, schema = [], mobileCta, noindex = false } =
+  Astro.props;
 
 const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), site.url).href;
-const og = await getImage({ src: photo(ogImage ?? site.defaultOgImage), width: 1200, format: 'jpg' });
+const ogPhoto = ogImage ?? { src: site.defaultOgImage, alt: site.defaultOgImageAlt };
+const og = await getImage({ src: photo(ogPhoto.src), width: 1200, format: 'jpg' });
 const ogUrl = new URL(og.src, site.url).href;
+const ogWidth = og.attributes.width;
+const ogHeight = og.attributes.height;
 
-// Données structurées : les coordonnées encore « à confirmer » ne sont pas publiées.
-const known = (s: string) => (s.startsWith('[') ? undefined : s);
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: site.name,
-  description: site.description,
-  url: site.url,
-  image: ogUrl,
-  email: known(site.contact.email),
-  telephone: known(site.contact.phone),
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: known(site.contact.city),
-    addressCountry: 'FR',
-  },
-  sameAs: Object.values(site.social)
-    .map((s) => s.href)
-    .filter((h) => h.startsWith('http')),
-};
+// Données structurées : un graphe par page (entreprise, Eva de Casti, site, page, fil d'Ariane,
+// prestations). Les valeurs encore « à confirmer » ne sont pas publiées (voir lib/structured-data.ts).
+// Pages non indexées (404, merci) : aucune donnée structurée.
+let jsonLd: Record<string, unknown> | undefined;
+if (!noindex) {
+  const defaultOg =
+    ogPhoto.src === site.defaultOgImage
+      ? ogUrl
+      : new URL((await getImage({ src: photo(site.defaultOgImage), width: 1200, format: 'jpg' })).src, site.url).href;
+  const portrait = await getImage({ src: photo(site.person.photo), width: 800, format: 'jpg' });
+  jsonLd = clean({
+    '@context': 'https://schema.org',
+    '@graph': [
+      ...siteNodes({ organisation: defaultOg, person: new URL(portrait.src, site.url).href }),
+      ...pageNodes({ url: canonical, title, description, breadcrumb }),
+      ...schema,
+    ],
+  });
+}
 ---
 
 <!doctype html>
@@ -64,9 +82,21 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <>
+          <meta name="robots" content="index, follow, max-image-preview:large" />
+          <link rel="canonical" href={canonical} />
+        </>
+      )
+    }
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" href={bodoniItalic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodoniNormal} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={instrument400} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
@@ -75,9 +105,17 @@ const jsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
+    {ogWidth && <meta property="og:image:width" content={String(ogWidth)} />}
+    {ogHeight && <meta property="og:image:height" content={String(ogHeight)} />}
+    <meta property="og:image:alt" content={ogPhoto.alt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+    <meta name="twitter:image:alt" content={ogPhoto.alt} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <!-- Marque la présence de JavaScript (les styles « sans JS » restent la base). -->
     <script is:inline>
@@ -101,6 +139,7 @@ const jsonLd = {
       </main>
       <Footer variant={footer} />
     </div>
+    {mobileCta && <MobileCta href={mobileCta} />}
     <script>
       import '../scripts/animations';
       import '../scripts/popups';

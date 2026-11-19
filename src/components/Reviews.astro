@@ -3,6 +3,7 @@
 import SectionHeading from './SectionHeading.astro';
 import Button from './Button.astro';
 import { avis, type LinkT, type ReviewT } from '../data';
+import { hasHref } from '../lib/links';
 
 interface Props {
   kicker: string;
@@ -37,7 +38,7 @@ const { kicker, title, items, link, size = 'normale', background = 'light-2', id
       }
     </div>
     {
-      link && (
+      link && hasHref(link.href) && (
         <div>
           <Button variant="lien" href={link.href}>{link.label}</Button>
         </div>

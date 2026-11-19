@@ -88,6 +88,7 @@
       "id": "prestations-sur-mesure",
       "variant": "prestations",
       "page": "agence",
+      "eventType": "autre",
       "photo": { "src": "stade-public.jpg", "alt": "Animation musicale dans un stade", "position": "40% center" },
       "quote": "Des événements sur mesure, de grande ampleur comme plus intimistes.",
       "title": "Événements sur mesure",

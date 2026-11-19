@@ -1,0 +1,129 @@
+---
+// Bouton flottant « Demander un devis » (mobile et tablette portrait, ≤ 960 px, là où le
+// bouton de l'en-tête passe dans le menu burger).
+// - apparaît une fois la bannière dépassée (elle a déjà son propre bouton) ;
+// - disparaît quand le pied de page arrive à l'écran (qui a lui aussi son bouton),
+//   et quand le menu mobile ou un pop-up est ouvert ;
+// - caché, il n'est pas atteignable au clavier (visibility: hidden) ;
+// - sans JavaScript, il n'est pas affiché (la navigation complète reste visible) ;
+// - prefers-reduced-motion : apparition sans déplacement ni fondu.
+// Zones de sécurité iOS : Safari place déjà la page dans la zone sûre (viewport-fit par défaut) ;
+// env(safe-area-inset-*) ajoute la marge nécessaire si viewport-fit=cover est activé un jour.
+import { site } from '../data';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a class="mobile-cta" href={href} data-mobile-cta>{site.mobileCta.label}</a>
+
+<script>
+  let observer: IntersectionObserver | null = null;
+  let controller: AbortController | null = null;
+
+  function setup() {
+    const cta = document.querySelector<HTMLElement>('[data-mobile-cta]');
+    const header = document.querySelector('.site-header');
+    const footer = document.querySelector('.footer');
+    if (!cta || !header || !footer) return;
+
+    const state = { header: true, footer: false, locked: false };
+    const update = () => cta.classList.toggle('is-visible', !state.header && !state.footer && !state.locked);
+
+    observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === header) state.header = entry.isIntersecting;
+        if (entry.target === footer) state.footer = entry.isIntersecting;
+      }
+      update();
+    });
+    observer.observe(header);
+    observer.observe(footer);
+
+    // Menu mobile ou pop-up ouvert (événements émis par Header.astro et scripts/popups.ts).
+    controller = new AbortController();
+    const { signal } = controller;
+    document.addEventListener('decasti:lock', () => ((state.locked = true), update()), { signal });
+    document.addEventListener('decasti:unlock', () => ((state.locked = false), update()), { signal });
+    // Pop-up déjà ouvert à l'arrivée (lien direct /dj#formules-mariages).
+    state.locked = !!document.querySelector('dialog[open]');
+    update();
+  }
+
+  function cleanup() {
+    observer?.disconnect();
+    observer = null;
+    controller?.abort();
+    controller = null;
+  }
+
+  document.addEventListener('astro:page-load', setup);
+  document.addEventListener('astro:before-swap', cleanup);
+</script>
+
+<style>
+  .mobile-cta {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    :global(.js) .mobile-cta {
+      position: fixed;
+      right: calc(16px + env(safe-area-inset-right, 0px));
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      z-index: 15;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: var(--wine);
+      color: var(--highlight);
+      box-shadow:
+        inset 0 0 0 1px var(--highlight),
+        0 12px 32px rgba(var(--shadow-rgb), 0.35);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.2s ease,
+        visibility 0s linear 0.3s;
+    }
+    :global(.js) .mobile-cta.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.2s ease;
+    }
+    :global(.js) .mobile-cta:hover {
+      background: var(--velvet);
+    }
+    /* Menu mobile ouvert : le bouton s'efface immédiatement. */
+    :global(html.js.menu-open) .mobile-cta,
+    :global(html.js.menu-open) .mobile-cta.is-visible {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 960px) and (prefers-reduced-motion: reduce) {
+    :global(.js) .mobile-cta,
+    :global(.js) .mobile-cta.is-visible {
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

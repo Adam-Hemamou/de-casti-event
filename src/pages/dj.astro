@@ -8,19 +8,39 @@ import Photo from '../components/Photo.astro';
 import Gallery from '../components/Gallery.astro';
 import Reviews from '../components/Reviews.astro';
 import Popup from '../components/Popup.astro';
-import { dj as d, avis, popups } from '../data';
+import { dj as d, avis, popups, site } from '../data';
+import { minPriceLabel, serviceNodes } from '../lib/structured-data';
 
 const pagePopups = popups.popups.filter((p) => p.page === 'dj');
+const schema = serviceNodes('dj', new URL('/dj', site.url).href);
+
+// {prixMin} : plus petit tarif chiffré des formules DJ, pour que la description suive les tarifs.
+const prixMin = minPriceLabel('dj');
+if (d.seo.description.includes('{prixMin}') && !prixMin) {
+  throw new Error('dj.json > seo.description utilise {prixMin}, mais aucune formule DJ chiffrée dans popups.json.');
+}
+const description = d.seo.description.replace('{prixMin}', prixMin ?? '');
 ---
 
-<BaseLayout title={d.seo.title} description={d.seo.description} footer="dj" headerClass="hero-dj" ogImage={d.hero.photo.src}>
+<BaseLayout
+  title={d.seo.title}
+  description={description}
+  footer="dj"
+  headerClass="hero-dj"
+  ogImage={d.hero.photo}
+  breadcrumb="DJ — Eva de Casti"
+  schema={schema}
+  mobileCta="/contact?prestation=dj#formulaire"
+>
   <Fragment slot="hero">
     <Photo photo={d.hero.photo} fill parallax priority sizes="100vw" class="hero-bg" />
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="w hero">
       <div class="hero-title-wrap">
-        <p class="kick on" data-reveal>{d.hero.kicker}</p>
-        <h1 class="bd it hero-title" data-reveal-title>{d.hero.title}</h1>
+        <h1 class="h1-group" style="--kick-gap: 24px">
+          <span class="kick on" data-reveal>{d.hero.kicker}</span>
+          <span class="bd it hero-title" data-reveal-title>{d.hero.title}</span>
+        </h1>
       </div>
       <div class="hero-side">
         <p class="p on" data-reveal>{d.hero.text}</p>
@@ -132,6 +152,7 @@ const pagePopups = popups.popups.filter((p) => p.page === 'dj');
     gap: 24px;
   }
   .hero-title {
+    display: block;
     margin: 0;
     font-size: clamp(52px, 7.67vw, 92px);
     line-height: 0.96;

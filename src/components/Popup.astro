@@ -19,7 +19,11 @@ interface Props {
 const { popup: p, returnTo } = Astro.props;
 const titleId = `${p.id}-titre`;
 const kicker = p.variant === 'prestations' ? popups.prestationsKicker : popups.formulesKicker;
-const ctaHref = `/contact${p.eventType ? `?type=${p.eventType}` : ''}#formulaire`;
+// Le formulaire présélectionne le type d'événement et la prestation (organisation ou DJ selon la page).
+const ctaParams = new URLSearchParams();
+if (p.eventType) ctaParams.set('type', p.eventType);
+ctaParams.set('prestation', p.page === 'dj' ? 'dj' : 'organisation');
+const ctaHref = `/contact?${ctaParams}#formulaire`;
 const compact = p.variant === 'formules' && p.plans.length > 3;
 const titleSize = p.layout?.titleSize ?? (p.title.includes('*') ? 52 : 56);
 const vars = [

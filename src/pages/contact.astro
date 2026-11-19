@@ -6,7 +6,10 @@ import Faq from '../components/Faq.astro';
 import Photo from '../components/Photo.astro';
 import { contact as d, site } from '../data';
 import { rich } from '../lib/rich';
+import { faqNode } from '../lib/structured-data';
+import { hasHref } from '../lib/links';
 
+const schema = faqNode(new URL('/contact', site.url).href, d.faq.items);
 const c = site.contact;
 const coords = [
   { label: d.hero.labels.email, value: c.email },
@@ -14,15 +17,26 @@ const coords = [
   { label: d.hero.labels.address, value: `${c.city}, ${c.country}` },
   { label: d.hero.labels.hours, value: c.hours },
 ];
-const socials = d.social.networks.map((k) => site.social[k]);
+// Réseaux sociaux : seuls ceux dont l'adresse est renseignée sont affichés.
+const socials = d.social.networks.map((k) => site.social[k]).filter((s) => hasHref(s.href));
 ---
 
-<BaseLayout title={d.seo.title} description={d.seo.description} footer="contact" headerClass="hero-contact" headerCta={d.headerCta}>
+<BaseLayout
+  title={d.seo.title}
+  description={d.seo.description}
+  footer="contact"
+  headerClass="hero-contact"
+  headerCta={d.headerCta}
+  breadcrumb="Contact"
+  schema={schema}
+>
   <Fragment slot="hero">
-    <div class="w hero">
+    <div class:list={['w hero', { 'hero--sans-social': socials.length === 0 }]}>
       <div class="hero-text">
-        <p class="kick on" data-reveal>{d.hero.kicker}</p>
-        <h1 class="bd hero-title" data-reveal-title set:html={rich(d.hero.title)} />
+        <h1 class="h1-group" style="--kick-gap: 26px">
+          <span class="kick on" data-reveal>{d.hero.kicker}</span>
+          <span class="bd hero-title" data-reveal-title set:html={rich(d.hero.title)} />
+        </h1>
         <p class="p on hero-lead" data-reveal>{d.hero.text}</p>
         <dl class="coords" data-reveal>
           {
@@ -37,10 +51,14 @@ const socials = d.social.networks.map((k) => site.social[k]);
       </div>
       <ContactForm />
     </div>
-    <div class="w social on-light">
-      <p class="bd it social-title">{d.social.title}</p>
-      {socials.map((s) => <a href={s.href}>{s.label}</a>)}
-    </div>
+    {
+      socials.length > 0 && (
+        <div class="w social on-light">
+          <p class="bd it social-title">{d.social.title}</p>
+          {socials.map((s) => <a href={s.href}>{s.label}</a>)}
+        </div>
+      )
+    }
   </Fragment>
 
   <!-- Bandeau vidéo -->
@@ -52,9 +70,14 @@ const socials = d.social.networks.map((k) => site.social[k]);
         <h2 class="bd video-title" data-reveal-title set:html={rich(d.video.title)} />
         <p class="p on" data-reveal>{d.video.text}</p>
       </div>
-      <a class="play" href={d.video.link.href} data-reveal>
-        <span class="play-icon" aria-hidden="true">▶</span>{d.video.link.label}
-      </a>
+      {
+        hasHref(d.video.link.href) && (
+          <a class="play" href={d.video.link.href} data-reveal>
+            <span class="play-icon" aria-hidden="true">▶</span>
+            {d.video.link.label}
+          </a>
+        )
+      }
     </div>
   </section>
 
@@ -85,6 +108,11 @@ const socials = d.social.networks.map((k) => site.social[k]);
     padding-bottom: 32px;
     align-items: flex-start;
   }
+  /* Sans réseaux sociaux renseignés (ligne « Suivez-nous » masquée) : même espace qu'avec
+     cette ligne entre le formulaire et le bandeau vidéo. */
+  .hero.hero--sans-social {
+    padding-bottom: 136px;
+  }
   .hero-text {
     flex: 1 1 400px;
     display: flex;
@@ -93,6 +121,7 @@ const socials = d.social.networks.map((k) => site.social[k]);
     padding-top: 24px;
   }
   .hero-title {
+    display: block;
     margin: 0;
     font-size: clamp(52px, 7vw, 84px);
     line-height: 0.98;

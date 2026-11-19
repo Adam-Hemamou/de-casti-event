@@ -12,16 +12,19 @@ import Reviews from '../components/Reviews.astro';
 import { accueil as d, avis } from '../data';
 ---
 
-<BaseLayout title={d.seo.title} description={d.seo.description} footer="accueil" headerClass="hero-accueil">
+<BaseLayout title={d.seo.title} description={d.seo.description} footer="accueil" headerClass="hero-accueil" mobileCta="/contact#formulaire">
   <div class="w hero" slot="hero">
     <div class="hero-text">
-      <p class="kick on" data-reveal>{d.hero.kicker}</p>
-      <h1 class="hero-title">
+      <h1 class="h1-group hero-title">
+        <span class="kick on" data-reveal>{d.hero.kicker}</span>
         <span class="bd hero-top" data-reveal>{d.hero.titleTop}</span>
         <span class="bd it hero-main" data-reveal-title>{d.hero.title}</span>
       </h1>
       <p class="p on hero-lead" data-reveal>{d.hero.text}</p>
-      <div class="hero-cta" data-reveal><Button href={d.hero.cta.href}>{d.hero.cta.label}</Button></div>
+      <div class="hero-cta" data-reveal>
+        <Button href={d.hero.cta.href}>{d.hero.cta.label}</Button>
+        {d.hero.ctaSecondary && <Button variant="lien" on href={d.hero.ctaSecondary.href}>{d.hero.ctaSecondary.label}</Button>}
+      </div>
     </div>
     <Vinyl photo={d.hero.vinyl.photo} caption={d.hero.vinyl.caption} />
   </div>

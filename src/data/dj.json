@@ -1,13 +1,14 @@
 {
   "seo": {
-    "title": "DJ Eva de Casti — De Casti Event",
-    "description": "Eva de Casti, DJ : une programmation adaptée à chaque public pour vos mariages, événements d'entreprise, soirées privées et festivals."
+    "note": "{prixMin} est remplacé au build par le plus petit tarif chiffré des formules DJ (popups.json).",
+    "title": "DJ mariage, soirée privée & événement d'entreprise — Eva de Casti",
+    "description": "Eva de Casti, DJ pour mariages, soirées privées, événements d'entreprise et festivals. Son et lumière selon la formule, dès {prixMin} TTC."
   },
   "hero": {
     "kicker": "DJ & production événementielle",
     "title": "La musique au cœur de vos événements.",
     "text": "Une signature musicale, une énergie communicative et une programmation adaptée à chaque public. Je vous accompagne pour faire de votre événement un moment unique, où la musique crée l'ambiance et rassemble les invités.",
-    "cta": { "label": "Demander un devis", "href": "/contact" },
+    "cta": { "label": "Demander un devis", "href": "/contact?prestation=dj#formulaire" },
     "photo": { "src": "hero-dj.jpg", "alt": "Eva de Casti aux platines dans un club, la foule derrière elle", "position": "60% 40%" }
   },
   "approche": {
@@ -113,7 +114,7 @@
     ],
     "closing": "Chaque installation est pensée pour offrir une expérience sonore et visuelle adaptée à votre événement.",
     "note": "Possibilité de compléter l'installation avec du matériel supplémentaire selon les besoins.",
-    "cta": { "label": "Demander un devis", "href": "/contact" },
+    "cta": { "label": "Demander un devis", "href": "/contact?prestation=dj#formulaire" },
     "photo": { "src": "studio-platines.jpg", "alt": "Platines Pioneer et enceintes de monitoring", "position": "center 65%" }
   },
   "avisBis": {

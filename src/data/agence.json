@@ -1,13 +1,13 @@
 {
   "seo": {
-    "title": "Agence événementielle — De Casti Event",
-    "description": "De la première idée à la coordination du jour J, De Casti Event organise vos événements professionnels et privés, selon vos envies."
+    "title": "Agence événementielle : mariages & événements d'entreprise — De Casti Event",
+    "description": "Mariages, soirées d'entreprise, séminaires, anniversaires et projets sur mesure : De Casti Event vous accompagne de la conception à la coordination du jour J."
   },
   "hero": {
     "kicker": "Agence événementielle",
     "title": "L'art d'organiser des événements *inoubliables.*",
     "text": "De la première idée à la coordination du jour J, De Casti Event vous accompagne dans la conception et l'organisation d'événements professionnels et privés, entièrement pensés selon vos envies et vos objectifs.",
-    "cta": { "label": "Parlons de votre projet", "href": "/contact" },
+    "cta": { "label": "Parlons de votre projet", "href": "/contact?prestation=organisation#formulaire" },
     "photo": { "src": "hero-agence.jpg", "alt": "Réception en bord de mer organisée par De Casti Event", "position": "center 60%" }
   },
   "approche": {
@@ -62,7 +62,7 @@
   "realisations": {
     "kicker": "Nos réalisations",
     "title": "Revivez nos plus beaux moments.",
-    "link": { "label": "Voir plus de photos & vidéos", "href": "/dj" },
+    "link": { "label": "Voir plus de photos & vidéos", "href": "/dj#galerie" },
     "rowHeight": 220,
     "photos": [
       { "src": "hero-agence.jpg", "alt": "Réception en bord de mer", "cols": 2 },

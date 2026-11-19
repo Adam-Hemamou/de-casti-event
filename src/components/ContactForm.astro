@@ -75,8 +75,37 @@ const fl = f.fields;
       <p class="error" id="type-erreur"></p>
     </div>
     <div class="field">
+      <label for="prestation">{fl.prestation.label}</label>
+      <select id="prestation" name="prestation">
+        <option value="">{f.typePlaceholder}</option>
+        {f.prestations.map((p) => <option value={p.label} data-prestation={p.value}>{p.label}</option>)}
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
       <label for="date">{fl.date.label}</label>
       <input id="date" name="date" type="date" />
+    </div>
+    <div class="field">
+      <label for="lieu">{fl.lieu.label}</label>
+      <input id="lieu" name="lieu" type="text" autocomplete="off" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+      <label for="invites">{fl.invites.label}</label>
+      <select id="invites" name="invites">
+        <option value="">{f.typePlaceholder}</option>
+        {f.invites.map((v) => <option value={v}>{v}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="budget">{fl.budget.label}</label>
+      <select id="budget" name="budget">
+        <option value="">{f.typePlaceholder}</option>
+        {f.budgets.map((v) => <option value={v}>{v}</option>)}
+      </select>
     </div>
   </div>
   <div class="field">
@@ -85,7 +114,7 @@ const fl = f.fields;
     <p class="error" id="msg-erreur"></p>
   </div>
   <button type="submit" class="pill wine submit">{f.submit}</button>
-  <p class="privacy">{f.privacy}</p>
+  <p class="privacy">{f.privacy} <a href={f.privacyLink.href}>{f.privacyLink.label}</a></p>
 </form>
 
 <script>
@@ -93,13 +122,17 @@ const fl = f.fields;
     const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
     if (!form) return;
 
-    // Présélection du type d'événement : /contact?type=mariage
-    const type = new URLSearchParams(location.search).get('type');
-    const select = form.querySelector<HTMLSelectElement>('select[name="type"]');
-    if (type && select) {
-      const option = select.querySelector<HTMLOptionElement>(`option[data-type="${CSS.escape(type)}"]`);
+    // Présélection depuis l'adresse : /contact?type=mariage&prestation=dj
+    const params = new URLSearchParams(location.search);
+    const preselect = (name: string, attr: string) => {
+      const value = params.get(name);
+      const select = form.querySelector<HTMLSelectElement>(`select[name="${name}"]`);
+      if (!value || !select) return;
+      const option = select.querySelector<HTMLOptionElement>(`option[${attr}="${CSS.escape(value)}"]`);
       if (option) option.selected = true;
-    }
+    };
+    preselect('type', 'data-type');
+    preselect('prestation', 'data-prestation');
 
     // Validation avec messages sous les champs (remplace les bulles du navigateur).
     form.noValidate = true;
@@ -226,6 +259,11 @@ const fl = f.fields;
     font-size: 13px;
     color: var(--text);
     text-align: center;
+  }
+  .privacy a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   @media (max-width: 520px) {
     .form {

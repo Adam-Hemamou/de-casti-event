@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Contact — De Casti Event",
-    "description": "Une question, une envie, un projet en tête ? Contactez De Casti Event pour organiser votre événement ou réserver Eva de Casti, DJ."
+    "title": "Contact & demande de devis — De Casti Event",
+    "description": "Mariage, soirée privée, événement d'entreprise ou réservation DJ : décrivez votre projet à De Casti Event et demandez votre devis personnalisé."
   },
   "headerCta": { "label": "Demander un devis", "href": "#formulaire" },
   "hero": {
@@ -19,7 +19,11 @@
       "email": { "label": "E-mail *", "error": "Veuillez indiquer votre adresse e-mail.", "errorFormat": "Cette adresse e-mail ne semble pas valide (exemple : nom@domaine.fr)." },
       "telephone": { "label": "Téléphone" },
       "type": { "label": "Type d'événement *", "error": "Veuillez choisir un type d'événement." },
+      "prestation": { "label": "Prestation souhaitée" },
       "date": { "label": "Date de l'événement" },
+      "lieu": { "label": "Lieu (ville ou nom du lieu)" },
+      "invites": { "label": "Nombre d'invités (approximatif)" },
+      "budget": { "label": "Budget envisagé" },
       "message": { "label": "Votre message *", "error": "Veuillez écrire votre message." }
     },
     "typePlaceholder": "Choisir…",
@@ -28,11 +32,22 @@
       { "value": "entreprise", "label": "Événement d'entreprise & corporate" },
       { "value": "soiree-privee", "label": "Soirée privée & anniversaire" },
       { "value": "festival", "label": "Festival & événement public" },
-      { "value": "sport", "label": "Sport, marque & événement spécial" }
+      { "value": "sport", "label": "Sport, marque & événement spécial" },
+      { "value": "autre", "label": "Autre / projet sur mesure" }
     ],
+    "prestations": [
+      { "value": "organisation", "label": "Organisation de l'événement" },
+      { "value": "dj", "label": "DJ" },
+      { "value": "organisation-dj", "label": "Organisation + DJ" },
+      { "value": "indecis", "label": "Je ne sais pas encore" }
+    ],
+    "invites": ["Moins de 50", "50 à 100", "100 à 200", "Plus de 200"],
+    "budgetsNote": "[Tranches provisoires à faire valider par Eva]",
+    "budgets": ["Moins de 1 000 €", "1 000 à 2 000 €", "2 000 à 5 000 €", "Plus de 5 000 €", "Je ne sais pas encore"],
     "honeypotLabel": "Ne pas remplir ce champ :",
     "submit": "Envoyer ma demande",
     "privacy": "Vos données sont confidentielles et ne seront jamais partagées.",
+    "privacyLink": { "label": "Politique de confidentialité", "href": "/politique-de-confidentialite" },
     "errorSummary": "Merci de compléter les champs signalés."
   },
   "social": {

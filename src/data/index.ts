@@ -22,7 +22,7 @@ export const Photo = S({
   alt: z.string(),
   position: z.string().optional(),
 });
-export const Seo = S({ title: text, description: text });
+export const Seo = S({ note: z.string().optional(), title: text, description: text });
 
 const SocialKey = z.enum(['instagram', 'facebook', 'tiktok', 'youtube', 'linkedin']);
 const FooterVariant = S({
@@ -37,6 +37,8 @@ const Site = S({
   urlNote: z.string().optional(),
   description: text,
   defaultOgImage: Photo.shape.src,
+  defaultOgImageAlt: text,
+  person: S({ note: z.string().optional(), name: text, jobTitle: text, photo: Photo.shape.src }),
   logo: S({ main: text, sub: text, label: text }),
   contact: S({ email: text, phone: text, city: text, country: text, hours: text }),
   social: z.record(SocialKey, Link),
@@ -46,6 +48,8 @@ const Site = S({
   menuLabel: text,
   menuCloseLabel: text,
   headerCta: Link,
+  // Bouton flottant « Demander un devis » (mobile) : la destination dépend de la page.
+  mobileCta: S({ label: text }),
   footer: S({
     navLabel: text,
     navTitle: text,
@@ -93,6 +97,8 @@ const Accueil = S({
     title: text,
     text: text,
     cta: Link,
+    // Lien secondaire (souligné) à côté du bouton de la bannière.
+    ctaSecondary: Link.optional(),
     vinyl: S({
       photo: Photo,
       caption: text,
@@ -148,7 +154,8 @@ const Accueil = S({
 });
 
 // Types d'événement du formulaire de contact (valeurs utilisées dans l'URL : /contact?type=mariage).
-export const EventType = z.enum(['mariage', 'entreprise', 'soiree-privee', 'festival', 'sport']);
+export const EventType = z.enum(['mariage', 'entreprise', 'soiree-privee', 'festival', 'sport', 'autre']);
+export const Prestation = z.enum(['organisation', 'dj', 'organisation-dj', 'indecis']);
 
 const PopupBase = {
   id: z.string().regex(/^[a-z0-9-]+$/, 'identifiant en minuscules et tirets'),
@@ -263,14 +270,24 @@ const Contact = S({
       email: Field,
       telephone: Field,
       type: Field,
+      prestation: Field,
       date: Field,
+      lieu: Field,
+      invites: Field,
+      budget: Field,
       message: Field,
     }),
     typePlaceholder: text,
     types: z.array(S({ value: EventType, label: text })),
+    // Prestation souhaitée (valeurs utilisées dans l'URL : /contact?prestation=dj).
+    prestations: z.array(S({ value: Prestation, label: text })),
+    invites: z.array(text).min(1),
+    budgetsNote: z.string().optional(),
+    budgets: z.array(text).min(1),
     honeypotLabel: text,
     submit: text,
     privacy: text,
+    privacyLink: Link,
     errorSummary: text,
   }),
   social: S({ title: text, networks: z.array(SocialKey) }),

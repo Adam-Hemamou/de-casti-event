@@ -3,6 +3,7 @@
 // (voir footer.variants dans src/data/site.json).
 import { site, type PageKey } from '../data';
 import Button from './Button.astro';
+import { hasHref } from '../lib/links';
 
 interface Props {
   variant: PageKey;
@@ -10,7 +11,9 @@ interface Props {
 
 const f = site.footer;
 const v = f.variants[Astro.props.variant];
-const socials = (v.social ?? []).map((key) => site.social[key]).filter(Boolean);
+// Réseaux sociaux : seuls ceux dont l'adresse est renseignée sont affichés ;
+// sans aucun réseau renseigné, la colonne « Suivre Eva » n'est pas affichée.
+const socials = (v.social ?? []).map((key) => site.social[key]).filter((s) => s && hasHref(s.href));
 const c = site.contact;
 const isPlaceholder = (s: string) => s.startsWith('[');
 ---
@@ -28,15 +31,18 @@ const isPlaceholder = (s: string) => s.startsWith('[');
       </div>
       {
         v.third === 'social' ? (
-          <div class="col">
-            <p class="bd it col-title">{f.socialTitle}</p>
-            {socials.map((l) => <a href={l.href}>{l.label}</a>)}
-          </div>
+          socials.length > 0 && (
+            <div class="col">
+              <p class="bd it col-title">{f.socialTitle}</p>
+              {socials.map((l) => <a href={l.href}>{l.label}</a>)}
+            </div>
+          )
         ) : (
           <div class="col">
             <p class="bd it col-title">{f.contactTitle}</p>
-            <a href={isPlaceholder(c.email) ? '#' : `mailto:${c.email}`}>{c.email}</a>
-            <a href={isPlaceholder(c.phone) ? '#' : `tel:${c.phone.replace(/\s/g, '')}`}>{c.phone}</a>
+            {/* Coordonnée encore à confirmer : affichée sans lien (pas de lien « # »). */}
+            {isPlaceholder(c.email) ? <span class="city">{c.email}</span> : <a href={`mailto:${c.email}`}>{c.email}</a>}
+            {isPlaceholder(c.phone) ? <span class="city">{c.phone}</span> : <a href={`tel:${c.phone.replace(/\s/g, '')}`}>{c.phone}</a>}
             <span class="city">{c.city}, {c.country}</span>
           </div>
         )

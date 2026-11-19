@@ -4,6 +4,13 @@
   "urlNote": "[domaine à confirmer] : valeur temporaire, à remplacer par le domaine définitif (sert aux URL canoniques, au sitemap et à Open Graph)",
   "description": "Agence événementielle & DJ : De Casti Event imagine, organise et coordonne vos événements professionnels et privés, avec l'ambiance musicale d'Eva de Casti.",
   "defaultOgImage": "hero-accueil.jpg",
+  "defaultOgImageAlt": "Eva de Casti bras levé face à la foule en club",
+  "person": {
+    "note": "Personne présentée dans les données structurées (Schema.org Person). jobTitle : intitulé affiché sur le site.",
+    "name": "Eva de Casti",
+    "jobTitle": "DJ",
+    "photo": "eva-portrait.jpg"
+  },
   "logo": { "main": "De Casti", "sub": "EVENT", "label": "De Casti Event, accueil" },
   "contact": {
     "email": "[e-mail à confirmer]",
@@ -29,7 +36,8 @@
   "navLabel": "Navigation principale",
   "menuLabel": "Menu",
   "menuCloseLabel": "Fermer le menu",
-  "headerCta": { "label": "Nous contacter", "href": "/contact" },
+  "headerCta": { "label": "Nous contacter", "href": "/contact#formulaire" },
+  "mobileCta": { "label": "Demander un devis" },
   "footer": {
     "navLabel": "Navigation du pied de page",
     "navTitle": "Navigation",
@@ -42,7 +50,7 @@
     ],
     "socialTitle": "Suivre Eva",
     "contactTitle": "Contact",
-    "cta": { "text": "Un projet, une date, une envie ?", "label": "Nous contacter", "href": "/contact" },
+    "cta": { "text": "Un projet, une date, une envie ?", "label": "Nous contacter", "href": "/contact#formulaire" },
     "tagline": "Des moments qui comptent.",
     "wordmark": "De Casti Event",
     "copyright": "© 2026 De Casti Event",

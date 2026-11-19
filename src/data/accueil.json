@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "De Casti Event — Agence événementielle & DJ",
-    "description": "De la conception de votre événement à son ambiance musicale, De Casti Event imagine et coordonne des expériences sur mesure."
+    "title": "Agence événementielle & DJ, mariages et entreprises — De Casti Event",
+    "description": "De Casti Event organise et coordonne mariages, soirées privées et événements d'entreprise, avec Eva de Casti aux platines. Deux expertises, une interlocutrice."
   },
   "hero": {
     "kicker": "Agence événementielle & DJ",
@@ -9,6 +9,7 @@
     "title": "des moments inoubliables.",
     "text": "De la conception de votre événement à son ambiance musicale, De Casti Event imagine et coordonne des expériences sur mesure, pensées dans les moindres détails pour vous et vos invités.",
     "cta": { "label": "Découvrir nos services", "href": "#activites" },
+    "ctaSecondary": { "label": "Demander un devis", "href": "/contact#formulaire" },
     "vinyl": {
       "photo": { "src": "dj-rooftop-bordeaux.jpg", "alt": "Eva de Casti aux platines", "position": "center 28%" },
       "caption": "Eva de Casti, aux platines",
@@ -85,7 +86,7 @@
           "Festivals & événements culturels",
           "Événements de marques"
         ],
-        "cta": { "label": "Découvrir DJ", "href": "/dj" },
+        "cta": { "label": "Découvrir l'univers DJ", "href": "/dj" },
         "photo": { "src": "hero-dj.jpg", "alt": "Eva de Casti aux platines dans un club", "position": "60% 40%" }
       }
     ]
@@ -114,7 +115,7 @@
   "realisations": {
     "kicker": "Réalisations",
     "title": "Revivez nos plus beaux moments",
-    "link": { "label": "Voir toutes nos réalisations", "href": "/dj" },
+    "link": { "label": "Voir toutes nos réalisations", "href": "/dj#galerie" },
     "rowHeight": 220,
     "photos": [
       { "src": "hero-accueil.jpg", "alt": "Eva bras levé face à la foule en club", "cols": 2, "rows": 2 },

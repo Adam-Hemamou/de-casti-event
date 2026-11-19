@@ -15,7 +15,7 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<BaseLayout title={page.seo.title} description={page.seo.description} headerClass="hero-simple">
+<BaseLayout title={page.seo.title} description={page.seo.description} headerClass="hero-simple" breadcrumb={page.title}>
   <PageIntro slot="hero" kicker={page.kicker} title={page.title} />
   <section class="legal on-light">
     <div class="w">

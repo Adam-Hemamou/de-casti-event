@@ -103,6 +103,19 @@ a {
   color: var(--highlight);
 }
 
+/* H1 qui regroupe le petit titre (.kick) et le grand titre de la bannière.
+   Rendu identique à deux blocs séparés : le H1 n'apporte ni marge ni style propre,
+   et l'écart entre les deux lignes reprend celui de la bannière (--kick-gap). */
+.h1-group {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+.h1-group > .kick {
+  display: block;
+  margin-bottom: var(--kick-gap, 28px);
+}
+
 .h2 {
   font-family: var(--font-serif);
   font-weight: 400;

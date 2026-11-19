@@ -43,7 +43,7 @@
   --velvet: #2A241E;
   --card-dark: #15120F;
   --line-dark: #3A3128;
-  --accent: #8A5F31;
+  --accent: #855B2F;          /* #8A5F31 assombri d'un cran : contraste 4,55:1 sur --bg-light-2 (WCAG AA) */
   --bg-light: #F3ECE2;
   --bg-light-2: #EAE0D2;
   --surface: #FBF7F1;

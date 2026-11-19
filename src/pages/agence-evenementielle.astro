@@ -8,17 +8,30 @@ import Photo from '../components/Photo.astro';
 import Gallery from '../components/Gallery.astro';
 import Reviews from '../components/Reviews.astro';
 import Popup from '../components/Popup.astro';
-import { agence as d, avis, popups } from '../data';
+import { agence as d, avis, popups, site } from '../data';
 import { rich } from '../lib/rich';
+import { serviceNodes } from '../lib/structured-data';
 
 const pagePopups = popups.popups.filter((p) => p.page === 'agence');
+const schema = serviceNodes('agence', new URL('/agence-evenementielle', site.url).href);
 ---
 
-<BaseLayout title={d.seo.title} description={d.seo.description} footer="agence" headerClass="hero-agence" ogImage={d.hero.photo.src}>
+<BaseLayout
+  title={d.seo.title}
+  description={d.seo.description}
+  footer="agence"
+  headerClass="hero-agence"
+  ogImage={d.hero.photo}
+  breadcrumb="Agence événementielle"
+  schema={schema}
+  mobileCta="/contact?prestation=organisation#formulaire"
+>
   <div class="hero" slot="hero">
     <div class="hero-text">
-      <p class="kick on" data-reveal>{d.hero.kicker}</p>
-      <h1 class="bd hero-title" data-reveal-title set:html={rich(d.hero.title)} />
+      <h1 class="h1-group">
+        <span class="kick on" data-reveal>{d.hero.kicker}</span>
+        <span class="bd hero-title" data-reveal-title set:html={rich(d.hero.title)} />
+      </h1>
       <p class="p on hero-lead" data-reveal>{d.hero.text}</p>
       <div data-reveal><Button href={d.hero.cta.href}>{d.hero.cta.label}</Button></div>
     </div>
@@ -68,6 +81,7 @@ const pagePopups = popups.popups.filter((p) => p.page === 'agence');
     gap: 28px;
   }
   .hero-title {
+    display: block;
     margin: 0;
     font-size: clamp(48px, 6.5vw, 78px);
     line-height: 1;
