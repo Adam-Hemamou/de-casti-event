@@ -1,9 +1,13 @@
 ---
-// Disque vinyle de l'accueil : photo d'Eva au centre, sillons, rotation lente continue.
-// La rotation est en CSS (fonctionne sans JavaScript) et s'arrête si l'utilisateur
-// préfère réduire les animations.
+// Platine de l'accueil : disque vinyle (photo d'Eva au centre), bras de lecture doré,
+// commandes ON/OFF, PLAY/PAUSE, SON et volume, halo lumineux quand la platine est allumée.
+//
+// - Logique : src/scripts/vinyl-player.ts (son, rotation, bras, accessibilité).
+// - Textes et morceau : src/data/accueil.json > hero.vinyl.player.
+// - Sans JavaScript : les commandes sont masquées et le disque garde sa rotation lente d'origine.
+// - Avec JavaScript : la platine est éteinte et le disque immobile à l'arrivée sur la page.
 import Photo from './Photo.astro';
-import type { PhotoT } from '../data';
+import { accueil, type PhotoT } from '../data';
 
 interface Props {
   photo: PhotoT;
@@ -11,17 +15,111 @@ interface Props {
 }
 
 const { photo, caption } = Astro.props;
+const p = accueil.hero.vinyl.player;
+const config = {
+  src: p.audio.src,
+  title: p.audio.title,
+  loop: p.audio.loop,
+  volume: p.volume,
+  actions: p.actions,
+  status: p.status,
+};
 ---
 
-<div class="vinyl-wrap">
-  <div class="vinyl">
-    <div class="label">
-      <Photo photo={photo} sizes="(max-width: 520px) 56vw, 282px" widths={[320, 600]} priority class="label-photo" />
-      <span class="hole" aria-hidden="true"></span>
+<div class="vinyl-wrap" data-state="off" data-vinyl-player data-config={JSON.stringify(config)}>
+  <div class="deck">
+    <div class="halo" aria-hidden="true"></div>
+    <div class="vinyl" data-disc>
+      <div class="label">
+        <Photo photo={photo} sizes="(max-width: 520px) 56vw, 282px" widths={[320, 600]} priority class="label-photo" />
+        <span class="hole" aria-hidden="true"></span>
+      </div>
     </div>
+
+    <svg class="arm" viewBox="0 0 440 440" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="platine-or" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" style="stop-color: var(--accent)"></stop>
+          <stop offset=".45" style="stop-color: var(--highlight-hover)"></stop>
+          <stop offset=".7" style="stop-color: var(--highlight)"></stop>
+          <stop offset="1" style="stop-color: var(--accent)"></stop>
+        </linearGradient>
+        <radialGradient id="platine-socle" cx=".4" cy=".35" r=".7">
+          <stop offset="0" style="stop-color: var(--velvet)"></stop>
+          <stop offset="1" style="stop-color: var(--wine-deep)"></stop>
+        </radialGradient>
+      </defs>
+      <!-- Repose-bras (fixe) -->
+      <rect x="449" y="320" width="7" height="34" rx="3" class="rest-post"></rect>
+      <path d="M442 320 h21 v6 h-21 z" class="gold"></path>
+      <!-- Socle du bras (fixe) -->
+      <circle cx="424" cy="30" r="27" class="base"></circle>
+      <circle cx="424" cy="30" r="20" class="base-ring"></circle>
+      <!-- Partie mobile : contrepoids, pivot, tube, tête de lecture -->
+      <!-- Position de repos dans l'attribut SVG (et non en CSS : une règle CSS « transform »
+           masquerait la rotation animée par le script). -->
+      <g class="arm-move" data-arm transform="rotate(-9 424 30)">
+        <rect x="412" y="-30" width="24" height="30" rx="5" class="gold"></rect>
+        <path d="M412 -20 h24 M412 -12 h24" class="weight-lines"></path>
+        <circle cx="424" cy="30" r="13" class="gold"></circle>
+        <circle cx="424" cy="30" r="4.5" class="pivot"></circle>
+        <path d="M424 40 L424 244 Q424 262 418 278 L412 296" class="tube"></path>
+        <path d="M422.6 46 L422.6 242" class="tube-shine"></path>
+        <g transform="rotate(18 410 312)">
+          <rect x="398" y="292" width="24" height="40" rx="4" class="gold"></rect>
+          <rect x="402" y="318" width="16" height="12" rx="2" class="pivot"></rect>
+          <path d="M422 300 q14 2 16 -10" class="lift"></path>
+          <path d="M410 330 v6" class="stylus"></path>
+        </g>
+      </g>
+    </svg>
   </div>
+
+  <div class="console" role="group" aria-label={p.groupLabel}>
+    <div class="ctl">
+      <span class="led" aria-hidden="true"></span>
+      <button type="button" class="btn power" aria-pressed="false" aria-label={p.actions.powerOn} data-power>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8"></path><path d="M7 6.3a7.5 7.5 0 1 0 10 0"></path></svg>
+      </button>
+      <span class="lbl" aria-hidden="true">{p.labels.power}</span>
+    </div>
+    <div class="ctl">
+      <button type="button" class="btn play" aria-pressed="false" aria-label={p.actions.play} disabled data-play>
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l10-6.5z"></path></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13M16 5.5v13"></path></svg>
+      </button>
+      <span class="lbl" aria-hidden="true">{p.labels.play}</span>
+    </div>
+    <div class="ctl">
+      <button type="button" class="btn btn--s mute" aria-pressed="false" aria-label={p.actions.mute} data-mute>
+        <svg class="i-son" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"></path></svg>
+        <svg class="i-muet" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"></path><path d="M16 9.5l5 5M21 9.5l-5 5"></path></svg>
+      </button>
+      <span class="lbl" aria-hidden="true">{p.labels.mute}</span>
+    </div>
+    <label class="vol">
+      <span class="lbl" aria-hidden="true">{p.labels.volume}</span>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        value={p.volume}
+        aria-label={p.actions.volume}
+        aria-valuetext={`${p.volume} %`}
+        style={`--v: ${p.volume}%`}
+        data-volume
+      />
+    </label>
+    <p class="sr-only" aria-live="polite" data-status></p>
+  </div>
+
   <p class="bd it caption">{caption}</p>
 </div>
+
+<script>
+  import '../scripts/vinyl-player';
+</script>
 
 <style>
   .vinyl-wrap {
@@ -30,9 +128,18 @@ const { photo, caption } = Astro.props;
     justify-content: center;
     position: relative;
   }
-  .vinyl {
+
+  /* Plateau : même taille que le disque d'origine (440 px, 86 % de la largeur sur mobile). */
+  .deck {
+    position: relative;
     width: 440px;
     max-width: 86vw;
+    aspect-ratio: 1;
+  }
+  .vinyl {
+    position: relative;
+    z-index: 1;
+    width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
     display: flex;
@@ -42,6 +149,10 @@ const { photo, caption } = Astro.props;
     box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
     animation: spin 18s linear infinite;
   }
+  /* Avec JavaScript, c'est la platine qui pilote la rotation (immobile tant qu'elle ne joue pas). */
+  :global(.js) .vinyl {
+    animation: none;
+  }
   .label {
     width: 64%;
     aspect-ratio: 1;
@@ -49,6 +160,7 @@ const { photo, caption } = Astro.props;
     overflow: hidden;
     position: relative;
     box-shadow: 0 0 0 6px var(--highlight);
+    transition: box-shadow 1s ease;
   }
   .label :global(.label-photo) {
     width: 100%;
@@ -67,6 +179,7 @@ const { photo, caption } = Astro.props;
   }
   .caption {
     position: absolute;
+    z-index: 3;
     right: -6px;
     bottom: -14px;
     margin: 0;
@@ -78,15 +191,393 @@ const { photo, caption } = Astro.props;
       transform: rotate(360deg);
     }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .vinyl {
-      animation: none;
+
+  /* Halo doré discret, platine allumée */
+  .halo {
+    position: absolute;
+    inset: -9%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(var(--highlight-rgb), 0.2) 50%,
+      rgba(var(--highlight-rgb), 0.07) 60%,
+      rgba(var(--highlight-rgb), 0) 70%
+    );
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+  }
+  .vinyl-wrap:not([data-state='off']) .halo {
+    opacity: 1;
+  }
+  .vinyl-wrap:not([data-state='off']) .label {
+    box-shadow:
+      0 0 0 6px var(--highlight),
+      0 0 26px 4px rgba(var(--highlight-rgb), 0.45);
+  }
+
+  /* Bras de lecture (la rotation est animée par le script) */
+  .arm {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    filter: drop-shadow(0 10px 8px rgba(var(--shadow-rgb), 0.55));
+  }
+  .gold {
+    fill: url(#platine-or);
+  }
+  .rest-post {
+    fill: var(--wine-deep);
+    stroke: var(--line-dark);
+  }
+  .base {
+    fill: url(#platine-socle);
+    stroke: var(--highlight);
+    stroke-opacity: 0.55;
+  }
+  .base-ring {
+    fill: none;
+    stroke: var(--line-dark);
+  }
+  .weight-lines {
+    stroke: var(--wine-deep);
+    stroke-opacity: 0.5;
+    stroke-width: 1.2;
+  }
+  .pivot {
+    fill: var(--wine-deep);
+  }
+  .tube {
+    fill: none;
+    stroke: url(#platine-or);
+    stroke-width: 6;
+    stroke-linecap: round;
+  }
+  .tube-shine {
+    stroke: var(--highlight-hover);
+    stroke-width: 1.4;
+    stroke-opacity: 0.8;
+    stroke-linecap: round;
+  }
+  .lift {
+    fill: none;
+    stroke: url(#platine-or);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .stylus {
+    stroke: var(--highlight-hover);
+    stroke-width: 1.6;
+  }
+
+  /* Console de commandes */
+  .console {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(var(--velvet-rgb), 0.55), rgba(var(--wine-deep-rgb), 0.8));
+    box-shadow:
+      inset 0 1px 0 rgba(var(--highlight-rgb), 0.16),
+      0 0 0 1px rgba(var(--highlight-rgb), 0.22),
+      0 24px 40px rgba(var(--shadow-rgb), 0.4);
+  }
+  /* Sans JavaScript, les commandes ne servent à rien : elles sont masquées. */
+  :global(html:not(.js)) .console {
+    display: none;
+  }
+  .ctl {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+  .lbl {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--muted-on-dark);
+    white-space: nowrap;
+    transition: color 0.4s ease;
+  }
+
+  /* Boutons : capuchon métal sombre, bague dorée */
+  .btn {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    color: var(--faint-on-dark);
+    background: radial-gradient(circle at 38% 30%, var(--velvet) 0%, var(--card-dark) 55%, var(--wine-deep) 100%);
+    box-shadow:
+      0 0 0 1px rgba(var(--highlight-rgb), 0.5),
+      0 0 0 4px rgba(var(--wine-deep-rgb), 0.9),
+      0 0 0 5px rgba(var(--highlight-rgb), 0.18),
+      inset 0 1px 1px rgba(var(--highlight-rgb), 0.25),
+      inset 0 -3px 6px rgba(var(--shadow-rgb), 0.6),
+      0 6px 12px rgba(var(--shadow-rgb), 0.5);
+    transition:
+      color 0.4s ease,
+      box-shadow 0.4s ease,
+      transform 0.12s ease;
+  }
+  .btn--s {
+    width: 42px;
+    height: 42px;
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.98);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--highlight);
+    outline-offset: 6px;
+  }
+  .btn svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .play svg path {
+    fill: currentColor;
+  }
+  .play .i-pause path {
+    fill: none;
+    stroke-width: 2.6;
+  }
+  .play .i-pause,
+  .mute .i-muet {
+    display: none;
+  }
+  .vinyl-wrap[data-state='play'] .play .i-play {
+    display: none;
+  }
+  .vinyl-wrap[data-state='play'] .play .i-pause {
+    display: block;
+  }
+  .vinyl-wrap.is-muted .mute .i-son {
+    display: none;
+  }
+  .vinyl-wrap.is-muted .mute .i-muet {
+    display: block;
+  }
+  .btn:disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+
+  /* Voyant d'alimentation */
+  .led {
+    position: absolute;
+    top: -12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--line-dark);
+    box-shadow: inset 0 1px 1px rgba(var(--shadow-rgb), 0.6);
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  /* États allumé / lecture.
+     Le bouton ON/OFF, son voyant et son libellé restent allumés en permanence
+     (un clic garde son effet : il allume ou éteint la platine). */
+  .vinyl-wrap .led {
+    background: var(--highlight);
+    box-shadow: 0 0 8px 2px rgba(var(--highlight-rgb), 0.7);
+  }
+  .vinyl-wrap:not([data-state='off']) .btn {
+    color: var(--text-on-dark);
+  }
+  .vinyl-wrap .btn.power,
+  .vinyl-wrap[data-state='play'] .play {
+    color: var(--highlight);
+    box-shadow:
+      0 0 0 1px var(--highlight),
+      0 0 0 4px rgba(var(--wine-deep-rgb), 0.9),
+      0 0 0 5px rgba(var(--highlight-rgb), 0.35),
+      0 0 18px 2px rgba(var(--highlight-rgb), 0.28),
+      inset 0 1px 1px rgba(var(--highlight-rgb), 0.3),
+      inset 0 -3px 6px rgba(var(--shadow-rgb), 0.6),
+      0 6px 12px rgba(var(--shadow-rgb), 0.5);
+  }
+  .vinyl-wrap .ctl:first-child .lbl,
+  .vinyl-wrap[data-state='play'] .ctl:nth-child(2) .lbl {
+    color: var(--highlight);
+  }
+
+  /* Curseur de volume : rail fin, curseur façon potentiomètre de table de mixage */
+  .vol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .vol input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 72px;
+    height: 24px;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .vol input::-webkit-slider-runnable-track {
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--highlight) var(--v), var(--line-dark) var(--v));
+  }
+  .vol input::-moz-range-track {
+    height: 3px;
+    border-radius: 3px;
+    background: var(--line-dark);
+  }
+  .vol input::-moz-range-progress {
+    height: 3px;
+    border-radius: 3px;
+    background: var(--highlight);
+  }
+  .vol input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 22px;
+    margin-top: -9.5px;
+    border: 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--highlight-hover) 45%, var(--highlight) 60%, var(--accent));
+    box-shadow:
+      inset 0 0 0 1px rgba(var(--wine-deep-rgb), 0.35),
+      0 3px 6px rgba(var(--shadow-rgb), 0.6);
+  }
+  .vol input::-moz-range-thumb {
+    width: 12px;
+    height: 22px;
+    border: 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--highlight-hover) 45%, var(--highlight) 60%, var(--accent));
+    box-shadow: 0 3px 6px rgba(var(--shadow-rgb), 0.6);
+  }
+  .vol input:focus-visible {
+    outline: 2px solid var(--highlight);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  .vinyl-wrap[data-state='off'] .vol input {
+    opacity: 0.6;
+  }
+
+  /* ===== Placement selon l'espace disponible (la bannière ne grandit pas) ===== */
+
+  /* Par défaut : barre horizontale sous le disque, dans la marge libre sous la légende. */
+  .console {
+    left: 50%;
+    top: calc(100% + 26px);
+    transform: translateX(-50%);
+    flex-direction: row;
+    padding: 10px 18px;
+    gap: 18px;
+  }
+  .console .led {
+    top: -9px;
+  }
+
+  /* Écrans larges et tablettes : colonne verticale à droite du disque. */
+  @media (min-width: 1366px), (min-width: 640px) and (max-width: 1123px) {
+    .console {
+      left: calc(100% + 22px);
+      top: 50%;
+      transform: translateY(-50%);
+      flex-direction: column;
+      padding: 24px 12px 18px;
+      gap: 22px;
+    }
+    .console .led {
+      top: -12px;
     }
   }
+
+  /* Bureau intermédiaire (1124–1365 px) : barre sous le disque, resserrée. */
+  @media (min-width: 1124px) and (max-width: 1365px) {
+    .console {
+      top: calc(100% + 22px);
+      padding: 8px 16px 6px;
+      gap: 16px;
+    }
+    .btn {
+      width: 42px;
+      height: 42px;
+    }
+    .btn--s {
+      width: 38px;
+      height: 38px;
+    }
+    .ctl {
+      gap: 5px;
+    }
+    .console .lbl {
+      font-size: 9px;
+    }
+  }
+
+  /* Mobile : barre compacte ; libellés masqués à l'écran (les boutons gardent leur nom accessible). */
+  @media (max-width: 639px) {
+    .console {
+      top: calc(100% + 22px);
+      padding: 0;
+      gap: 12px;
+      background: none;
+      box-shadow: none;
+    }
+    .console .lbl {
+      display: none;
+    }
+    .btn,
+    .btn--s {
+      width: 44px;
+      height: 44px;
+    }
+    .console .led {
+      top: -8px;
+    }
+    .vol input {
+      width: 110px;
+      height: 44px;
+    }
+  }
+
   @media (max-width: 520px) {
     .caption {
       right: 0;
       font-size: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl {
+      animation: none;
+    }
+    .halo,
+    .label,
+    .led,
+    .btn,
+    .lbl {
+      transition: none;
     }
   }
 </style>

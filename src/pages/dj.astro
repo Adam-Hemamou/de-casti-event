@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ValueList from '../components/ValueList.astro';
-import ExpertiseCard from '../components/ExpertiseCard.astro';
+import CardCarousel from '../components/CardCarousel.astro';
 import Photo from '../components/Photo.astro';
 import Gallery from '../components/Gallery.astro';
 import Reviews from '../components/Reviews.astro';
@@ -44,9 +44,7 @@ const pagePopups = popups.popups.filter((p) => p.page === 'dj');
   <section class="expertises" id="expertises">
     <div class="expertises-inner">
       <SectionHeading kicker={d.expertises.kicker} title={d.expertises.title} on gap={16} class="expertises-head" />
-      <div class="expertises-grid">
-        {d.expertises.cards.map((card) => <ExpertiseCard {...card} size="compacte" />)}
-      </div>
+      <CardCarousel cards={d.expertises.cards} label={d.expertises.kicker} />
     </div>
   </section>
 
@@ -185,11 +183,6 @@ const pagePopups = popups.popups.filter((p) => p.page === 'dj');
   }
   .expertises-inner :global(.expertises-head) {
     padding: 0 16px;
-  }
-  .expertises-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-    gap: 16px;
   }
 
   :global(.gallery.galerie) {

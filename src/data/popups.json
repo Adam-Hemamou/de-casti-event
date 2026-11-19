@@ -14,7 +14,7 @@
       "text": "De Casti Event accompagne les entreprises dans la conception, l'organisation et la coordination de leurs événements professionnels.",
       "services": [
         "Soirées d'entreprise",
-        "Séminaires & team building",
+        "Séminaires & Team building",
         "Lancements de produits",
         "Inaugurations & ouvertures",
         "Événements clients & partenaires"
@@ -150,9 +150,9 @@
         { "title": "Lumière", "items": ["6 PAR LED sur batterie", "Éclairage architectural"] },
         { "title": "Effets", "items": ["Étincelles froides x2", "Brouillard", "Fumée lourde"] },
         { "title": "Vidéo", "items": ["Vidéoprojecteur", "Écran", "Pack projection"] },
-        { "title": "Son", "items": ["Enceinte colonne supp.", "Pack 2 enceintes colonne", "Retour 400 W", "Micro supplémentaire"] },
+        { "title": "Son", "items": ["Enceinte colonne supplémentaire", "Pack 2 enceintes colonne", "Retour 400 W", "Micro supplémentaire"], "spaced": true },
         { "title": "Animations", "items": ["Photobooth", "Livre d'or audio"] },
-        { "title": "Artistique", "items": ["Saxophoniste, chanteur, musicien"] },
+        { "title": "Artistique", "items": ["Saxophoniste", "Chanteur", "Musicien"] },
         { "title": "Technique", "items": ["Régie DJ premium"] }
       ],
       "cta": "Parlons de votre mariage",
@@ -247,6 +247,7 @@
           "price": "Sur devis"
         }
       ],
+      "notesTitle": "Informations complémentaires",
       "notes": [
         { "title": "À vous de choisir le moment de ma présence", "text": "Uniquement la soirée dansante ou l'événement complet dès l'accueil." },
         { "title": "Différence Essentiel / Signature", "text": "La formule Signature inclut une mise en lumière renforcée (PAR LED) pour sublimer votre lieu." },

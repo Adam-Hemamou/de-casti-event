@@ -30,7 +30,7 @@
         "text": "Soirées d'entreprise, séminaires, team building, inaugurations, lancements de produits, cocktails et événements clients.",
         "note": "Nous imaginons des événements qui valorisent votre image, fédèrent vos équipes et marquent les esprits.",
         "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque dans un lieu scénographié" },
-        "link": "En savoir plus",
+        "link": "Découvrir nos prestations",
         "popup": "prestations-entreprise"
       },
       {
@@ -38,7 +38,7 @@
         "text": "De la préparation à la coordination du jour J, nous accompagnons les futurs mariés dans l'organisation de leur journée.",
         "note": "Un accompagnement personnalisé pour profiter pleinement de chaque instant.",
         "photo": { "src": "hero-contact.jpg", "alt": "Jardins d'un château, cadre de réception", "position": "center 70%" },
-        "link": "En savoir plus",
+        "link": "Découvrir nos prestations",
         "popup": "prestations-mariages"
       },
       {
@@ -46,7 +46,7 @@
         "text": "Anniversaires, fiançailles, célébrations et soirées privées.",
         "note": "Nous donnons vie à vos envies pour imaginer des moments uniques à partager avec vos proches.",
         "photo": { "src": "guinguette.jpg", "alt": "Fête privée en plein air avec DJ" },
-        "link": "En savoir plus",
+        "link": "Découvrir nos prestations",
         "popup": "prestations-prives"
       },
       {
@@ -54,7 +54,7 @@
         "text": "Événements publics, festivals, événements sportifs, projets de marques et manifestations culturelles.",
         "note": "Nous étudions chaque projet pour proposer un accompagnement adapté à ses enjeux et à son format.",
         "photo": { "src": "stade-public.jpg", "alt": "Animation musicale dans un stade" },
-        "link": "En savoir plus",
+        "link": "Découvrir nos prestations",
         "popup": "prestations-sur-mesure"
       }
     ]

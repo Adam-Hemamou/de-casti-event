@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Steps from '../components/Steps.astro';
-import ExpertiseCard from '../components/ExpertiseCard.astro';
+import CardCarousel from '../components/CardCarousel.astro';
 import Photo from '../components/Photo.astro';
 import Gallery from '../components/Gallery.astro';
 import Reviews from '../components/Reviews.astro';
@@ -39,9 +39,7 @@ const pagePopups = popups.popups.filter((p) => p.page === 'agence');
   <section class="expertises" id="expertises">
     <div class="w expertises-inner">
       <SectionHeading kicker={d.expertises.kicker} title={d.expertises.title} on gap={16} maxWidth="760px" />
-      <div class="expertises-grid">
-        {d.expertises.cards.map((card) => <ExpertiseCard {...card} />)}
-      </div>
+      <CardCarousel cards={d.expertises.cards} label={d.expertises.kicker} />
     </div>
   </section>
 
@@ -107,11 +105,6 @@ const pagePopups = popups.popups.filter((p) => p.page === 'agence');
     display: flex;
     flex-direction: column;
     gap: 52px;
-  }
-  .expertises-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-    gap: 20px;
   }
 
   :global(.gallery.realisations) {

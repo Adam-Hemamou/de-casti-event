@@ -1,0 +1,63 @@
+---
+// Icônes au trait fin (grille 24 px, sans remplissage, couleur du texte : currentColor).
+// Même famille graphique que l'étincelle de ActivityCard.astro.
+export type IconName = 'dialogue' | 'plume' | 'calendrier' | 'etincelle';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 40, class: extra } = Astro.props;
+---
+
+<svg
+  class:list={['icon', extra]}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    name === 'dialogue' && (
+      <>
+        <path d="M15 7V5.5A2.5 2.5 0 0 0 12.5 3h-7A2.5 2.5 0 0 0 3 5.5v3A2.5 2.5 0 0 0 5.5 11H6v2.5L8.5 11" />
+        <path d="M11.5 9h7a2.5 2.5 0 0 1 2.5 2.5v3a2.5 2.5 0 0 1-2.5 2.5H18v2.5L15.5 17h-4A2.5 2.5 0 0 1 9 14.5v-3A2.5 2.5 0 0 1 11.5 9z" />
+      </>
+    )
+  }
+  {
+    name === 'plume' && (
+      <>
+        <path d="M9 7h6l2.5 6.5L12 21l-5.5-7.5L9 7z" />
+        <path d="M12 21v-6.4" />
+        <circle cx="12" cy="13.2" r="1.4" />
+        <path d="M10 7V3.5h4V7" />
+      </>
+    )
+  }
+  {
+    name === 'calendrier' && (
+      <>
+        <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+        <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+        <path d="M9.2 15.1l1.9 1.9 3.8-3.8" />
+      </>
+    )
+  }
+  {
+    name === 'etincelle' && (
+      <>
+        <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" />
+        <path d="M19 16l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z" />
+      </>
+    )
+  }
+</svg>

@@ -93,9 +93,32 @@ const Accueil = S({
     title: text,
     text: text,
     cta: Link,
-    vinyl: S({ photo: Photo, caption: text }),
+    vinyl: S({
+      photo: Photo,
+      caption: text,
+      player: S({
+        audio: S({
+          note: z.string().optional(),
+          // Vide tant que le morceau n'est pas fourni ; sinon un chemin vers public/ (ex. /audio/vinyle.mp3).
+          src: z.union([z.literal(''), z.string().regex(/^\/[^\s]+\.(mp3|m4a|aac|ogg|wav)$/i, 'chemin attendu : /audio/nom-du-fichier.mp3')]),
+          title: text,
+          loop: z.boolean(),
+        }),
+        volume: z.number().int().min(0).max(100),
+        groupLabel: text,
+        labels: S({ power: text, play: text, mute: text, volume: text }),
+        actions: S({ powerOn: text, powerOff: text, play: text, pause: text, mute: text, unmute: text, volume: text }),
+        status: S({ on: text, off: text, playing: text, paused: text, muted: text, unmuted: text, noAudio: text }),
+      }),
+    }),
   }),
-  valeurs: S({ kicker: text, title: text, text: text, items: z.array(TitledText) }),
+  valeurs: S({
+    kicker: text,
+    title: text,
+    text: text,
+    // icon : pictogramme au-dessus de chaque valeur (voir src/components/Icon.astro).
+    items: z.array(TitledText.extend({ icon: z.enum(['dialogue', 'plume', 'calendrier', 'etincelle']).optional() })),
+  }),
   activites: S({
     separator: text,
     cards: z.array(
@@ -168,9 +191,11 @@ const FormulesPopup = S({
   featuredLabel: text,
   plans: z.array(Plan).min(1),
   optionsTitle: text.optional(),
-  optionGroups: z.array(S({ title: text, items: z.array(text) })).optional(),
+  // spaced : options légèrement espacées (groupe dont les libellés passent sur plusieurs lignes).
+  optionGroups: z.array(S({ title: text, items: z.array(text), spaced: z.boolean().optional() })).optional(),
   optionList: z.array(text).optional(),
   optionText: text.optional(),
+  notesTitle: text.optional(),
   notes: z.array(S({ title: text, text: text })).optional(),
   ctaNote: text.optional(),
 });

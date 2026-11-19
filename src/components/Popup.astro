@@ -89,7 +89,17 @@ const vars = [
                     {p.optionGroups.map((g) => (
                       <div>
                         <b>{g.title}</b>
-                        <span set:html={g.items.map((i) => rich(i)).join('<br>')} />
+                        {g.spaced ? (
+                          <span class="opt-items opt-items--spaced">
+                            {g.items.map((i) => (
+                              <span class="opt-item">
+                                <span set:html={rich(i)} />
+                              </span>
+                            ))}
+                          </span>
+                        ) : (
+                          <span set:html={g.items.map((i) => rich(i)).join('<br>')} />
+                        )}
                       </div>
                     ))}
                   </div>
@@ -105,13 +115,16 @@ const vars = [
               </div>
             )}
             {p.notes && (
-              <div class="notes">
-                {p.notes.map((n) => (
-                  <div>
-                    <b>{n.title}</b>
-                    <p>{n.text}</p>
-                  </div>
-                ))}
+              <div class="notes-block">
+                {p.notesTitle && <p class="bd it box-title">{p.notesTitle}</p>}
+                <div class="notes">
+                  {p.notes.map((n) => (
+                    <div>
+                      <b>{n.title}</b>
+                      <p>{n.text}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
             <div class:list={['cta', { 'cta--note': !!p.ctaNote }]}>
@@ -400,6 +413,19 @@ const vars = [
     color: var(--wine);
     margin-bottom: 6px;
   }
+  /* Groupe aux libellés longs (« spaced ») : une option par ligne, légèrement espacées. */
+  .opt-items {
+    display: block;
+  }
+  /* Même hauteur de ligne que les autres groupes (texte en ligne dans un bloc de 16 px). */
+  .opts .opt-item {
+    display: block;
+    font-size: 16px;
+    line-height: normal;
+  }
+  .opt-items--spaced .opt-item + .opt-item {
+    margin-top: 5px;
+  }
   .opts span {
     font-size: 12.5px;
     line-height: 1.45;
@@ -423,11 +449,17 @@ const vars = [
   .opts--list li:first-child {
     border-left: 0;
   }
+  /* Bloc d'informations : même filet et même petit titre que « Options & compléments ». */
+  .notes-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+  }
   .notes {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding-top: 18px;
-    border-top: 1px solid var(--line-soft);
   }
   .notes > div {
     padding: 2px 22px;

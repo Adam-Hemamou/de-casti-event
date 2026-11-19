@@ -31,35 +31,35 @@
         "title": "Mariages",
         "text": "Du vin d'honneur à la soirée dansante, j'accompagne les mariés pour créer une ambiance musicale à leur image, des premiers instants jusqu'aux dernières danses.",
         "photo": { "src": "dj-mariage-pampas.jpg", "alt": "Installation DJ pour un mariage devant un mur en pierre", "position": "center 30%" },
-        "link": "Voir les formules",
+        "link": "Découvrir les formules",
         "popup": "formules-mariages"
       },
       {
         "title": "Événements d'entreprise",
         "text": "Soirées corporate, cocktails, séminaires, inaugurations, lancements de produits et événements clients. Une prestation musicale adaptée à votre image et à votre public.",
         "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque avec animation musicale" },
-        "link": "Voir les formules",
+        "link": "Découvrir les formules",
         "popup": "formules-entreprise"
       },
       {
         "title": "Soirées privées",
         "text": "Anniversaires, fêtes de famille, soirées entre amis et célébrations. Une programmation personnalisée pour partager un moment festif et mémorable.",
         "photo": { "src": "club-foule.jpg", "alt": "Soirée privée en club avec Eva aux platines" },
-        "link": "Voir les formules",
+        "link": "Découvrir les formules",
         "popup": "formules-soirees"
       },
       {
         "title": "Festivals & événements publics",
         "text": "Festivals, fêtes locales, événements culturels et manifestations publiques. Une présence musicale adaptée à l'ambiance et à l'énergie du public.",
         "photo": { "src": "guinguette.jpg", "alt": "DJ set en plein air lors d'une fête locale" },
-        "link": "Voir les formules",
+        "link": "Découvrir les formules",
         "popup": "formules-festivals"
       },
       {
         "title": "Sport, marques & événements spéciaux",
         "text": "Événements sportifs, compétitions, animations de marques, événements automobiles et lancements. Une animation musicale pensée pour accompagner et dynamiser chaque temps fort.",
         "photo": { "src": "stade-societe-generale.jpg", "alt": "Eva aux platines au bord du terrain dans un stade" },
-        "link": "Voir les formules",
+        "link": "Découvrir les formules",
         "popup": "formules-sport"
       }
     ]

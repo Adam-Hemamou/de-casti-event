@@ -11,7 +11,36 @@
     "cta": { "label": "Découvrir nos services", "href": "#activites" },
     "vinyl": {
       "photo": { "src": "dj-rooftop-bordeaux.jpg", "alt": "Eva de Casti aux platines", "position": "center 28%" },
-      "caption": "Eva de Casti, aux platines"
+      "caption": "Eva de Casti, aux platines",
+      "player": {
+        "audio": {
+          "note": "Déposer le morceau dans public/audio/ puis indiquer son chemin ici (ex. /audio/vinyle.mp3). Format conseillé : MP3 192 kbit/s. Laisser vide tant que le morceau n'est pas fourni : la platine fonctionne alors sans son.",
+          "src": "",
+          "title": "[Titre du morceau à confirmer]",
+          "loop": true
+        },
+        "volume": 70,
+        "groupLabel": "Commandes de la platine",
+        "labels": { "power": "ON / OFF", "play": "PLAY / PAUSE", "mute": "SON", "volume": "VOLUME" },
+        "actions": {
+          "powerOn": "Allumer la platine",
+          "powerOff": "Éteindre la platine",
+          "play": "Lecture",
+          "pause": "Pause",
+          "mute": "Couper le son",
+          "unmute": "Rétablir le son",
+          "volume": "Volume"
+        },
+        "status": {
+          "on": "Platine allumée",
+          "off": "Platine éteinte",
+          "playing": "Lecture : {titre}",
+          "paused": "Pause",
+          "muted": "Son coupé",
+          "unmuted": "Son rétabli",
+          "noAudio": "Morceau pas encore disponible : la platine tourne sans son."
+        }
+      }
     }
   },
   "valeurs": {
@@ -19,10 +48,10 @@
     "title": "Passion, élégance & émotion",
     "text": "Chaque événement est une nouvelle histoire à écrire. Nous mettons notre créativité, notre savoir-faire et notre sens du détail au service de vos projets, pour imaginer des expériences uniques qui vous ressemblent.",
     "items": [
-      { "title": "Écoute & conseil", "text": "Comprendre vos envies, vos besoins et vos objectifs pour construire un événement qui vous ressemble." },
-      { "title": "Création sur mesure", "text": "Imaginer des concepts personnalisés, adaptés à votre univers, à vos attentes et à votre budget." },
-      { "title": "Rigueur & organisation", "text": "Anticiper, coordonner et veiller à chaque détail pour un déroulement fluide et maîtrisé." },
-      { "title": "Émotion & expérience", "text": "Créer des instants forts, des rencontres et des souvenirs qui restent." }
+      { "title": "Écoute & conseil", "icon": "dialogue", "text": "Comprendre vos envies, vos besoins et vos objectifs pour construire un événement qui vous ressemble." },
+      { "title": "Création sur mesure", "icon": "plume", "text": "Imaginer des concepts personnalisés, adaptés à votre univers, à vos attentes et à votre budget." },
+      { "title": "Rigueur & organisation", "icon": "calendrier", "text": "Anticiper, coordonner et veiller à chaque détail pour un déroulement fluide et maîtrisé." },
+      { "title": "Émotions garanties", "icon": "etincelle", "text": "Créer des instants forts, des rencontres et des souvenirs qui restent." }
     ]
   },
   "activites": {

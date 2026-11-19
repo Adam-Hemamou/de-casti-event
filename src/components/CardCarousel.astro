@@ -1,0 +1,229 @@
+---
+// Carrousel des cartes d'expertise (pages Agence et DJ), construit avec Embla Carousel.
+// Toutes les cartes défilent ensemble : 3 visibles sur ordinateur, 2 sur tablette, 1 sur mobile.
+// Flèches (une carte par clic), glissement à la souris et au doigt, flèches du clavier.
+// Sans JavaScript : la bande se fait défiler horizontalement, toutes les cartes restent accessibles.
+// Comportement : src/scripts/card-carousel.ts.
+import ExpertiseCard from './ExpertiseCard.astro';
+import type { PhotoT } from '../data';
+
+interface Card {
+  title: string;
+  text: string;
+  note?: string;
+  photo: PhotoT;
+  link: string;
+  popup: string;
+}
+
+interface Props {
+  cards: Card[];
+  /** Nom de la zone, lu par les lecteurs d'écran (ex. « Nos expertises »). */
+  label: string;
+  size?: 'grande' | 'compacte';
+}
+
+const { cards, label, size = 'grande' } = Astro.props;
+const trackId = `carrousel-${cards[0]?.popup ?? 'cartes'}`;
+const arrow = (d: string) =>
+  `<svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${d}"/></svg>`;
+---
+
+<div class="carousel" data-carousel role="region" aria-roledescription="carrousel" aria-label={label}>
+  <div class="viewport" data-carousel-viewport>
+    <div class="container" id={trackId}>
+      {
+        cards.map((c, i) => (
+          <div class="slide" role="group" aria-roledescription="carte" aria-label={`${i + 1} sur ${cards.length}`}>
+            <div class="slide-inner" data-reveal>
+              <ExpertiseCard {...c} size={size} reveal={false} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="controls" data-carousel-controls>
+    <div class="progress" aria-hidden="true"><span class="bar" data-carousel-bar></span></div>
+    <p class="bd it count" aria-hidden="true">
+      <span class="now" data-carousel-now>01</span><span class="sep">/</span><span data-carousel-total>01</span>
+    </p>
+    <div class="arrows">
+      <button type="button" class="arrow" data-carousel-prev aria-controls={trackId} aria-label="Carte précédente" set:html={arrow('M17 5H1.5M5.5 1l-4 4 4 4')} />
+      <button type="button" class="arrow" data-carousel-next aria-controls={trackId} aria-label="Carte suivante" set:html={arrow('M1 5h15.5M12.5 1l4 4-4 4')} />
+    </div>
+  </div>
+  <p class="sr-only" aria-live="polite" data-carousel-status></p>
+</div>
+
+<style>
+  .carousel {
+    --gap: 20px;
+    --per-view: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  /* Fenêtre Embla. Le léger débord (1 px) laisse voir le filet doré du bord des cartes. */
+  .viewport {
+    overflow: hidden;
+    padding: 1px;
+    margin: -1px;
+    touch-action: pan-y pinch-zoom;
+  }
+  :global(html.js) .viewport {
+    cursor: grab;
+  }
+  :global(html.js) .viewport.is-dragging {
+    cursor: grabbing;
+  }
+  .container {
+    display: flex;
+    margin-left: calc(var(--gap) * -1);
+    backface-visibility: hidden;
+  }
+  .slide {
+    flex: 0 0 calc(100% / var(--per-view));
+    min-width: 0;
+    padding-left: var(--gap);
+    display: flex;
+  }
+  .slide-inner {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+  }
+  .slide-inner > :global(article) {
+    flex: 1;
+    min-width: 0;
+  }
+  .slide :global(img) {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  /* Commandes */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .controls[hidden],
+  :global(html:not(.js)) .controls {
+    display: none;
+  }
+  .progress {
+    position: relative;
+    flex: 1;
+    height: 1px;
+    background: rgba(var(--highlight-rgb), 0.22);
+    overflow: hidden;
+  }
+  /* La barre suit la position de la bande image par image (pas de transition CSS). */
+  .bar {
+    position: absolute;
+    inset: 0;
+    background: var(--highlight);
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+  .count {
+    margin: 0;
+    font-size: 19px;
+    letter-spacing: 0.04em;
+    color: var(--muted-on-dark);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .now {
+    color: var(--highlight);
+  }
+  .sep {
+    margin: 0 8px;
+    opacity: 0.6;
+  }
+  .arrows {
+    display: flex;
+    gap: 10px;
+  }
+  .arrow {
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(var(--highlight-rgb), 0.45);
+    background: transparent;
+    color: var(--highlight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color 0.35s ease,
+      border-color 0.35s ease,
+      opacity 0.35s ease;
+  }
+  .arrow :global(svg) {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .arrow:hover:not(:disabled) {
+    background: rgba(var(--highlight-rgb), 0.1);
+    border-color: var(--highlight);
+  }
+  .arrow[data-carousel-prev]:hover:not(:disabled) :global(svg) {
+    transform: translateX(-3px);
+  }
+  .arrow[data-carousel-next]:hover:not(:disabled) :global(svg) {
+    transform: translateX(3px);
+  }
+  .arrow:focus-visible {
+    outline: 1px solid var(--highlight);
+    outline-offset: 3px;
+  }
+  .arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  /* Sans JavaScript : bande à défilement horizontal natif. */
+  :global(html:not(.js)) .viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  :global(html:not(.js)) .slide {
+    scroll-snap-align: start;
+  }
+
+  /* Tablette : 2 cartes ; mobile : 1 carte. */
+  @media (max-width: 1023px) {
+    .carousel {
+      --gap: 16px;
+      --per-view: 2;
+      gap: 28px;
+    }
+    .arrow {
+      width: 42px;
+      height: 42px;
+    }
+  }
+  @media (max-width: 719px) {
+    .carousel {
+      --per-view: 1;
+    }
+    .controls {
+      gap: 18px;
+    }
+    .count {
+      font-size: 17px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arrow,
+    .arrow :global(svg) {
+      transition: none;
+    }
+  }
+</style>
