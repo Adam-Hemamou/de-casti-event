@@ -38,9 +38,27 @@ const Site = S({
   description: text,
   defaultOgImage: Photo.shape.src,
   defaultOgImageAlt: text,
-  person: S({ note: z.string().optional(), name: text, jobTitle: text, photo: Photo.shape.src }),
+  person: S({
+    note: z.string().optional(),
+    name: text,
+    jobTitle: text,
+    description: text,
+    knowsAbout: z.array(text),
+    photo: Photo.shape.src,
+  }),
+  // Domaines d'expertise de l'entreprise (données structurées Organization.knowsAbout).
+  knowsAbout: z.array(text),
   logo: S({ main: text, sub: text, label: text }),
-  contact: S({ email: text, phone: text, city: text, country: text, hours: text }),
+  contact: S({
+    note: z.string().optional(),
+    email: text,
+    phone: text,
+    city: text,
+    region: text,
+    country: text,
+    zone: text,
+    hours: text,
+  }),
   social: z.record(SocialKey, Link),
   nav: z.array(Link),
   skipLink: text,
@@ -68,6 +86,7 @@ const Site = S({
 
 const Review = S({ text: text, author: text, stars: z.number().int().min(1).max(5) });
 const Avis = S({
+  note: z.string().optional(),
   starsLabel: text,
   accueil: z.array(Review),
   agence: z.array(Review),
@@ -139,6 +158,7 @@ const Accueil = S({
       }),
     ),
   }),
+  chiffresNote: z.string().optional(),
   chiffres: z.array(S({ value: z.number().int().min(0), suffix: z.string(), label: text })),
   apropos: S({
     kicker: text,
@@ -215,7 +235,8 @@ const Popups = S({
 
 const Agence = S({
   seo: Seo,
-  hero: S({ kicker: text, title: text, text: text, cta: Link, photo: Photo }),
+  // ctaSecondary : lien discret (souligné) vers l'univers DJ, à côté du bouton de la bannière.
+  hero: S({ kicker: text, title: text, text: text, cta: Link, ctaSecondary: Link.optional(), photo: Photo }),
   approche: S({ kicker: text, title: text, steps: z.array(TitledText) }),
   expertises: S({
     kicker: text,
@@ -226,6 +247,18 @@ const Agence = S({
   avis: SectionIntro,
 });
 
+// Questions fréquentes (pages Contact et DJ). Les réponses acceptent le jeton
+// {tarifs:identifiant-du-pop-up}, remplacé au build par les tarifs de popups.json.
+const FaqSection = S({
+  note: z.string().optional(),
+  kicker: text,
+  title: text,
+  textBefore: text,
+  link: Link,
+  textAfter: text,
+  items: z.array(S({ question: text, answer: text })),
+});
+
 const Dj = S({
   seo: Seo,
   hero: S({ kicker: text, title: text, text: text, cta: Link, photo: Photo }),
@@ -233,6 +266,7 @@ const Dj = S({
   expertises: S({
     kicker: text,
     title: text,
+    note: z.string().optional(),
     cards: z.array(S({ title: text, text: text, photo: Photo, link: text, popup: text })),
   }),
   galerie: Gallery,
@@ -249,6 +283,7 @@ const Dj = S({
     photo: Photo,
   }),
   avisBis: S({ note: z.string().optional(), afficher: z.boolean(), kicker: text, title: text }),
+  faq: FaqSection,
 });
 
 const Field = S({ label: text, error: text.optional(), errorFormat: text.optional() });
@@ -259,7 +294,7 @@ const Contact = S({
     kicker: text,
     title: text,
     text: text,
-    labels: S({ email: text, phone: text, address: text, hours: text }),
+    labels: S({ email: text, phone: text, address: text, zone: text, hours: text }),
   }),
   form: S({
     name: z.string().regex(/^[a-z0-9-]+$/),
@@ -292,14 +327,7 @@ const Contact = S({
   }),
   social: S({ title: text, networks: z.array(SocialKey) }),
   video: S({ title: text, text: text, link: Link, photo: Photo }),
-  faq: S({
-    kicker: text,
-    title: text,
-    textBefore: text,
-    link: Link,
-    textAfter: text,
-    items: z.array(S({ question: text, answer: text })),
-  }),
+  faq: FaqSection,
 });
 
 const SimplePage = S({ seo: Seo, kicker: text, title: text, text: text, cta: Link });

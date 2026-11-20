@@ -1,13 +1,14 @@
 {
   "seo": {
-    "title": "Agence événementielle : mariages & événements d'entreprise — De Casti Event",
-    "description": "Mariages, soirées d'entreprise, séminaires, anniversaires et projets sur mesure : De Casti Event vous accompagne de la conception à la coordination du jour J."
+    "title": "Agence événementielle à Bordeaux — De Casti Event",
+    "description": "Organisation de mariages, soirées privées et événements d'entreprise à Bordeaux et partout en France : conception, prestataires et coordination du jour J."
   },
   "hero": {
-    "kicker": "Agence événementielle",
+    "kicker": "Agence événementielle à Bordeaux",
     "title": "L'art d'organiser des événements *inoubliables.*",
-    "text": "De la première idée à la coordination du jour J, De Casti Event vous accompagne dans la conception et l'organisation d'événements professionnels et privés, entièrement pensés selon vos envies et vos objectifs.",
+    "text": "Fondée par Eva de Casti, DJ événementielle, De Casti Event vous accompagne à Bordeaux et partout en France dans la conception et l'organisation d'événements professionnels et privés, de la première idée à la coordination du jour J.",
     "cta": { "label": "Parlons de votre projet", "href": "/contact?prestation=organisation#formulaire" },
+    "ctaSecondary": { "label": "Découvrir l'univers DJ", "href": "/dj" },
     "photo": { "src": "hero-agence.jpg", "alt": "Réception en bord de mer organisée par De Casti Event", "position": "center 60%" }
   },
   "approche": {
@@ -23,7 +24,7 @@
   },
   "expertises": {
     "kicker": "Nos expertises",
-    "title": "Un événement à votre image, une organisation adaptée à vos besoins.",
+    "title": "Mariages, événements privés et professionnels : une organisation adaptée à vos besoins.",
     "cards": [
       {
         "title": "Événements professionnels",
@@ -62,7 +63,7 @@
   "realisations": {
     "kicker": "Nos réalisations",
     "title": "Revivez nos plus beaux moments.",
-    "link": { "label": "Voir plus de photos & vidéos", "href": "/dj#galerie" },
+    "link": { "label": "Voir Eva aux platines en images", "href": "/dj#galerie" },
     "rowHeight": 220,
     "photos": [
       { "src": "hero-agence.jpg", "alt": "Réception en bord de mer", "cols": 2 },

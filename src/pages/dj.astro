@@ -8,11 +8,27 @@ import Photo from '../components/Photo.astro';
 import Gallery from '../components/Gallery.astro';
 import Reviews from '../components/Reviews.astro';
 import Popup from '../components/Popup.astro';
+import Faq from '../components/Faq.astro';
 import { dj as d, avis, popups, site } from '../data';
-import { minPriceLabel, serviceNodes } from '../lib/structured-data';
+import { faqNode, fillTarifs, minPriceLabel, priceRangeLabel, serviceNodes } from '../lib/structured-data';
 
+const pageUrl = new URL('/dj', site.url).href;
 const pagePopups = popups.popups.filter((p) => p.page === 'dj');
-const schema = serviceNodes('dj', new URL('/dj', site.url).href);
+// Questions fréquentes : jetons {tarifs:…} remplacés depuis popups.json. Les mêmes réponses
+// servent à l'affichage et aux données structurées FAQPage (texte strictement identique).
+const faqItems = d.faq.items.map((i) => ({ question: i.question, answer: fillTarifs(i.answer, 'dj.json > faq') }));
+const schema = [...serviceNodes('dj', pageUrl), ...faqNode(pageUrl, faqItems)];
+
+// {tarifs} : fourchette des tarifs chiffrés du pop-up de chaque carte, écrite dans le texte
+// visible de la carte (les prix ne dépendent plus de l'ouverture du pop-up).
+const cards = d.expertises.cards.map((card) => {
+  if (!card.text.includes('{tarifs}')) return card;
+  const tarifs = priceRangeLabel(card.popup);
+  if (!tarifs) {
+    throw new Error(`dj.json > expertises : la carte « ${card.title} » utilise {tarifs}, mais le pop-up « ${card.popup} » n'a aucun tarif chiffré.`);
+  }
+  return { ...card, text: card.text.replace('{tarifs}', tarifs).trim() };
+});
 
 // {prixMin} : plus petit tarif chiffré des formules DJ, pour que la description suive les tarifs.
 const prixMin = minPriceLabel('dj');
@@ -28,7 +44,8 @@ const description = d.seo.description.replace('{prixMin}', prixMin ?? '');
   footer="dj"
   headerClass="hero-dj"
   ogImage={d.hero.photo}
-  breadcrumb="DJ — Eva de Casti"
+  breadcrumb="DJ à Bordeaux"
+  about="person"
   schema={schema}
   mobileCta="/contact?prestation=dj#formulaire"
 >
@@ -64,7 +81,7 @@ const description = d.seo.description.replace('{prixMin}', prixMin ?? '');
   <section class="expertises" id="expertises">
     <div class="expertises-inner">
       <SectionHeading kicker={d.expertises.kicker} title={d.expertises.title} on gap={16} class="expertises-head" />
-      <CardCarousel cards={d.expertises.cards} label={d.expertises.kicker} />
+      <CardCarousel cards={cards} label={d.expertises.kicker} />
     </div>
   </section>
 
@@ -108,10 +125,57 @@ const description = d.seo.description.replace('{prixMin}', prixMin ?? '');
 
   {d.avisBis.afficher && <Reviews kicker={d.avisBis.kicker} title={d.avisBis.title} items={avis.dj} background="light" />}
 
+  <!-- Questions fréquentes (même présentation que la page contact) -->
+  <section class="faq-section on-light" id="faq">
+    <div class="w faq-inner">
+      <SectionHeading kicker={d.faq.kicker} title={d.faq.title} gap={16} class="faq-intro" titleClass="h2-faq">
+        <p class="p" data-reveal>
+          {d.faq.textBefore} <a class="faq-link" href={d.faq.link.href}>{d.faq.link.label}</a>{d.faq.textAfter}
+        </p>
+      </SectionHeading>
+      <div class="faq-list">
+        <Faq items={faqItems} />
+      </div>
+    </div>
+  </section>
+
   {pagePopups.map((p) => <Popup popup={p} returnTo="expertises" />)}
 </BaseLayout>
 
 <style>
+  /* Questions fréquentes : repris de la page contact. */
+  .faq-section {
+    padding: 104px 0;
+  }
+  .faq-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+  }
+  .faq-inner :global(.faq-intro) {
+    flex: 1 1 320px;
+  }
+  :global(.h2.h2-faq) {
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+  .faq-link {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .faq-list {
+    flex: 1.5 1 520px;
+  }
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 80px 0;
+    }
+    .faq-inner {
+      gap: 40px;
+    }
+  }
+
   /* Bannière photo plein cadre */
   :global(.site-header.hero-dj) {
     min-height: 780px;

@@ -2,21 +2,27 @@
   "name": "De Casti Event",
   "url": "https://www.decasti-event.fr",
   "urlNote": "[domaine à confirmer] : valeur temporaire, à remplacer par le domaine définitif (sert aux URL canoniques, au sitemap et à Open Graph)",
-  "description": "Agence événementielle & DJ : De Casti Event imagine, organise et coordonne vos événements professionnels et privés, avec l'ambiance musicale d'Eva de Casti.",
+  "description": "De Casti Event est l'activité d'Eva de Casti, DJ événementielle basée à Bordeaux : animation musicale de mariages, soirées privées et événements d'entreprise partout en France, et organisation d'événements sur mesure.",
   "defaultOgImage": "hero-accueil.jpg",
   "defaultOgImageAlt": "Eva de Casti bras levé face à la foule en club",
   "person": {
-    "note": "Personne présentée dans les données structurées (Schema.org Person). jobTitle : intitulé affiché sur le site.",
+    "note": "Personne présentée dans les données structurées (Schema.org Person). jobTitle : intitulé affiché sur le site (bannière de la page DJ).",
     "name": "Eva de Casti",
-    "jobTitle": "DJ",
+    "jobTitle": "DJ événementielle",
+    "description": "DJ événementielle basée à Bordeaux et fondatrice de De Casti Event. Elle anime mariages, soirées privées et événements d'entreprise partout en France.",
+    "knowsAbout": ["DJ mariage", "Animation musicale d'événements", "Sonorisation et éclairage d'événements"],
     "photo": "eva-portrait.jpg"
   },
+  "knowsAbout": ["Animation DJ", "Organisation de mariages", "Organisation d'événements privés", "Organisation d'événements d'entreprise"],
   "logo": { "main": "De Casti", "sub": "EVENT", "label": "De Casti Event, accueil" },
   "contact": {
     "email": "[e-mail à confirmer]",
     "phone": "[téléphone à confirmer]",
-    "city": "[ville à confirmer]",
+    "note": "city : ville de rattachement (pas d'adresse physique publiée). region : région de la ville, utilisée dans les données structurées. zone : zone d'intervention affichée sur la page contact. Les valeurs « [...] » ne sont pas affichées.",
+    "city": "Bordeaux",
+    "region": "Nouvelle-Aquitaine",
     "country": "France",
+    "zone": "Partout en France",
     "hours": "[horaires à confirmer]"
   },
   "social": {
@@ -28,8 +34,8 @@
   },
   "nav": [
     { "label": "Accueil", "href": "/" },
-    { "label": "Agence événementielle", "href": "/agence-evenementielle" },
     { "label": "DJ", "href": "/dj" },
+    { "label": "Agence événementielle", "href": "/agence-evenementielle" },
     { "label": "Contact", "href": "/contact" }
   ],
   "skipLink": "Aller au contenu",

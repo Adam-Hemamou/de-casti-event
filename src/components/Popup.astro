@@ -24,7 +24,14 @@ const ctaParams = new URLSearchParams();
 if (p.eventType) ctaParams.set('type', p.eventType);
 ctaParams.set('prestation', p.page === 'dj' ? 'dj' : 'organisation');
 const ctaHref = `/contact?${ctaParams}#formulaire`;
-const compact = p.variant === 'formules' && p.plans.length > 3;
+// Contenus encore provisoires (« [Formule 1] », « [Tarif] », « [Options à fournir…] ») : non affichés,
+// pour qu'aucun texte provisoire ne soit visible ni indexé. Le pop-up garde son titre, son texte et
+// son bouton de contact ; les formules apparaissent dès qu'elles sont rédigées dans popups.json.
+const isDraft = (s?: string) => !!s && s.trim().startsWith('[');
+const plans = p.variant === 'formules' ? p.plans.filter((plan) => !isDraft(plan.name) && !isDraft(plan.price)) : [];
+const optionText = p.variant === 'formules' && !isDraft(p.optionText) ? p.optionText : undefined;
+const hasOptions = p.variant === 'formules' && !!(p.optionGroups?.length || p.optionList?.length || optionText);
+const compact = plans.length > 3;
 const titleSize = p.layout?.titleSize ?? (p.title.includes('*') ? 52 : 56);
 const vars = [
   `--title-size: ${titleSize}px`,
@@ -69,7 +76,7 @@ const vars = [
               <p class="bd it box-title">{p.stepsTitle}</p>
               <Steps variant="popup" items={p.steps} />
             </div>
-            <p class="bd it closing">{p.closing}</p>
+            <p class="bd it closing" set:html={rich(p.closing)} />
             <div class="cta">
               <a class="pill wine popup-pill" href={ctaHref}>{p.cta}</a>
             </div>
@@ -80,13 +87,15 @@ const vars = [
       {
         p.variant === 'formules' && (
           <>
-            <div class:list={['plans', { 'plans--compact': compact }]}>
-              {p.plans.map((plan) => (
-                <PricingCard {...plan} featuredLabel={p.featuredLabel} compact={compact} />
-              ))}
-            </div>
-            {p.optionsTitle && (
-              <div class:list={['options', { 'options--text': !!p.optionText }]}>
+            {plans.length > 0 && (
+              <div class:list={['plans', { 'plans--compact': compact }]}>
+                {plans.map((plan) => (
+                  <PricingCard {...plan} featuredLabel={p.featuredLabel} compact={compact} />
+                ))}
+              </div>
+            )}
+            {p.optionsTitle && hasOptions && (
+              <div class:list={['options', { 'options--text': !!optionText }]}>
                 <p class="bd it box-title">{p.optionsTitle}</p>
                 {p.optionGroups && (
                   <div class="opts opts--groups" style={`--n: ${p.optionGroups.length}`}>
@@ -115,7 +124,7 @@ const vars = [
                     ))}
                   </ul>
                 )}
-                {p.optionText && <p class="p option-text">{p.optionText}</p>}
+                {optionText && <p class="p option-text">{optionText}</p>}
               </div>
             )}
             {p.notes && (

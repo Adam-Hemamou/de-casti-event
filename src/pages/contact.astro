@@ -6,17 +6,23 @@ import Faq from '../components/Faq.astro';
 import Photo from '../components/Photo.astro';
 import { contact as d, site } from '../data';
 import { rich } from '../lib/rich';
-import { faqNode } from '../lib/structured-data';
+import { faqNode, fillTarifs, known } from '../lib/structured-data';
 import { hasHref } from '../lib/links';
 
-const schema = faqNode(new URL('/contact', site.url).href, d.faq.items);
+// Questions fréquentes : jetons {tarifs:…} éventuels remplacés depuis popups.json. Les mêmes
+// réponses servent à l'affichage et aux données structurées FAQPage (texte strictement identique).
+const faqItems = d.faq.items.map((i) => ({ question: i.question, answer: fillTarifs(i.answer, 'contact.json > faq') }));
+const schema = faqNode(new URL('/contact', site.url).href, faqItems);
 const c = site.contact;
+// Coordonnées : une valeur encore « [à confirmer] » n'est pas affichée (elle apparaît dès
+// qu'elle est renseignée dans site.json). Aucune adresse physique : seulement la ville.
 const coords = [
-  { label: d.hero.labels.email, value: c.email },
-  { label: d.hero.labels.phone, value: c.phone },
-  { label: d.hero.labels.address, value: `${c.city}, ${c.country}` },
-  { label: d.hero.labels.hours, value: c.hours },
-];
+  { label: d.hero.labels.email, value: known(c.email) },
+  { label: d.hero.labels.phone, value: known(c.phone) },
+  { label: d.hero.labels.address, value: known(c.city) && `${c.city}, ${c.country}` },
+  { label: d.hero.labels.zone, value: known(c.zone) },
+  { label: d.hero.labels.hours, value: known(c.hours) },
+].filter((item): item is { label: string; value: string } => !!item.value);
 // Réseaux sociaux : seuls ceux dont l'adresse est renseignée sont affichés.
 const socials = d.social.networks.map((k) => site.social[k]).filter((s) => hasHref(s.href));
 ---
@@ -28,6 +34,7 @@ const socials = d.social.networks.map((k) => site.social[k]).filter((s) => hasHr
   headerClass="hero-contact"
   headerCta={d.headerCta}
   breadcrumb="Contact"
+  pageType="ContactPage"
   schema={schema}
 >
   <Fragment slot="hero">
@@ -90,7 +97,7 @@ const socials = d.social.networks.map((k) => site.social[k]).filter((s) => hasHr
         </p>
       </SectionHeading>
       <div class="faq-list">
-        <Faq items={d.faq.items} />
+        <Faq items={faqItems} />
       </div>
     </div>
   </section>

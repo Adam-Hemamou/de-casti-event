@@ -1,4 +1,5 @@
 {
+  "note": "[À CONFIRMER PAR EVA AVANT LA MISE EN LIGNE] Avis repris de la maquette : authenticité et accord des clients à vérifier. S'ils ne sont pas confirmés, masquer les sections d'avis avant le déploiement. Aucun avis n'est publié dans les données structurées.",
   "starsLabel": "{n} étoiles sur 5",
   "accueil": [
     { "text": "Une organisation parfaite du début à la fin. Notre mariage était tout simplement magique !", "author": "Camille & Thomas", "stars": 5 },

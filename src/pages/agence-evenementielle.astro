@@ -33,7 +33,10 @@ const schema = serviceNodes('agence', new URL('/agence-evenementielle', site.url
         <span class="bd hero-title" data-reveal-title set:html={rich(d.hero.title)} />
       </h1>
       <p class="p on hero-lead" data-reveal>{d.hero.text}</p>
-      <div data-reveal><Button href={d.hero.cta.href}>{d.hero.cta.label}</Button></div>
+      <div class="hero-cta" data-reveal>
+        <Button href={d.hero.cta.href}>{d.hero.cta.label}</Button>
+        {d.hero.ctaSecondary && <Button variant="lien" on href={d.hero.ctaSecondary.href}>{d.hero.ctaSecondary.label}</Button>}
+      </div>
     </div>
     <div class="hero-photo">
       <Photo photo={d.hero.photo} fill parallax priority sizes="(max-width: 1000px) 100vw, 50vw" />
@@ -71,6 +74,13 @@ const schema = serviceNodes('agence', new URL('/agence-evenementielle', site.url
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
+  }
+  /* Bouton + lien discret vers l'univers DJ (même disposition que la bannière de l'accueil). */
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
   }
   .hero-text {
     flex: 1 1 560px;

@@ -1,20 +1,20 @@
 {
   "seo": {
     "note": "{prixMin} est remplacé au build par le plus petit tarif chiffré des formules DJ (popups.json).",
-    "title": "DJ mariage, soirée privée & événement d'entreprise — Eva de Casti",
-    "description": "Eva de Casti, DJ pour mariages, soirées privées, événements d'entreprise et festivals. Son et lumière selon la formule, dès {prixMin} TTC."
+    "title": "DJ mariage & événementiel à Bordeaux — Eva de Casti",
+    "description": "DJ mariage, soirée privée et événement d'entreprise à Bordeaux, en Gironde et partout en France. Son et lumière selon la formule, dès {prixMin} TTC."
   },
   "hero": {
-    "kicker": "DJ & production événementielle",
+    "kicker": "DJ événementielle à Bordeaux",
     "title": "La musique au cœur de vos événements.",
-    "text": "Une signature musicale, une énergie communicative et une programmation adaptée à chaque public. Je vous accompagne pour faire de votre événement un moment unique, où la musique crée l'ambiance et rassemble les invités.",
+    "text": "Basée à Bordeaux, j'anime mariages, soirées privées et événements professionnels en Gironde et partout en France. Une signature musicale, une énergie communicative et une programmation adaptée à chaque public, pour que la musique crée l'ambiance et rassemble vos invités.",
     "cta": { "label": "Demander un devis", "href": "/contact?prestation=dj#formulaire" },
     "photo": { "src": "hero-dj.jpg", "alt": "Eva de Casti aux platines dans un club, la foule derrière elle", "position": "60% 40%" }
   },
   "approche": {
     "kicker": "Notre approche",
     "title": "Une passion, une exigence, une ambiance qui vous ressemble.",
-    "text": "Chaque événement possède son identité et son public. Mon rôle est de comprendre vos attentes pour construire une programmation musicale cohérente, m'adapter à l'ambiance et faire vivre chaque moment derrière les platines.",
+    "text": "Mariage, soirée privée ou événement d'entreprise : chaque événement possède son identité et son public. Mon rôle est de comprendre vos attentes pour construire une programmation musicale cohérente, m'adapter à l'ambiance et faire vivre chaque moment derrière les platines.",
     "photo": { "src": "dj-terrasse-pont.jpg", "alt": "DJ set en terrasse avec vue sur le pont Chaban-Delmas" },
     "items": [
       { "title": "Écoute & conseil", "text": "Comprendre vos envies, vos goûts musicaux et l'atmosphère que vous souhaitez créer." },
@@ -26,25 +26,26 @@
   },
   "expertises": {
     "kicker": "Nos expertises",
-    "title": "Une ambiance musicale pour chaque événement.",
+    "title": "Votre DJ pour mariages, soirées privées et événements professionnels.",
+    "note": "{tarifs} est remplacé au build par la fourchette des tarifs chiffrés du pop-up de la carte (popups.json), ex. « De 650 à 1 090 € TTC. ». Ne pas l'utiliser sur une carte dont le pop-up n'a aucun tarif chiffré.",
     "cards": [
       {
         "title": "Mariages",
-        "text": "Du vin d'honneur à la soirée dansante, j'accompagne les mariés pour créer une ambiance musicale à leur image, des premiers instants jusqu'aux dernières danses.",
+        "text": "Du vin d'honneur à la soirée dansante, j'accompagne les mariés pour créer une ambiance musicale à leur image, des premiers instants jusqu'aux dernières danses. {tarifs}",
         "photo": { "src": "dj-mariage-pampas.jpg", "alt": "Installation DJ pour un mariage devant un mur en pierre", "position": "center 30%" },
         "link": "Découvrir les formules",
         "popup": "formules-mariages"
       },
       {
         "title": "Événements d'entreprise",
-        "text": "Soirées corporate, cocktails, séminaires, inaugurations, lancements de produits et événements clients. Une prestation musicale adaptée à votre image et à votre public.",
+        "text": "Soirées corporate, cocktails, séminaires, inaugurations, lancements de produits et événements clients. Une prestation musicale adaptée à votre image et à votre public. {tarifs}",
         "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque avec animation musicale" },
         "link": "Découvrir les formules",
         "popup": "formules-entreprise"
       },
       {
         "title": "Soirées privées",
-        "text": "Anniversaires, fêtes de famille, soirées entre amis et célébrations. Une programmation personnalisée pour partager un moment festif et mémorable.",
+        "text": "Anniversaires, fêtes de famille, soirées entre amis et célébrations. Une programmation personnalisée pour partager un moment festif et mémorable. {tarifs}",
         "photo": { "src": "club-foule.jpg", "alt": "Soirée privée en club avec Eva aux platines" },
         "link": "Découvrir les formules",
         "popup": "formules-soirees"
@@ -103,7 +104,7 @@
   "sono": {
     "kicker": "Sonorisation & mise en lumière",
     "title": "Le son et la lumière au service de votre événement.",
-    "text": "Au-delà de la prestation DJ, je propose des solutions de sonorisation et de mise en lumière adaptées à votre lieu, au nombre de participants et au format de votre événement.",
+    "text": "La sonorisation est incluse dans toutes les formules mariage, entreprise et soirée privée. Au-delà de la prestation DJ, je propose des solutions de sonorisation et de mise en lumière adaptées à votre lieu, au nombre de participants et au format de votre événement.",
     "items": [
       "Sonorisation professionnelle",
       "Enceintes et caissons de basses",
@@ -118,9 +119,25 @@
     "photo": { "src": "studio-platines.jpg", "alt": "Platines Pioneer et enceintes de monitoring", "position": "center 65%" }
   },
   "avisBis": {
-    "note": "Deuxième section d'avis présente dans la maquette (doublon à vérifier avec la cliente) : passer \"afficher\" à false pour la masquer.",
-    "afficher": true,
+    "note": "Deuxième section d'avis présente dans la maquette : masquée (phase 3B) car elle répète les mêmes avis que la première section. Passer \"afficher\" à true pour la réafficher.",
+    "afficher": false,
     "kicker": "Ils nous ont fait confiance",
     "title": "Leur expérience, leurs mots."
+  },
+  "faq": {
+    "note": "{tarifs:identifiant} est remplacé au build par la fourchette des tarifs du pop-up (popups.json) : ne jamais saisir un prix à la main ici.",
+    "kicker": "Questions fréquentes",
+    "title": "Vos questions sur les prestations DJ.",
+    "textBefore": "Une autre question ?",
+    "link": { "label": "Contactez-moi", "href": "/contact?prestation=dj#formulaire" },
+    "textAfter": ", je serai ravie de vous aider.",
+    "items": [
+      { "question": "Combien coûte une prestation DJ ?", "answer": "Mariage : {tarifs:formules-mariages}. Événement d'entreprise : {tarifs:formules-entreprise}. Soirée privée ou anniversaire : {tarifs:formules-soirees}. Une formule sur mesure, sur devis, existe pour les événements d'entreprise et les soirées privées. Pour les festivals et les événements sportifs, il suffit de nous contacter." },
+      { "question": "Que comprennent les formules mariage ?", "answer": "Premium : DJ, sonorisation complète, 2 micros HF, GigBar et barre LED, ambiance du dîner, gestion des discours et animations, jusqu'à environ 4 h de DJ set. Signature : en plus, la musique du vin d'honneur et la sonorisation du cocktail. Expérience : en plus, la sonorisation de la cérémonie, 2 enceintes sur batterie et jusqu'à 4 micros HF." },
+      { "question": "Le matériel son et lumière est-il fourni ?", "answer": "Oui. La sonorisation est incluse dans toutes les formules mariage, entreprise et soirée privée ; les micros et l'éclairage sont inclus selon la formule. Des options permettent de compléter l'installation : éclairage, effets, vidéo, enceintes supplémentaires, photobooth." },
+      { "question": "Pouvez-vous sonoriser la cérémonie et le vin d'honneur ?", "answer": "Oui. La formule Signature inclut la musique du vin d'honneur et la sonorisation du cocktail. La formule Expérience comprend en plus la sonorisation de la cérémonie." },
+      { "question": "Peut-on choisir la musique ?", "answer": "Oui. La programmation est construite à partir de vos envies et de votre public : house, funk et disco, pop-rock, années 80 à 2000, latino, hip-hop et R&B, ou un répertoire plus généraliste." },
+      { "question": "Vous déplacez-vous en dehors de Bordeaux ?", "answer": "Oui. Basée à Bordeaux, Eva intervient en Gironde et partout en France." }
+    ]
   }
 }

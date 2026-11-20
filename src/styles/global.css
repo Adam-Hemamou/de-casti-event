@@ -33,6 +33,14 @@ a {
   text-decoration: none;
 }
 
+/* Lien placé dans un texte des fichiers de données ([texte](/chemin), voir lib/rich.ts) :
+   même couleur que le texte, simplement souligné. */
+.lien-texte {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
 :focus-visible {
   outline: 2px solid var(--highlight);
   outline-offset: 3px;

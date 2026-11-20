@@ -40,10 +40,10 @@ const isPlaceholder = (s: string) => s.startsWith('[');
         ) : (
           <div class="col">
             <p class="bd it col-title">{f.contactTitle}</p>
-            {/* Coordonnée encore à confirmer : affichée sans lien (pas de lien « # »). */}
-            {isPlaceholder(c.email) ? <span class="city">{c.email}</span> : <a href={`mailto:${c.email}`}>{c.email}</a>}
-            {isPlaceholder(c.phone) ? <span class="city">{c.phone}</span> : <a href={`tel:${c.phone.replace(/\s/g, '')}`}>{c.phone}</a>}
-            <span class="city">{c.city}, {c.country}</span>
+            {/* Coordonnée encore à confirmer (« [...] ») : non affichée ; elle apparaît dès qu'elle est renseignée. */}
+            {!isPlaceholder(c.email) && <a href={`mailto:${c.email}`}>{c.email}</a>}
+            {!isPlaceholder(c.phone) && <a href={`tel:${c.phone.replace(/\s/g, '')}`}>{c.phone}</a>}
+            {!isPlaceholder(c.city) && <span class="city">{c.city}, {c.country}</span>}
           </div>
         )
       }

@@ -1,14 +1,14 @@
 {
   "seo": {
-    "title": "Contact & demande de devis — De Casti Event",
-    "description": "Mariage, soirée privée, événement d'entreprise ou réservation DJ : décrivez votre projet à De Casti Event et demandez votre devis personnalisé."
+    "title": "Contact & devis DJ ou événement à Bordeaux — De Casti Event",
+    "description": "Devis DJ ou organisation pour un mariage, une soirée privée ou un événement d'entreprise. Basée à Bordeaux, Eva de Casti intervient dans toute la France."
   },
   "headerCta": { "label": "Demander un devis", "href": "#formulaire" },
   "hero": {
     "kicker": "Contactez-nous",
     "title": "Parlons de *votre projet.*",
-    "text": "Une question, une envie, un projet en tête ? Nous sommes à votre écoute pour créer ensemble des moments uniques et inoubliables.",
-    "labels": { "email": "E-mail", "phone": "Téléphone", "address": "Adresse", "hours": "Disponibilités" }
+    "text": "Une question, une envie, un projet en tête ? DJ ou organisation de votre événement, nous sommes à votre écoute, à Bordeaux comme partout en France, pour créer ensemble des moments uniques et inoubliables.",
+    "labels": { "email": "E-mail", "phone": "Téléphone", "address": "Localisation", "zone": "Zone d'intervention", "hours": "Disponibilités" }
   },
   "form": {
     "name": "contact",
@@ -56,7 +56,7 @@
   },
   "video": {
     "title": "Chaque projet est unique. *Chaque détail compte.*",
-    "text": "Notre équipe met tout en œuvre pour comprendre vos envies et vous proposer une expérience sur mesure, à votre image.",
+    "text": "Nous mettons tout en œuvre pour comprendre vos envies et vous proposer une expérience sur mesure, à votre image.",
     "link": { "label": "Voir la vidéo", "href": "#" },
     "photo": { "src": "hero-accueil.jpg", "alt": "Eva bras levé face à la foule en club", "position": "center 40%" }
   },
@@ -67,9 +67,11 @@
     "link": { "label": "Contactez-nous", "href": "#formulaire" },
     "textAfter": ", nous serons ravis de vous aider.",
     "items": [
-      { "question": "Quels types d'événements organisez-vous ?", "answer": "[Réponse à rédiger avec le client]" },
-      { "question": "Intervenez-vous dans toute la France ?", "answer": "[Réponse à rédiger avec le client]" },
-      { "question": "Comment se déroule la réservation d'un DJ ou d'un événement ?", "answer": "[Réponse à rédiger avec le client]" }
+      { "question": "Où êtes-vous basée ? Intervenez-vous dans toute la France ?", "answer": "De Casti Event est basée à Bordeaux, en Gironde. Eva de Casti intervient partout en France, pour les prestations DJ comme pour l'organisation d'événements." },
+      { "question": "Quels types d'événements prenez-vous en charge ?", "answer": "Mariages, soirées privées et anniversaires, événements d'entreprise (soirées, séminaires, lancements, inaugurations, événements clients), ainsi que festivals, événements publics, sportifs et de marques." },
+      { "question": "Peut-on vous confier à la fois l'organisation et le DJ ?", "answer": "Oui ! Vous pouvez faire appel à De Casti Event pour l'organisation de votre événement, pour la prestation DJ d'Eva de Casti, ou pour associer les deux prestations au sein d'un même projet." },
+      { "question": "Comment se déroule l'organisation d'un événement ?", "answer": "En cinq étapes : un échange pour définir vos envies et vos besoins, la conception du projet, la recherche et la coordination des prestataires, l'organisation et le suivi, puis la coordination le jour J." },
+      { "question": "Comment faire une demande ?", "answer": "Décrivez votre projet dans le formulaire (type d'événement, date, lieu, nombre d'invités, budget). Après un premier échange, vous recevez une proposition personnalisée." }
     ]
   }
 }

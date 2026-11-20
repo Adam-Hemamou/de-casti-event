@@ -37,6 +37,10 @@ interface Props {
   ogImage?: { src: string; alt: string };
   /** Nom de la page dans le fil d'Ariane des données structurées (absent sur l'accueil). */
   breadcrumb?: string;
+  /** Type Schema.org de la page (ContactPage pour la page contact). */
+  pageType?: 'WebPage' | 'ContactPage';
+  /** Sujet principal de la page dans les données structurées (Eva de Casti pour la page DJ). */
+  about?: 'organisation' | 'person';
   /** Données structurées propres à la page (Service, FAQPage…), ajoutées au graphe commun. */
   schema?: Record<string, unknown>[];
   /** Destination du bouton flottant « Demander un devis » (mobile) ; absent = pas de bouton. */
@@ -44,8 +48,20 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description, footer = 'agence', headerClass, headerCta, ogImage, breadcrumb, schema = [], mobileCta, noindex = false } =
-  Astro.props;
+const {
+  title,
+  description,
+  footer = 'agence',
+  headerClass,
+  headerCta,
+  ogImage,
+  breadcrumb,
+  pageType,
+  about,
+  schema = [],
+  mobileCta,
+  noindex = false,
+} = Astro.props;
 
 const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), site.url).href;
 const ogPhoto = ogImage ?? { src: site.defaultOgImage, alt: site.defaultOgImageAlt };
@@ -68,7 +84,7 @@ if (!noindex) {
     '@context': 'https://schema.org',
     '@graph': [
       ...siteNodes({ organisation: defaultOg, person: new URL(portrait.src, site.url).href }),
-      ...pageNodes({ url: canonical, title, description, breadcrumb }),
+      ...pageNodes({ url: canonical, title, description, breadcrumb, type: pageType, about, image: ogUrl }),
       ...schema,
     ],
   });

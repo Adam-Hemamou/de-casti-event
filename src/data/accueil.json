@@ -1,13 +1,13 @@
 {
   "seo": {
-    "title": "Agence événementielle & DJ, mariages et entreprises — De Casti Event",
-    "description": "De Casti Event organise et coordonne mariages, soirées privées et événements d'entreprise, avec Eva de Casti aux platines. Deux expertises, une interlocutrice."
+    "title": "DJ & organisation d'événements à Bordeaux — De Casti Event",
+    "description": "DJ événementielle basée à Bordeaux, Eva de Casti anime mariages, soirées et événements d'entreprise partout en France et organise vos événements sur mesure."
   },
   "hero": {
-    "kicker": "Agence événementielle & DJ",
+    "kicker": "DJ & agence événementielle à Bordeaux",
     "titleTop": "CRÉONS ENSEMBLE",
     "title": "des moments inoubliables.",
-    "text": "De la conception de votre événement à son ambiance musicale, De Casti Event imagine et coordonne des expériences sur mesure, pensées dans les moindres détails pour vous et vos invités.",
+    "text": "Eva de Casti, DJ événementielle basée à Bordeaux, crée l'ambiance musicale de vos mariages, soirées privées et événements d'entreprise partout en France. Avec De Casti Event, elle imagine et coordonne aussi votre événement, de la première idée au jour J.",
     "cta": { "label": "Découvrir nos services", "href": "#activites" },
     "ctaSecondary": { "label": "Demander un devis", "href": "/contact#formulaire" },
     "vinyl": {
@@ -59,24 +59,9 @@
     "separator": "&",
     "cards": [
       {
-        "icon": "sparkle",
-        "title": "Agence *événementielle*",
-        "text": "De Casti Event imagine, organise et coordonne vos événements professionnels et privés, de la première idée jusqu'au jour J.",
-        "listColumns": 1,
-        "items": [
-          "Événements d'entreprise & corporate",
-          "Séminaires & team building",
-          "Inaugurations & lancements",
-          "Soirées d'entreprise & événements clients",
-          "Mariages & célébrations privées"
-        ],
-        "cta": { "label": "Découvrir l'agence", "href": "/agence-evenementielle" },
-        "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque dans un tunnel scénographié" }
-      },
-      {
         "icon": "headphones",
         "title": "DJ *— Eva de Casti*",
-        "text": "Des ambiances musicales personnalisées, une sélection adaptée à votre public et une énergie pensée pour faire vivre chaque événement.",
+        "text": "Des ambiances musicales personnalisées, une sélection adaptée à votre public et une énergie pensée pour faire vivre chaque événement, depuis Bordeaux et partout en France.",
         "listColumns": 2,
         "items": [
           "Mariages",
@@ -88,9 +73,25 @@
         ],
         "cta": { "label": "Découvrir l'univers DJ", "href": "/dj" },
         "photo": { "src": "hero-dj.jpg", "alt": "Eva de Casti aux platines dans un club", "position": "60% 40%" }
+      },
+      {
+        "icon": "sparkle",
+        "title": "Agence *événementielle*",
+        "text": "De Casti Event imagine, organise et coordonne vos événements professionnels et privés, à Bordeaux et dans toute la France, de la première idée jusqu'au jour J.",
+        "listColumns": 1,
+        "items": [
+          "Événements d'entreprise & corporate",
+          "Séminaires & team building",
+          "Inaugurations & lancements",
+          "Soirées d'entreprise & événements clients",
+          "Mariages & célébrations privées"
+        ],
+        "cta": { "label": "Découvrir l'agence", "href": "/agence-evenementielle" },
+        "photo": { "src": "evenement-marque.jpg", "alt": "Événement de marque dans un tunnel scénographié" }
       }
     ]
   },
+  "chiffresNote": "[À CONFIRMER PAR EVA AVANT LA MISE EN LIGNE] Chiffres repris de la maquette (250+ événements, 7 années, 15+ régions & destinations) : à masquer avant le déploiement s'ils ne sont pas confirmés. Ils ne sont repris ni dans les données structurées ni dans la FAQ.",
   "chiffres": [
     { "value": 250, "suffix": "+", "label": "événements réalisés" },
     { "value": 7, "suffix": "", "label": "années d'expérience" },
@@ -103,13 +104,13 @@
     "title": "L'art de sublimer chaque instant",
     "lead": "Deux expertises, une même passion : l'événementiel.",
     "paragraphs": [
-      "De Casti Event est née de la passion d'Eva de Casti pour la musique et de son envie de créer des événements uniques, authentiques et mémorables.",
+      "De Casti Event est née de la passion d'Eva de Casti pour la musique et de son envie de créer des événements uniques, authentiques et mémorables. Basée à Bordeaux, Eva intervient partout en France.",
       "Depuis plusieurs années, Eva évolue dans l'univers événementiel à travers son activité de DJ et développe une véritable expertise dans la création d'ambiances musicales et l'accompagnement de projets événementiels.",
       "Aujourd'hui, avec De Casti Event, elle met cette expérience au service des particuliers et des entreprises, en proposant un accompagnement personnalisé dans la conception, l'organisation et la coordination de leurs événements.",
       "De la recherche des prestataires à la coordination du jour J, en passant par l'animation musicale, chaque projet est imaginé avec attention, créativité et exigence."
     ],
     "emphasis": "Notre ambition : donner vie à vos idées et transformer chaque événement en une expérience qui vous ressemble.",
-    "link": { "label": "En savoir plus", "href": "/agence-evenementielle" },
+    "link": { "label": "Découvrir l'agence événementielle", "href": "/agence-evenementielle" },
     "photo": { "src": "eva-portrait.jpg", "alt": "Portrait d'Eva de Casti", "position": "center 22%" }
   },
   "realisations": {
