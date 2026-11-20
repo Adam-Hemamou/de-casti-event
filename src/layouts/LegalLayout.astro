@@ -1,65 +1,362 @@
 ---
-// Mise en page des pages légales (mentions légales, confidentialité).
+// Mise en page des pages légales (mentions légales, politique de confidentialité).
+// - bannière sombre du site (PageIntro) ;
+// - sommaire numéroté, fixe à côté du texte sur grand écran, en tête de page sur mobile ;
+// - sections numérotées (grand chiffre Bodoni italique, comme les étapes de la page Agence) ;
+// - blocs : paragraphe, liste, ou tableau « intitulé / information ».
+// Informations manquantes : les marqueurs « [À COMPLÉTER : …] » / « [À CONFIRMER : …] » sont
+// affichés comme tels, et la page n'est pas indexée tant qu'il en reste (voir lib/legal.ts).
 import BaseLayout from './BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
+import { estProvisoire, texteLegal } from '../lib/legal';
+
+type Block = { p: string } | { list: string[] } | { rows: { label: string; value: string; href?: string }[] };
 
 interface Props {
   page: {
     seo: { title: string; description: string };
     kicker: string;
     title: string;
-    sections: { title: string; text: string }[];
+    intro: string;
+    updated: string;
+    tocLabel: string;
+    provisional: string;
+    sections: { id: string; title: string; blocks: Block[] }[];
   };
 }
 
 const { page } = Astro.props;
+const provisoire = estProvisoire(page);
+const num = (i: number) => String(i + 1).padStart(2, '0');
+const externe = (href: string) => /^https?:\/\//.test(href);
 ---
 
-<BaseLayout title={page.seo.title} description={page.seo.description} headerClass="hero-simple" breadcrumb={page.title}>
-  <PageIntro slot="hero" kicker={page.kicker} title={page.title} />
+<BaseLayout
+  title={page.seo.title}
+  description={page.seo.description}
+  headerClass="hero-legal"
+  breadcrumb={page.title.replace(/\*/g, '').replace(/\.$/, '')}
+  noindex={provisoire}
+>
+  <PageIntro slot="hero" kicker={page.kicker} title={page.title} text={page.intro} />
+
   <section class="legal on-light">
-    <div class="w">
-      <div class="legal-inner">
-      {
-        page.sections.map((s) => (
-          <div class="block" data-reveal>
-            <h2 class="bd it">{s.title}</h2>
-            <p class="p">{s.text}</p>
-          </div>
-        ))
-      }
+    <div class="w legal-grid">
+      <nav class="toc" aria-labelledby="sommaire-titre">
+        <p class="kick toc-title" id="sommaire-titre">{page.tocLabel}</p>
+        <ol>
+          {
+            page.sections.map((s, i) => (
+              <li>
+                <a href={`#${s.id}`}>
+                  <span class="toc-num">{num(i)}</span>
+                  <span>{s.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="content">
+        {
+          provisoire && (
+            <p class="notice" role="note">
+              <span class="notice-dot" aria-hidden="true" />
+              {page.provisional}
+            </p>
+          )
+        }
+        <p class="updated" set:html={texteLegal(page.updated)} />
+
+        {
+          page.sections.map((s, i) => (
+            <section class="block" id={s.id} aria-labelledby={`${s.id}-titre`} data-reveal>
+              <header class="block-head">
+                <span class="num" aria-hidden="true">{num(i)}</span>
+                <h2 class="bd" id={`${s.id}-titre`}>{s.title}</h2>
+              </header>
+              <div class="block-body">
+                {s.blocks.map((b) =>
+                  'p' in b ? (
+                    <p class="p" set:html={texteLegal(b.p)} />
+                  ) : 'list' in b ? (
+                    <ul class="list">
+                      {b.list.map((item) => (
+                        <li set:html={texteLegal(item)} />
+                      ))}
+                    </ul>
+                  ) : (
+                    <dl class="rows">
+                      {b.rows.map((r) => (
+                        <div class="row">
+                          <dt>{r.label}</dt>
+                          <dd>
+                            {r.href ? (
+                              <a class="lien-texte" href={r.href} rel={externe(r.href) ? 'noopener' : undefined}>
+                                {r.value}
+                              </a>
+                            ) : (
+                              <Fragment set:html={texteLegal(r.value)} />
+                            )}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  ),
+                )}
+              </div>
+            </section>
+          ))
+        }
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  :global(.site-header.hero-simple) {
-    background: var(--wine);
+  /* Bannière : même fond que les autres bannières, avec le halo de l'accueil. */
+  :global(.site-header.hero-legal) {
+    background: radial-gradient(110% 120% at 85% 0%, var(--velvet) 0%, var(--wine) 50%, var(--wine-deep) 100%);
   }
+
   .legal {
-    padding: 104px 0;
+    padding: 104px 0 120px;
   }
-  .legal-inner {
-    display: flex;
-    flex-direction: column;
-    max-width: 760px;
+  .legal-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    gap: 80px;
+    align-items: start;
   }
-  .block {
-    padding: 24px 0;
+
+  /* Sommaire */
+  .toc {
+    position: sticky;
+    top: 40px;
+    padding-top: 6px;
+  }
+  .toc-title {
+    margin-bottom: 18px;
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     border-top: 1px solid var(--line);
+  }
+  .toc a {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14.5px;
+    line-height: 1.35;
+    color: var(--text);
+    transition: color 0.2s ease;
+  }
+  .toc a:hover {
+    color: var(--accent);
+  }
+  .toc-num {
+    flex: none;
+    width: 1.7em;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--accent);
+  }
+
+  /* Avertissement « page en cours de finalisation » */
+  .notice {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    margin: 0 0 20px;
+    padding: 18px 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .notice-dot {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translateY(-1px);
+  }
+  .updated {
+    margin: 0 0 40px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text-muted);
+  }
+
+  /* Sections */
+  .block {
+    scroll-margin-top: 32px;
+    padding: 40px 0 44px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    column-gap: 16px;
   }
   .block:last-child {
     border-bottom: 1px solid var(--line);
   }
+  .block-head {
+    display: contents;
+  }
+  .num {
+    grid-row: 1 / span 2;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 46px;
+    line-height: 0.9;
+    color: var(--accent);
+  }
   h2 {
-    margin: 0 0 10px;
-    font-size: 26px;
+    margin: 0 0 18px;
+    font-size: clamp(26px, 2.6vw, 34px);
+    line-height: 1.1;
     font-weight: 400;
+    color: var(--wine);
+  }
+  .block-body {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .block-body .p {
+    max-width: 68ch;
+  }
+
+  /* Listes à puces dorées */
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 68ch;
+  }
+  .list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .list li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* Tableau « intitulé / information » */
+  .rows {
+    margin: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(150px, 220px) minmax(0, 1fr);
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  dt {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: 3px;
+  }
+  dd {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--wine);
+  }
+
+  /* Information manquante : étiquette visible, jamais confondue avec une vraie donnée. */
+  .legal :global(.todo) {
+    display: inline;
+    padding: 2px 8px 3px;
+    border: 1px dashed var(--accent);
+    border-radius: 4px;
+    background: rgba(var(--highlight-rgb), 0.16);
+    font-size: 14.5px;
+    line-height: 1.9;
+    color: var(--text);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .legal :global(.todo-tag) {
+    margin-right: 6px;
+    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .legal :global(.todo-detail) {
+    font-style: italic;
+  }
+
+  @media (max-width: 960px) {
+    .legal-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .toc {
+      position: static;
+    }
+    .toc ol {
+      columns: 2;
+      column-gap: 32px;
+    }
+    .toc li {
+      break-inside: avoid;
+    }
   }
   @media (max-width: 768px) {
     .legal {
-      padding: 72px 0;
+      padding: 64px 0 80px;
+    }
+    .toc ol {
+      columns: 1;
+    }
+    .block {
+      grid-template-columns: 1fr;
+      padding: 32px 0 36px;
+    }
+    .num {
+      grid-row: auto;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .block-body {
+      grid-column: 1;
+    }
+    .row {
+      grid-template-columns: 1fr;
+      gap: 4px;
     }
   }
 </style>

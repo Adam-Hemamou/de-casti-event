@@ -46,9 +46,18 @@
     "budgets": ["Moins de 1 000 €", "1 000 à 2 000 €", "2 000 à 5 000 €", "Plus de 5 000 €", "Je ne sais pas encore"],
     "honeypotLabel": "Ne pas remplir ce champ :",
     "submit": "Envoyer ma demande",
-    "privacy": "Vos données sont confidentielles et ne seront jamais partagées.",
-    "privacyLink": { "label": "Politique de confidentialité", "href": "/politique-de-confidentialite" },
-    "errorSummary": "Merci de compléter les champs signalés."
+    "privacy": "Vos informations sont utilisées uniquement pour traiter votre demande et vous recontacter. Elles sont transmises aux prestataires techniques nécessaires au fonctionnement du service, conformément à notre",
+    "privacyLink": { "label": "politique de confidentialité.", "href": "/politique-de-confidentialite" },
+    "errorSummary": "Merci de compléter les champs signalés.",
+    "sending": "Envoi en cours…",
+    "sendErrorsNote": "Messages affichés si l'envoi échoue (route /api/contact). Le visiteur ne voit jamais le détail technique.",
+    "sendErrors": {
+      "invalid": "Certaines informations ne sont pas valides. Merci de vérifier le formulaire.",
+      "unavailable": "L'envoi du formulaire est momentanément indisponible. Merci de réessayer un peu plus tard.",
+      "failed": "Votre message n'a pas pu être envoyé. Merci de réessayer dans quelques instants.",
+      "tooMany": "Plusieurs demandes ont été envoyées en peu de temps. Merci de réessayer dans quelques minutes.",
+      "back": "Retour au formulaire"
+    }
   },
   "social": {
     "title": "Suivez-nous",

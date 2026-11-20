@@ -324,6 +324,10 @@ const Contact = S({
     privacy: text,
     privacyLink: Link,
     errorSummary: text,
+    // Envoi (route /api/contact) : libellé du bouton pendant l'envoi et messages d'échec.
+    sending: text,
+    sendErrorsNote: z.string().optional(),
+    sendErrors: S({ invalid: text, unavailable: text, failed: text, tooMany: text, back: text }),
   }),
   social: S({ title: text, networks: z.array(SocialKey) }),
   video: S({ title: text, text: text, link: Link, photo: Photo }),
@@ -331,8 +335,27 @@ const Contact = S({
 });
 
 const SimplePage = S({ seo: Seo, kicker: text, title: text, text: text, cta: Link });
-const LegalPage = S({ seo: Seo, kicker: text, title: text, sections: z.array(S({ title: text, text: text })) });
-const Pages = S({ merci: SimplePage, erreur404: SimplePage, mentions: LegalPage, confidentialite: LegalPage });
+// Page 404 : bouton principal (retour à l'accueil) et liens secondaires (DJ, contact).
+const ErrorPage = SimplePage.extend({ links: z.array(Link) });
+
+// Pages légales. Une information encore inconnue s'écrit « [À COMPLÉTER : …] » ou
+// « [À CONFIRMER : …] » : elle est signalée visiblement sur la page, et la page n'est ni
+// indexée ni listée dans le sitemap tant qu'il en reste une (voir src/lib/legal.ts).
+const LegalRow = S({ label: text, value: text, href: z.string().optional() });
+const LegalBlock = z.union([S({ p: text }), S({ list: z.array(text).min(1) }), S({ rows: z.array(LegalRow).min(1) })]);
+const LegalPage = S({
+  seo: Seo,
+  kicker: text,
+  title: text,
+  intro: text,
+  updated: text,
+  tocLabel: text,
+  provisional: text,
+  sections: z
+    .array(S({ id: z.string().regex(/^[a-z0-9-]+$/, 'identifiant en minuscules et tirets'), title: text, blocks: z.array(LegalBlock).min(1) }))
+    .min(1),
+});
+const Pages = S({ merci: SimplePage, erreur404: ErrorPage, mentions: LegalPage, confidentialite: LegalPage });
 
 function load<T extends z.ZodType>(file: string, schema: T, data: unknown): z.infer<T> {
   const result = schema.safeParse(data);

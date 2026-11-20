@@ -1,13 +1,16 @@
 ---
-// Formulaire de contact (Netlify Forms).
-// - Netlify détecte le formulaire au déploiement grâce à data-netlify="true" et au champ form-name ;
-// - champ anti-spam caché (bot-field) ;
-// - après envoi, redirection vers /merci (attribut action) ;
+// Formulaire de contact, envoyé à la route /api/contact (fonction Vercel + Resend).
+// - la route revérifie tous les champs : la validation ci-dessous n'est qu'un confort ;
+// - champ anti-robots caché (bot-field), contrôlé par la route ;
+// - avec JavaScript : envoi en arrière-plan, bouton verrouillé pendant l'envoi (pas de double
+//   envoi), message d'erreur dans le formulaire sans perdre la saisie, puis page /merci ;
+// - sans JavaScript : envoi classique, la route redirige vers /merci ou affiche l'erreur ;
 // - validation : messages sous chaque champ (script ci-dessous) ; sans JavaScript,
-//   la validation native du navigateur s'applique (required, type="email") ;
+//   la validation native du navigateur s'applique (required, type="email", maxlength) ;
 // - type d'événement présélectionné via l'adresse : /contact?type=mariage
 import { contact } from '../data';
 import { rich } from '../lib/rich';
+import { LIMITES } from '../lib/contact-form';
 
 const f = contact.form;
 const fl = f.fields;
@@ -18,13 +21,13 @@ const fl = f.fields;
   class="form on-light"
   name={f.name}
   method="POST"
-  action="/merci"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
+  action="/api/contact"
   data-astro-reload
   data-contact-form
+  data-success="/merci"
+  data-sending={f.sending}
+  data-messages={JSON.stringify(f.sendErrors)}
 >
-  <input type="hidden" name="form-name" value={f.name} />
   <p class="honeypot" hidden>
     <label>{f.honeypotLabel} <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
   </p>
@@ -36,12 +39,12 @@ const fl = f.fields;
   <div class="row">
     <div class="field">
       <label for="nom">{fl.nom.label}</label>
-      <input id="nom" name="nom" type="text" autocomplete="family-name" required aria-describedby="nom-erreur" data-error={fl.nom.error} />
+      <input id="nom" name="nom" type="text" autocomplete="family-name" required maxlength={LIMITES.nom} aria-describedby="nom-erreur" data-error={fl.nom.error} />
       <p class="error" id="nom-erreur"></p>
     </div>
     <div class="field">
       <label for="prenom">{fl.prenom.label}</label>
-      <input id="prenom" name="prenom" type="text" autocomplete="given-name" required aria-describedby="prenom-erreur" data-error={fl.prenom.error} />
+      <input id="prenom" name="prenom" type="text" autocomplete="given-name" required maxlength={LIMITES.prenom} aria-describedby="prenom-erreur" data-error={fl.prenom.error} />
       <p class="error" id="prenom-erreur"></p>
     </div>
   </div>
@@ -54,6 +57,7 @@ const fl = f.fields;
         type="email"
         autocomplete="email"
         required
+        maxlength={LIMITES.email}
         aria-describedby="email-erreur"
         data-error={fl.email.error}
         data-error-format={fl.email.errorFormat}
@@ -62,7 +66,7 @@ const fl = f.fields;
     </div>
     <div class="field">
       <label for="tel">{fl.telephone.label}</label>
-      <input id="tel" name="telephone" type="tel" autocomplete="tel" />
+      <input id="tel" name="telephone" type="tel" autocomplete="tel" maxlength={LIMITES.telephone} />
     </div>
   </div>
   <div class="row">
@@ -89,7 +93,7 @@ const fl = f.fields;
     </div>
     <div class="field">
       <label for="lieu">{fl.lieu.label}</label>
-      <input id="lieu" name="lieu" type="text" autocomplete="off" />
+      <input id="lieu" name="lieu" type="text" autocomplete="off" maxlength={LIMITES.lieu} />
     </div>
   </div>
   <div class="row">
@@ -110,7 +114,7 @@ const fl = f.fields;
   </div>
   <div class="field">
     <label for="msg">{fl.message.label}</label>
-    <textarea id="msg" name="message" rows="4" required aria-describedby="msg-erreur" data-error={fl.message.error}></textarea>
+    <textarea id="msg" name="message" rows="4" required maxlength={LIMITES.message} aria-describedby="msg-erreur" data-error={fl.message.error}></textarea>
     <p class="error" id="msg-erreur"></p>
   </div>
   <button type="submit" class="pill wine submit">{f.submit}</button>
@@ -158,12 +162,75 @@ const fl = f.fields;
       el.addEventListener('blur', () => el.value && check(el));
     });
 
-    form.addEventListener('submit', (e) => {
+    // Envoi en arrière-plan vers /api/contact : la saisie est conservée en cas d'erreur.
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const buttonLabel = button.textContent ?? '';
+    const defaultSummary = summary.textContent ?? '';
+    const messages = JSON.parse(form.dataset.messages ?? '{}') as Record<string, string>;
+    const messageFor = (code: string) =>
+      ({
+        invalide: messages.invalid,
+        format: messages.invalid,
+        taille: messages.invalid,
+        'trop-de-demandes': messages.tooMany,
+        'non-configure': messages.unavailable,
+      })[code] ?? messages.failed;
+    let sending = false;
+
+    const showSummary = (text: string) => {
+      summary.textContent = text;
+      summary.hidden = false;
+    };
+    const unlock = () => {
+      sending = false;
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
+      button.textContent = buttonLabel;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Double clic ou nouvelle soumission pendant un envoi : ignorés.
+      if (sending) return;
+      summary.textContent = defaultSummary;
       const invalid = fields.filter((el) => !check(el));
       summary.hidden = invalid.length === 0;
       if (invalid.length) {
-        e.preventDefault();
         invalid[0].focus();
+        return;
+      }
+
+      sending = true;
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      button.textContent = form.dataset.sending ?? buttonLabel;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(20000),
+        });
+        const result = (await response.json().catch(() => ({}))) as { ok?: boolean; code?: string; champs?: string[] };
+        if (response.ok && result.ok) {
+          // Le bouton reste verrouillé jusqu'au changement de page.
+          location.assign(form.dataset.success ?? '/merci');
+          return;
+        }
+        // Champs refusés par le serveur : même affichage que la validation du navigateur.
+        const refused = fields.filter((el) => result.champs?.includes(el.name));
+        refused.forEach((el) => {
+          const error = document.getElementById(el.getAttribute('aria-describedby')!)!;
+          error.textContent = (el.value.trim() && el.dataset.errorFormat) || el.dataset.error || '';
+          el.setAttribute('aria-invalid', 'true');
+        });
+        showSummary(refused.length ? defaultSummary : messageFor(result.code ?? ''));
+        unlock();
+        (refused[0] ?? button).focus();
+      } catch {
+        showSummary(messages.failed);
+        unlock();
       }
     });
   }

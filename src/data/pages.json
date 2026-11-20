@@ -10,19 +10,338 @@
     "seo": { "title": "Page introuvable — De Casti Event", "description": "Cette page n'existe pas ou a été déplacée." },
     "kicker": "Erreur 404",
     "title": "Cette page est *introuvable.*",
-    "text": "[Texte à confirmer] La page que vous cherchez n'existe pas ou a été déplacée.",
-    "cta": { "label": "Retour à l'accueil", "href": "/" }
+    "text": "La musique s'est arrêtée ici : la page que vous cherchez n'existe pas ou a été déplacée.",
+    "cta": { "label": "Retour à l'accueil", "href": "/" },
+    "links": [
+      { "label": "Découvrir l'univers DJ", "href": "/dj" },
+      { "label": "Nous contacter", "href": "/contact" }
+    ]
   },
   "mentions": {
-    "seo": { "title": "Mentions légales — De Casti Event", "description": "Mentions légales du site De Casti Event." },
+    "seo": { "title": "Mentions légales — De Casti Event", "description": "Mentions légales du site De Casti Event : éditeur, hébergement, propriété intellectuelle et contact." },
     "kicker": "Informations légales",
-    "title": "Mentions légales",
-    "sections": [{ "title": "[à rédiger]", "text": "[à rédiger]" }]
+    "title": "Mentions *légales.*",
+    "intro": "Informations relatives à l'éditeur et à l'hébergeur du site, prévues par l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique.",
+    "updated": "Dernière mise à jour : [À COMPLÉTER : date de mise en ligne de la version définitive]",
+    "tocLabel": "Sommaire",
+    "provisional": "Page en cours de finalisation : les informations signalées « À compléter » ou « À confirmer » seront renseignées avant la mise en ligne définitive.",
+    "sections": [
+      {
+        "id": "editeur",
+        "title": "Éditeur du site",
+        "blocks": [
+          { "p": "Le site est édité par :" },
+          {
+            "rows": [
+              { "label": "Nom commercial", "value": "De Casti Event" },
+              { "label": "Fondatrice", "value": "Eva de Casti" },
+              { "label": "Entrepreneur ou société", "value": "[À COMPLÉTER : nom et prénom de l'entrepreneur individuel, ou dénomination sociale de la société]" },
+              { "label": "Adresse du site", "value": "[À COMPLÉTER : nom de domaine définitif]" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "identification",
+        "title": "Identification de l'entreprise",
+        "blocks": [
+          {
+            "rows": [
+              { "label": "Forme juridique", "value": "[À COMPLÉTER : par exemple entreprise individuelle (micro-entreprise) ou société, avec sa forme]" },
+              { "label": "Capital social", "value": "[À COMPLÉTER : uniquement pour une société]" },
+              { "label": "Adresse", "value": "[À COMPLÉTER : adresse postale du siège ou de domiciliation de l'entreprise]" },
+              { "label": "Ville de rattachement", "value": "Bordeaux (Gironde), France. L'activité s'exerce partout en France." },
+              { "label": "SIREN / SIRET", "value": "[À COMPLÉTER : numéros d'identification]" },
+              { "label": "Immatriculation", "value": "[À COMPLÉTER : registre d'immatriculation (RNE ou RCS) et ville]" },
+              { "label": "TVA", "value": "[À COMPLÉTER : numéro de TVA intracommunautaire, ou mention « TVA non applicable, article 293 B du CGI » selon le régime fiscal]" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "publication",
+        "title": "Responsable de la publication",
+        "blocks": [
+          { "rows": [{ "label": "Responsable", "value": "[À COMPLÉTER : nom et prénom du ou de la responsable de la publication]" }] },
+          { "p": "La personne responsable de la publication peut être jointe aux coordonnées indiquées ci-dessous." }
+        ]
+      },
+      {
+        "id": "coordonnees",
+        "title": "Coordonnées",
+        "blocks": [
+          {
+            "rows": [
+              { "label": "E-mail", "value": "[À COMPLÉTER : adresse e-mail de contact]" },
+              { "label": "Téléphone", "value": "[À COMPLÉTER : numéro de téléphone]" },
+              { "label": "Formulaire", "value": "Formulaire de contact du site", "href": "/contact" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hebergement",
+        "title": "Hébergement du site",
+        "blocks": [
+          { "p": "Le site est hébergé par :" },
+          {
+            "rows": [
+              { "label": "Hébergeur", "value": "Vercel Inc." },
+              { "label": "Adresse", "value": "440 N Barranca Ave #4133, Covina, CA 91723, États-Unis" },
+              { "label": "Téléphone", "value": "[À COMPLÉTER : numéro de téléphone de l'hébergeur]" },
+              { "label": "Site", "value": "vercel.com", "href": "https://vercel.com" }
+            ]
+          },
+          { "p": "Les e-mails envoyés depuis le formulaire de contact sont acheminés par le service Resend. Son rôle est décrit dans la [politique de confidentialité](/politique-de-confidentialite)." }
+        ]
+      },
+      {
+        "id": "propriete-intellectuelle",
+        "title": "Propriété intellectuelle",
+        "blocks": [
+          { "p": "L'ensemble des contenus du site (textes, photographies, vidéos, logo, éléments graphiques et mise en page) est protégé par le droit de la propriété intellectuelle. Sauf mention contraire, ces contenus appartiennent à De Casti Event ou à leurs auteurs respectifs." },
+          { "p": "Toute reproduction, représentation, modification ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite." },
+          { "rows": [{ "label": "Crédits photographiques", "value": "[À COMPLÉTER : nom des photographes ou mention des droits sur les photos]" }] }
+        ]
+      },
+      {
+        "id": "responsabilite",
+        "title": "Responsabilité",
+        "blocks": [
+          { "p": "De Casti Event veille à publier des informations exactes et à jour. Les informations présentées sur le site, notamment les prestations, formules et tarifs, sont données à titre indicatif. [À CONFIRMER : préciser que seul le devis accepté engage les parties.]" },
+          { "p": "De Casti Event ne saurait être tenue responsable d'une interruption du site, d'un problème technique ou de l'usage fait des informations publiées." },
+          { "p": "Le site peut contenir des liens vers d'autres sites, sur lesquels De Casti Event n'exerce aucun contrôle et dont elle ne saurait être tenue responsable." }
+        ]
+      },
+      {
+        "id": "mediation",
+        "title": "Médiation de la consommation",
+        "blocks": [
+          { "p": "Conformément aux articles L. 612-1 et suivants du Code de la consommation, le client particulier peut recourir gratuitement à un médiateur de la consommation en vue de la résolution amiable d'un litige." },
+          { "rows": [{ "label": "Médiateur", "value": "[À COMPLÉTER : nom, adresse et site internet du médiateur de la consommation choisi par l'entreprise]" }] }
+        ]
+      },
+      {
+        "id": "contact",
+        "title": "Contact",
+        "blocks": [
+          { "p": "Pour toute question relative au site ou aux présentes mentions légales, vous pouvez écrire via le [formulaire de contact](/contact) ou à l'adresse e-mail indiquée dans la rubrique « Coordonnées »." },
+          { "p": "Le traitement des données personnelles est décrit dans la [politique de confidentialité](/politique-de-confidentialite)." }
+        ]
+      }
+    ]
   },
   "confidentialite": {
-    "seo": { "title": "Politique de confidentialité — De Casti Event", "description": "Politique de confidentialité et traitement des données personnelles du site De Casti Event." },
+    "seo": { "title": "Politique de confidentialité — De Casti Event", "description": "Données personnelles traitées par le site De Casti Event, notamment via le formulaire de contact, et droits des utilisateurs." },
     "kicker": "Informations légales",
-    "title": "Politique de confidentialité",
-    "sections": [{ "title": "[à rédiger]", "text": "[à rédiger]" }]
+    "title": "Politique de *confidentialité.*",
+    "intro": "Quelles données personnelles sont traitées lorsque vous utilisez le site, en particulier le formulaire de contact, pourquoi, par qui, et quels sont vos droits.",
+    "updated": "Dernière mise à jour : [À COMPLÉTER : date de mise en ligne de la version définitive]",
+    "tocLabel": "Sommaire",
+    "provisional": "Page en cours de finalisation : les informations signalées « À compléter » ou « À confirmer » seront renseignées avant la mise en ligne définitive.",
+    "sections": [
+      {
+        "id": "responsable",
+        "title": "Responsable du traitement",
+        "blocks": [
+          { "p": "Le responsable du traitement est l'éditeur du site, De Casti Event, présenté dans les [mentions légales](/mentions-legales)." },
+          {
+            "rows": [
+              { "label": "Identité", "value": "[À COMPLÉTER : nom de l'entrepreneur individuel ou dénomination sociale]" },
+              { "label": "Adresse", "value": "[À COMPLÉTER : adresse postale de l'entreprise]" },
+              { "label": "Contact données personnelles", "value": "[À COMPLÉTER : adresse e-mail à utiliser pour les questions relatives aux données]" },
+              { "label": "Délégué à la protection des données", "value": "[À CONFIRMER : aucun délégué désigné]" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "donnees-collectees",
+        "title": "Données personnelles collectées",
+        "blocks": [
+          { "p": "Le site ne propose ni création de compte, ni paiement en ligne, ni lettre d'information. Des données personnelles sont traitées dans deux situations :" },
+          {
+            "list": [
+              "lorsque vous envoyez le formulaire de contact (voir la rubrique suivante) ;",
+              "lors de chaque visite, pour le fonctionnement et la sécurité du site : données techniques de connexion traitées par l'hébergeur, comme l'adresse IP, la date et l'heure, la page demandée et le type de navigateur."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "formulaire",
+        "title": "Données collectées via le formulaire de contact",
+        "blocks": [
+          { "p": "Le formulaire recueille les informations suivantes :" },
+          {
+            "list": [
+              "obligatoires : nom, prénom, adresse e-mail, type d'événement et message ;",
+              "facultatives : téléphone, prestation souhaitée, date de l'événement, lieu, nombre d'invités et budget envisagé."
+            ]
+          },
+          { "p": "Ces informations sont vérifiées par le serveur, puis transmises par e-mail à De Casti Event. Elles ne sont pas enregistrées dans une base de données du site." },
+          { "p": "Pour limiter les envois abusifs, le site utilise l'adresse IP de l'expéditeur sous forme d'empreinte, conservée temporairement en mémoire, sans stockage applicatif : le site ne l'enregistre pas et ne l'inscrit pas dans ses journaux. Un champ invisible permet aussi de repérer les envois automatisés." },
+          { "p": "Indépendamment du site, l'hébergeur Vercel collecte des données techniques relatives au trafic, notamment les adresses IP, conformément à sa politique de confidentialité (voir la rubrique « Hébergement et intervention de Vercel »)." }
+        ]
+      },
+      {
+        "id": "finalites",
+        "title": "Finalités du traitement",
+        "blocks": [
+          { "p": "Vos données sont traitées pour :" },
+          {
+            "list": [
+              "répondre à vos questions et à vos demandes de devis (prestation DJ ou organisation d'événement) ;",
+              "échanger avec vous en vue d'une éventuelle prestation ;",
+              "assurer la sécurité du site et prévenir les envois abusifs ou automatisés ;",
+              "assurer le fonctionnement technique et l'hébergement du site."
+            ]
+          },
+          { "p": "[À CONFIRMER : vos données ne sont ni vendues, ni louées, ni utilisées pour de la prospection commerciale sans votre accord.]" }
+        ]
+      },
+      {
+        "id": "bases-legales",
+        "title": "Bases légales",
+        "blocks": [
+          { "p": "Les bases légales ci-dessous correspondent aux traitements effectués par le site. Elles doivent être confirmées par le responsable du traitement." },
+          {
+            "list": [
+              "Demandes de devis et échanges en vue d'une prestation : mesures précontractuelles prises à votre demande (article 6.1.b du RGPD). [À CONFIRMER]",
+              "Autres messages envoyés via le formulaire : intérêt légitime de De Casti Event à répondre aux messages reçus (article 6.1.f du RGPD). [À CONFIRMER]",
+              "Sécurité du site et prévention des abus : intérêt légitime à protéger le site et son formulaire (article 6.1.f du RGPD). [À CONFIRMER]"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "caractere-obligatoire",
+        "title": "Caractère obligatoire ou facultatif des données",
+        "blocks": [
+          { "p": "Les champs signalés par un astérisque sont nécessaires pour traiter votre demande : sans eux, le message ne peut pas être envoyé. Les autres champs sont facultatifs ; ils permettent de préparer une réponse plus précise." }
+        ]
+      },
+      {
+        "id": "destinataires",
+        "title": "Destinataires des données",
+        "blocks": [
+          { "p": "Vos données sont destinées à De Casti Event, qui les traite pour répondre à votre demande. [À COMPLÉTER : préciser si d'autres personnes y ont accès, par exemple des partenaires associés à l'organisation d'un événement avec votre accord.]" },
+          { "p": "Elles sont également traitées, pour le compte de De Casti Event et dans la limite de leur mission, par les prestataires techniques suivants :" },
+          {
+            "list": [
+              "Resend, pour l'acheminement des e-mails envoyés depuis le formulaire ;",
+              "Vercel, pour l'hébergement du site et l'exécution du formulaire ;",
+              "[À COMPLÉTER : fournisseur de la messagerie qui reçoit les demandes, par exemple Gmail, Outlook ou OVHcloud]."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "resend",
+        "title": "Intervention de Resend",
+        "blocks": [
+          { "p": "Lorsque vous envoyez le formulaire, son contenu, c'est-à-dire vos coordonnées et votre message, est transmis au service Resend, qui envoie l'e-mail à De Casti Event. Resend intervient en qualité de sous-traitant." },
+          { "p": "Selon les informations publiées par Resend, les données sont traitées principalement aux États-Unis. Ces transferts sont encadrés par les clauses contractuelles types de la Commission européenne et par le cadre de protection des données UE–États-Unis (Data Privacy Framework), auquel Resend déclare être certifié." },
+          {
+            "rows": [
+              { "label": "Prestataire", "value": "Resend [À CONFIRMER : dénomination exacte de la société indiquée dans le contrat]" },
+              { "label": "Site", "value": "resend.com", "href": "https://resend.com" },
+              { "label": "Accord de traitement", "value": "[À CONFIRMER : accord de traitement des données (DPA) accepté lors de l'ouverture du compte]" },
+              { "label": "Conservation chez Resend", "value": "[À COMPLÉTER : durée de conservation des e-mails et des journaux selon l'offre souscrite]" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "vercel",
+        "title": "Hébergement et intervention de Vercel",
+        "blocks": [
+          { "p": "Le site est hébergé par Vercel Inc. (440 N Barranca Ave #4133, Covina, CA 91723, États-Unis). Vercel diffuse les pages du site et exécute le traitement du formulaire. À cette occasion, il collecte des données techniques relatives au trafic, notamment les adresses IP, conformément à sa politique de confidentialité, et traite le contenu des demandes envoyées, en qualité de sous-traitant." },
+          { "p": "Les journaux applicatifs du formulaire, écrits par le site, ne contiennent ni donnée saisie ni adresse IP : seuls des codes de fonctionnement y sont inscrits." },
+          {
+            "rows": [
+              { "label": "Site", "value": "vercel.com", "href": "https://vercel.com" },
+              { "label": "Transferts hors UE", "value": "[À CONFIRMER : garanties de transfert prévues par l'accord de traitement des données de Vercel et région d'exécution retenue]" },
+              { "label": "Conservation des journaux", "value": "[À COMPLÉTER : durée selon l'offre Vercel souscrite]" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "conservation",
+        "title": "Durées de conservation",
+        "blocks": [
+          {
+            "list": [
+              "Demandes envoyées via le formulaire : [À COMPLÉTER : durée retenue, par exemple trois ans à compter du dernier contact pour un prospect, durée recommandée par la CNIL]. Si une prestation est conclue, les documents correspondants sont conservés pendant les durées légales applicables.",
+              "Empreinte de l'adresse IP utilisée par le site contre les envois abusifs : conservée temporairement en mémoire, sans stockage applicatif.",
+              "Journaux techniques de l'hébergeur, dont les adresses IP collectées par Vercel : [À COMPLÉTER : durée selon l'offre Vercel souscrite].",
+              "E-mails et journaux d'envoi chez Resend : [À COMPLÉTER : durée selon l'offre Resend souscrite]."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "droits",
+        "title": "Vos droits",
+        "blocks": [
+          { "p": "Conformément au règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés, vous disposez des droits suivants :" },
+          {
+            "list": [
+              "droit d'accès à vos données ;",
+              "droit de rectification ;",
+              "droit à l'effacement ;",
+              "droit à la limitation du traitement ;",
+              "droit d'opposition aux traitements fondés sur l'intérêt légitime ;",
+              "droit à la portabilité des données que vous avez fournies, lorsque le traitement repose sur des mesures précontractuelles ;",
+              "droit de définir des directives relatives au sort de vos données après votre décès."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "exercice-des-droits",
+        "title": "Exercer vos droits",
+        "blocks": [
+          { "p": "Pour exercer vos droits, écrivez à [À COMPLÉTER : adresse e-mail dédiée aux données personnelles] ou utilisez le [formulaire de contact](/contact) en précisant votre demande." },
+          { "p": "Une réponse vous est apportée dans un délai d'un mois, qui peut être prolongé de deux mois pour une demande complexe, comme le prévoit le RGPD. En cas de doute raisonnable sur votre identité, un justificatif peut vous être demandé." }
+        ]
+      },
+      {
+        "id": "cnil",
+        "title": "Réclamation auprès de la CNIL",
+        "blocks": [
+          { "p": "Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la Commission nationale de l'informatique et des libertés (CNIL)." },
+          {
+            "rows": [
+              { "label": "Site", "value": "cnil.fr", "href": "https://www.cnil.fr" },
+              { "label": "Adresse", "value": "3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cookies",
+        "title": "Cookies et traceurs",
+        "blocks": [
+          { "p": "À la date de la dernière mise à jour, le site ne dépose aucun cookie et n'utilise aucun traceur : pas d'outil de mesure d'audience, pas de publicité, pas de bouton de partage vers les réseaux sociaux, et aucun contenu chargé depuis un site tiers. Les polices de caractères sont hébergées par le site lui-même, et aucune information n'est enregistrée dans le stockage de votre navigateur." },
+          { "p": "Si un outil de ce type est ajouté, cette politique sera mise à jour et votre consentement sera demandé lorsque la réglementation l'exige." }
+        ]
+      },
+      {
+        "id": "securite",
+        "title": "Sécurité des données",
+        "blocks": [
+          { "p": "Des mesures techniques protègent vos données : connexion chiffrée (HTTPS) [À CONFIRMER : après la mise en service du nom de domaine], en-têtes de sécurité, vérification de chaque champ du formulaire par le serveur, limitation des envois abusifs, clés d'accès aux services conservées hors du code du site, et journaux techniques sans données saisies." }
+        ]
+      },
+      {
+        "id": "modifications",
+        "title": "Modifications de la politique",
+        "blocks": [
+          { "p": "Cette politique peut évoluer, notamment en cas de nouveau service ou de changement de prestataire. La date de dernière mise à jour figure en haut de la page." }
+        ]
+      }
+    ]
   }
 }
